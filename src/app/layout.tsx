@@ -3,12 +3,14 @@ import { Cormorant_Garamond, Playfair_Display, Inter, Poppins } from 'next/font/
 import './globals.css';
 import { CartProvider } from '@/context/CartContext';
 import { WishlistProvider } from '@/context/WishlistContext';
+import { AuthProvider } from '@/context/AuthContext';
 // import { AnnouncementBar } from '@/components/layout/AnnouncementBar';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { QuickViewProvider } from '@/context/QuickViewContext';
 import { LoadingProvider } from '@/context/LoadingContext';
 import { SmoothScrollProvider } from '@/components/common/SmoothScrollProvider';
+import { AnimatedTextSelection } from '@/components/common/AnimatedTextSelection';
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -39,18 +41,29 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'AK ATELIER — Haute Couture Heritage | Luxury Indian & International Fashion',
+  metadataBase: new URL('https://akatelier.luxury'),
+  title: 'AK ATELIER — Haute Couture & Western Tailoring · Milan & Paris',
   description:
-    'Step into AK ATELIER, an international luxury fashion house combining imperial Indian craftsmanship, 24k gold zari handlooms, bespoke bridal lehengas, and contemporary haute couture.',
+    'Experience AK ATELIER Milano: Super 150s virgin wool suiting, double-faced Mongolian cashmere overcoats, liquid silk evening gowns, and bespoke formal tailoring.',
   keywords: [
-    'Indian luxury ethnic wear',
-    'Bridal Lehengas',
-    'Royal Sherwanis',
-    'Banarasi Sarees',
-    'Indian haute couture',
-    'Zardozi embroidery',
     'AK ATELIER',
+    'Milan luxury fashion',
+    'Haute couture',
+    'Tailored pant suits',
+    'Cashmere overcoats',
+    'Silk evening gowns',
+    'Bespoke tuxedos',
+    'Quiet luxury',
   ],
+  openGraph: {
+    title: 'AK ATELIER — Haute Couture & Western Tailoring · Milan',
+    description:
+      'Super 150s virgin wool suiting, double-faced Mongolian cashmere, and liquid silk gowns from our Milan flagship atelier.',
+    url: 'https://akatelier.luxury',
+    siteName: 'AK ATELIER',
+    locale: 'en_US',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({
@@ -67,28 +80,29 @@ export default function RootLayout({
         <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <link rel="preload" href="/hero-frames/frame_001.webp" as="image" type="image/webp" fetchPriority="high" />
-        {/* Preload first two above-fold mood images — rest handled by SectionImagePreloader */}
-        <link rel="preload" href="/images/moods/kanjivaram_silk.jpg" as="image" fetchPriority="low" />
-        <link rel="preload" href="/images/moods/banarasi_brocade.jpg" as="image" fetchPriority="low" />
+        <link rel="preload" href="/hero-poster.webp" as="image" type="image/webp" fetchPriority="high" />
       </head>
       <body
         suppressHydrationWarning
-        className="min-h-screen flex flex-col bg-monarch-ivory text-monarch-charcoal selection:bg-monarch-maroon selection:text-monarch-gold-light"
+        className="min-h-screen flex flex-col bg-surface-300 text-neutral-900 selection:bg-primary-300 selection:text-neutral-900"
       >
-        <CartProvider>
-          <WishlistProvider>
-            <QuickViewProvider>
-              <LoadingProvider>
-                {/* <AnnouncementBar /> */}
-                <Header />
-                <SmoothScrollProvider>
-                  <main className="flex-1">{children}</main>
-                </SmoothScrollProvider>
-                <Footer />
-              </LoadingProvider>
-            </QuickViewProvider>
-          </WishlistProvider>
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            <WishlistProvider>
+              <QuickViewProvider>
+                <LoadingProvider>
+                  {/* <AnnouncementBar /> */}
+                  <Header />
+                  <SmoothScrollProvider>
+                    <main className="flex-1">{children}</main>
+                  </SmoothScrollProvider>
+                  <Footer />
+                  <AnimatedTextSelection />
+                </LoadingProvider>
+              </QuickViewProvider>
+            </WishlistProvider>
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );

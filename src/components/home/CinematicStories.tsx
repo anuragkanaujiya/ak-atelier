@@ -171,7 +171,7 @@ export const CinematicStories: React.FC = () => {
         pin: pinWrapper,
         start: 'top top',
         end: () => '+=' + getScrollDistance(),
-        scrub: 0.5,
+        scrub: true, // 1:1 sync with Lenis smooth momentum (eliminates sluggish 500ms double-delay)
         anticipatePin: 0, // Eliminate premature pin snap which covered WorthYourAttention
         refreshPriority: 6, // Priority 6: Second pinned section; refreshes strictly AFTER WovenToBeRemembered pinSpacing
         invalidateOnRefresh: true,
@@ -186,7 +186,9 @@ export const CinematicStories: React.FC = () => {
           if (rawIndex !== activeIndexRef.current) {
             const dir = rawIndex > activeIndexRef.current ? 1 : -1;
             activeIndexRef.current = rawIndex;
-            setPage([rawIndex, dir]);
+            requestAnimationFrame(() => {
+              setPage([rawIndex, dir]);
+            });
           }
         },
       });
@@ -284,7 +286,7 @@ export const CinematicStories: React.FC = () => {
 
         {/* Minimal Story Counter & Clean Arrow Navigation */}
         <div className="flex items-center gap-3">
-          <span className="font-mono text-[11px] tracking-widest text-monarch-gold-light">
+          <span className="font-mono text-[11px] tracking-widest text-primary-300">
             0{activeIndex + 1} <span className="text-white/35">/ 0{CINEMATIC_STORIES.length}</span>
           </span>
 
@@ -360,7 +362,7 @@ export const CinematicStories: React.FC = () => {
               <button
                 type="button"
                 onClick={handleAddToCart}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-monarch-maroon hover:bg-monarch-maroon-light text-white text-[11px] font-mono uppercase tracking-[0.2em] font-semibold shadow-xl transition-all hover:scale-105 active:scale-95 border border-white/15 cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary-600 hover:bg-primary-700 text-white text-[11px] font-mono uppercase tracking-[0.2em] font-semibold shadow-xl transition-all hover:scale-105 active:scale-95 border border-white/15 cursor-pointer"
               >
                 <ShoppingBag className="w-3.5 h-3.5" />
                 <span>ADD TO CART</span>
@@ -372,7 +374,7 @@ export const CinematicStories: React.FC = () => {
                 onClick={handleToggleWishlist}
                 className={`w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-md border transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer ${
                   isWished
-                    ? 'bg-monarch-maroon text-monarch-gold-light border-monarch-gold/60 shadow-lg'
+                    ? 'bg-secondary-600 text-white border-secondary-400 shadow-lg'
                     : 'bg-white/10 hover:bg-white/20 text-white border-white/20'
                 }`}
                 aria-label={isWished ? 'Remove from Wishlist' : 'Add to Wishlist'}
@@ -380,7 +382,7 @@ export const CinematicStories: React.FC = () => {
               >
                 <Heart
                   className={`w-4 h-4 transition-transform duration-300 ${
-                    isWished ? 'fill-current text-monarch-gold-light scale-110' : 'text-white'
+                    isWished ? 'fill-current text-white scale-110' : 'text-white'
                   }`}
                 />
               </button>
@@ -408,8 +410,8 @@ export const CinematicStories: React.FC = () => {
               </div>
             )}
             {wishlistToast && (
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-monarch-maroon/95 border border-monarch-gold/40 text-monarch-gold-light text-xs backdrop-blur-md">
-                <Heart className="w-3.5 h-3.5 fill-current text-monarch-gold-light" />
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-secondary-900/95 border border-secondary-400/40 text-secondary-200 text-xs backdrop-blur-md">
+                <Heart className="w-3.5 h-3.5 fill-current text-secondary-200" />
                 <span>{wishlistToast}</span>
               </div>
             )}
@@ -423,12 +425,12 @@ export const CinematicStories: React.FC = () => {
       <div className="relative z-10 pt-2 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         {/* Left Story Progress (Matches Screenshot Bottom Left) */}
         <div className="flex items-center gap-3">
-          <span className="font-mono text-xs tracking-wider text-monarch-gold-light font-bold">
+          <span className="font-mono text-xs tracking-wider text-primary-300 font-bold">
             0{activeIndex + 1}
           </span>
           <div className="w-12 h-px bg-white/25 overflow-hidden">
             <motion.div
-              className="h-full bg-monarch-gold-light"
+              className="h-full bg-primary-400"
               animate={{ width: `${((activeIndex + 1) / CINEMATIC_STORIES.length) * 100}%` }}
               transition={{ duration: 0.4 }}
             />

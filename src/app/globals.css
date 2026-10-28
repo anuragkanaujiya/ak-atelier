@@ -2,81 +2,527 @@
 
 @theme inline {
   --breakpoint-xs: 380px;
-  --color-monarch-maroon: #5A1725;
-  --color-monarch-maroon-dark: #3F101A;
-  --color-monarch-maroon-light: #7A2436;
-  --color-monarch-burgundy: #291116;
-  --color-monarch-burgundy-deep: #1A0A0E;
-  --color-monarch-gold: #C7A15B;
-  --color-monarch-gold-light: #DFBE7F;
-  --color-monarch-gold-dark: #9A7737;
-  --color-monarch-gold-muted: #8E703E;
-  --color-monarch-ivory: #F7F0E5;
-  --color-monarch-ivory-light: #FCF9F4;
-  --color-monarch-beige: #D9C8B0;
-  --color-monarch-beige-light: #E8DCCB;
-  --color-monarch-charcoal: #211D1A;
-  --color-monarch-charcoal-light: #36302B;
 
-  --font-serif: var(--font-cormorant), "Playfair Display", Georgia, serif;
-  --font-display: var(--font-playfair), "Cormorant Garamond", Georgia, serif;
+  /* ==========================================================================
+     AK ATELIER MILANO — UNIFIED DESIGN TOKENS
+     ========================================================================== */
+
+  /* PRIMARY / LILAC - Brand identity, primary actions, focus and selected states */
+  --color-primary-100: #F5F2F7;
+  --color-primary-200: #E4DFF0;
+  --color-primary-300: #CFC7E3;
+  --color-primary-400: #B5A9D1;
+  --color-primary-500: #9A8EBA;
+  --color-primary-600: #81779F;
+  --color-primary-700: #6D638A;
+  --color-primary-800: #594F72;
+  --color-primary-900: #40384F;
+
+  /* SECONDARY / ROSE MAUVE - Fashion accents, campaign details, supporting actions */
+  --color-secondary-100: #F7EEF3;
+  --color-secondary-200: #E8D3DE;
+  --color-secondary-300: #D8B9CC;
+  --color-secondary-400: #C5A1B9;
+  --color-secondary-500: #B58FA8;
+  --color-secondary-600: #9B718F;
+  --color-secondary-700: #805A76;
+  --color-secondary-800: #65455D;
+  --color-secondary-900: #4A3245;
+
+  /* ACCENT / GLACIER BLUE - Cool collection accents and selected editorial sections */
+  --color-accent-100: #F1F7FA;
+  --color-accent-200: #DDEAF0;
+  --color-accent-300: #C7DCE6;
+  --color-accent-400: #B6CBD9;
+  --color-accent-500: #93B2C4;
+  --color-accent-600: #7396AB;
+  --color-accent-700: #587A8E;
+  --color-accent-800: #405D70;
+  --color-accent-900: #2D4352;
+
+  /* NEUTRAL / PLUM CHARCOAL - Typography, borders, icons and structure */
+  --color-neutral-100: #F5F4F7;
+  --color-neutral-200: #E4E2E8;
+  --color-neutral-300: #D0CDD6;
+  --color-neutral-400: #B2AEBB;
+  --color-neutral-500: #918C9B;
+  --color-neutral-600: #77727D;
+  --color-neutral-700: #5A5562;
+  --color-neutral-800: #34313B;
+  --color-neutral-900: #242129;
+
+  /* SURFACE / CHALK - Website canvas, cards and quiet background layers */
+  --color-surface-100: #FFFFFF;
+  --color-surface-200: #FEFCFF;
+  --color-surface-300: #FAF8FC;
+  --color-surface-400: #F5F2F7;
+  --color-surface-500: #EEEAF2;
+  --color-surface-600: #E4DFF0;
+  --color-surface-700: #D3CDDF;
+  --color-surface-800: #BFB8CD;
+  --color-surface-900: #A49CAF;
+
+  /* SUCCESS / SAGE - Order success, confirmation and positive status */
+  --color-success-100: #EFF6F1;
+  --color-success-200: #DCEBE0;
+  --color-success-300: #C2DCCB;
+  --color-success-400: #9FC3AD;
+  --color-success-500: #7FA68F;
+  --color-success-600: #628A73;
+  --color-success-700: #4D705C;
+  --color-success-800: #3A5646;
+  --color-success-900: #293E32;
+
+  /* ERROR / BERRY - Errors, destructive actions and sale/error emphasis */
+  --color-error-100: #FAEEF2;
+  --color-error-200: #F0D6E0;
+  --color-error-300: #E3B4C6;
+  --color-error-400: #D18DA9;
+  --color-error-500: #B96B8B;
+  --color-error-600: #9B4F70;
+  --color-error-700: #7D3B5A;
+  --color-error-800: #612C45;
+  --color-error-900: #451F31;
+
+  /* WARNING / CHAMPAGNE - Low-stock notices and gentle caution states */
+  --color-warning-100: #FAF7F0;
+  --color-warning-200: #F0E7D6;
+  --color-warning-300: #E7DDC9;
+  --color-warning-400: #D8C7A8;
+  --color-warning-500: #C5AD83;
+  --color-warning-600: #A88C5F;
+  --color-warning-700: #846C47;
+  --color-warning-800: #655237;
+  --color-warning-900: #493B29;
+
+  /* Legacy Monarch Aliases mapped seamlessly to New Luxury Palette */
+  --color-monarch-maroon: #594F72;
+  --color-monarch-maroon-dark: #40384F;
+  --color-monarch-maroon-light: #6D638A;
+  --color-monarch-burgundy: #34313B;
+  --color-monarch-burgundy-deep: #242129;
+  --color-monarch-gold: #C5AD83;
+  --color-monarch-gold-light: #D8C7A8;
+  --color-monarch-gold-dark: #A88C5F;
+  --color-monarch-gold-muted: #846C47;
+  --color-monarch-ivory: #FAF8FC;
+  --color-monarch-ivory-light: #FFFFFF;
+  --color-monarch-beige: #EEEAF2;
+  --color-monarch-beige-light: #F5F2F7;
+  --color-monarch-charcoal: #242129;
+  --color-monarch-charcoal-light: #34313B;
+
+  /* Fluid Typography Tokens (Smooth clamp scaling — impactful luxury size) */
+  --font-size-hero-title: clamp(2.75rem, 6.8vw + 0.5rem, 6.75rem);
+  --font-size-hero-highlight: clamp(2.25rem, 5vw + 0.25rem, 5.25rem);
+
+  /* Typography Fonts */
+  --font-serif: var(--font-cormorant), "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  --font-display: var(--font-playfair), "Playfair Display", "Cormorant Garamond", Georgia, serif;
   --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-nav: var(--font-poppins), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 :root {
-  --background: #F7F0E5;
-  --foreground: #211D1A;
-  --royal-maroon: #5A1725;
-  --deep-burgundy: #291116;
-  --antique-gold: #C7A15B;
-  --warm-ivory: #F7F0E5;
-  --sand-beige: #D9C8B0;
-  --charcoal: #211D1A;
+  /* Surface and Background Foundations */
+  --background: #FAF8FC;
+  --foreground: #242129;
+  
+  --bg-page: #FAF8FC;
+  --bg-card: #FFFFFF;
+  --bg-subtle: #F5F2F7;
+  --bg-muted: #EEEAF2;
+
+  --text-primary: #242129;
+  --text-secondary: #5A5562;
+  --text-muted: #77727D;
+  --text-inverse: #FFFFFF;
+
+  --border-subtle: #E4E2E8;
+  --border-medium: #D0CDD6;
+  --border-strong: #B2AEBB;
+  --border-focus: #81779F;
+
+  /* Semantic Action Tokens */
+  --btn-primary-bg: #81779F;
+  --btn-primary-hover: #6D638A;
+  --btn-primary-text: #FFFFFF;
+
+  /* ==========================================================================
+     GLOBAL LUXURY GRADIENTS (TOKENS & UTILITIES)
+     All gradients MUST be defined here using design tokens.
+     Components must use these classes or variables rather than ad-hoc inline gradients.
+     ========================================================================== */
+  --gradient-luxury-primary: linear-gradient(135deg, #6D638A 0%, #81779F 50%, #594F72 100%);
+  --gradient-luxury-lilac: linear-gradient(135deg, #CFC7E3 0%, #9A8EBA 50%, #6D638A 100%);
+  --gradient-luxury-rose: linear-gradient(135deg, #C5A1B9 0%, #9B718F 50%, #65455D 100%);
+  --gradient-luxury-champagne: linear-gradient(135deg, #FAF7F0 0%, #D8C7A8 40%, #C5AD83 70%, #A88C5F 100%);
+  --gradient-luxury-glacier: linear-gradient(135deg, #DDEAF0 0%, #93B2C4 50%, #405D70 100%);
+  --gradient-luxury-plum: linear-gradient(180deg, #34313B 0%, #242129 60%, #17151A 100%);
+  --gradient-radial-vignette: radial-gradient(circle at center, transparent 35%, rgba(36, 33, 41, 0.72) 80%, rgba(20, 18, 23, 0.95) 100%);
+  --gradient-radial-glow: radial-gradient(circle at 50% 50%, rgba(181, 169, 209, 0.18) 0%, rgba(64, 56, 79, 0.06) 50%, transparent 75%);
+  
+  --btn-secondary-bg: #9B718F;
+  --btn-secondary-hover: #805A76;
+  --btn-secondary-text: #FFFFFF;
+
+  /* CSS Tokens for all 8 scales */
+  --color-primary-100: #F5F2F7;
+  --color-primary-200: #E4DFF0;
+  --color-primary-300: #CFC7E3;
+  --color-primary-400: #B5A9D1;
+  --color-primary-500: #9A8EBA;
+  --color-primary-600: #81779F;
+  --color-primary-700: #6D638A;
+  --color-primary-800: #594F72;
+  --color-primary-900: #40384F;
+
+  --color-secondary-100: #F7EEF3;
+  --color-secondary-200: #E8D3DE;
+  --color-secondary-300: #D8B9CC;
+  --color-secondary-400: #C5A1B9;
+  --color-secondary-500: #B58FA8;
+  --color-secondary-600: #9B718F;
+  --color-secondary-700: #805A76;
+  --color-secondary-800: #65455D;
+  --color-secondary-900: #4A3245;
+
+  --color-accent-100: #F1F7FA;
+  --color-accent-200: #DDEAF0;
+  --color-accent-300: #C7DCE6;
+  --color-accent-400: #B6CBD9;
+  --color-accent-500: #93B2C4;
+  --color-accent-600: #7396AB;
+  --color-accent-700: #587A8E;
+  --color-accent-800: #405D70;
+  --color-accent-900: #2D4352;
+
+  --color-neutral-100: #F5F4F7;
+  --color-neutral-200: #E4E2E8;
+  --color-neutral-300: #D0CDD6;
+  --color-neutral-400: #B2AEBB;
+  --color-neutral-500: #918C9B;
+  --color-neutral-600: #77727D;
+  --color-neutral-700: #5A5562;
+  --color-neutral-800: #34313B;
+  --color-neutral-900: #242129;
+
+  --color-surface-100: #FFFFFF;
+  --color-surface-200: #FEFCFF;
+  --color-surface-300: #FAF8FC;
+  --color-surface-400: #F5F2F7;
+  --color-surface-500: #EEEAF2;
+  --color-surface-600: #E4DFF0;
+  --color-surface-700: #D3CDDF;
+  --color-surface-800: #BFB8CD;
+  --color-surface-900: #A49CAF;
+
+  --color-success-100: #EFF6F1;
+  --color-success-200: #DCEBE0;
+  --color-success-300: #C2DCCB;
+  --color-success-400: #9FC3AD;
+  --color-success-500: #7FA68F;
+  --color-success-600: #628A73;
+  --color-success-700: #4D705C;
+  --color-success-800: #3A5646;
+  --color-success-900: #293E32;
+
+  --color-error-100: #FAEEF2;
+  --color-error-200: #F0D6E0;
+  --color-error-300: #E3B4C6;
+  --color-error-400: #D18DA9;
+  --color-error-500: #B96B8B;
+  --color-error-600: #9B4F70;
+  --color-error-700: #7D3B5A;
+  --color-error-800: #612C45;
+  --color-error-900: #451F31;
+
+  --color-warning-100: #FAF7F0;
+  --color-warning-200: #F0E7D6;
+  --color-warning-300: #E7DDC9;
+  --color-warning-400: #D8C7A8;
+  --color-warning-500: #C5AD83;
+  --color-warning-600: #A88C5F;
+  --color-warning-700: #846C47;
+  --color-warning-800: #655237;
+  --color-warning-900: #493B29;
+}
+
+/* ==========================================================================
+   GLOBAL DARK PALETTE SYSTEM
+   Deep Plum Charcoal Canvas with Ethereal Lilac Accents & High Contrast
+   ========================================================================== */
+:root[data-theme='dark'],
+.dark {
+  --background: #242129;
+  --foreground: #FAF8FC;
+
+  --bg-page: #242129;
+  --bg-card: #34313B;
+  --bg-subtle: #40384F;
+  --bg-muted: #5A5562;
+
+  --text-primary: #FAF8FC;
+  --text-secondary: #D0CDD6;
+  --text-muted: #918C9B;
+  --text-inverse: #242129;
+
+  --border-subtle: rgba(181, 169, 209, 0.15);
+  --border-medium: rgba(181, 169, 209, 0.28);
+  --border-strong: rgba(181, 169, 209, 0.5);
+  --border-focus: #B5A9D1;
+
+  --btn-primary-bg: #81779F;
+  --btn-primary-hover: #9A8EBA;
+  --btn-primary-text: #FFFFFF;
+}
+
+/* ==========================================================================
+   HAUTE COUTURE LUXURY BUTTON WITH SMOOTH BEFORE/AFTER SWEEP ANIMATION
+   ========================================================================== */
+.btn-luxury {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  isolation: isolate;
+}
+
+.btn-luxury::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.28) 50%,
+    transparent 100%
+  );
+  transform: skewX(-22deg);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.btn-luxury:hover::before {
+  transform: translateX(260%) skewX(-22deg);
+}
+
+.btn-luxury::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(207, 199, 227, 0.6) 0%,
+    rgba(181, 169, 209, 0.15) 50%,
+    rgba(207, 199, 227, 0.7) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.btn-luxury:hover::after {
+  opacity: 1;
+}
+
+/* Fluid clamp typography for smooth responsive hero title */
+.hero-title-clamp {
+  font-size: var(--font-size-hero-title, clamp(2.75rem, 6.8vw + 0.5rem, 6.75rem));
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+}
+
+.hero-highlight-clamp {
+  font-size: var(--font-size-hero-highlight, clamp(2.25rem, 5vw + 0.25rem, 5.25rem));
+  line-height: 1.05;
 }
 
 html {
-  scroll-behavior: smooth;
   scrollbar-gutter: stable;
-  background-color: #F7F0E5;
-  color: #211D1A;
+  background-color: var(--color-surface-300);
+  color: var(--color-neutral-900);
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary-400) var(--color-surface-400);
 }
 
 body {
-  background-color: #F7F0E5;
-  color: #211D1A;
+  background-color: var(--color-surface-300);
+  color: var(--color-neutral-900);
   font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Scrollbar for luxury feel */
+/* ==========================================================================
+   SMOOTH LUXURY TEXT SELECTION
+   ========================================================================== */
+::selection {
+  background-color: var(--color-primary-300);
+  color: var(--color-neutral-900);
+  text-shadow: none;
+}
+
+::-moz-selection {
+  background-color: var(--color-primary-300);
+  color: var(--color-neutral-900);
+  text-shadow: none;
+}
+
+/* ==========================================================================
+   TYPOGRAPHY HIERARCHY
+   ========================================================================== */
+.type-display-2xl {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--color-neutral-900);
+}
+
+.type-display-xl {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 4.5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-neutral-900);
+}
+
+.type-display-lg {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--color-neutral-900);
+}
+
+.type-heading-1 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--color-neutral-900);
+}
+
+.type-heading-2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--color-neutral-900);
+}
+
+.type-heading-3 {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--color-neutral-900);
+}
+
+.type-body-lg {
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--color-neutral-700);
+}
+
+.type-body-md {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-neutral-700);
+}
+
+.type-body-sm {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-neutral-600);
+}
+
+.type-eyebrow {
+  font-family: var(--font-nav);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-primary-600);
+}
+
+.type-label-caps {
+  font-family: var(--font-nav);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.type-mono-price {
+  font-family: var(--font-sans);
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--color-neutral-900);
+}
+
+/* ==========================================================================
+   CUSTOM LUXURY SCROLLBAR (CROSS-BROWSER)
+   ========================================================================== */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary-400) var(--color-surface-400);
+}
+
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #291116;
+  background: var(--color-surface-400);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #C7A15B;
-  border-radius: 4px;
+  background: var(--color-primary-400);
+  border-radius: 9999px;
+  border: 1.5px solid var(--color-surface-400);
+  transition: background 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #DFBE7F;
+  background: var(--color-primary-600);
 }
 
-/* Shimmer and Gold Accents */
-.gold-shimmer {
+::-webkit-scrollbar-thumb:active {
+  background: var(--color-primary-700);
+}
+
+/* Luxury Shimmer & Accents */
+.lilac-shimmer {
   background: linear-gradient(
     135deg,
-    #9A7737 0%,
-    #DFBE7F 35%,
-    #C7A15B 60%,
-    #FDF5E6 80%,
-    #9A7737 100%
+    #81779F 0%,
+    #B5A9D1 35%,
+    #CFC7E3 60%,
+    #FFFFFF 80%,
+    #81779F 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
@@ -88,31 +534,6 @@ body {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
-}
-
-.gold-border-gradient {
-  border-image: linear-gradient(to right, #9A7737, #DFBE7F, #C7A15B, #DFBE7F, #9A7737) 1;
-}
-
-.gold-border {
-  border-color: rgba(199, 161, 91, 0.35);
-}
-
-.bg-burgundy-pattern {
-  background-color: #291116;
-  background-image: radial-gradient(rgba(199, 161, 91, 0.08) 1px, transparent 0);
-  background-size: 24px 24px;
-}
-
-/* Arch Shape */
-.royal-arch {
-  border-top-left-radius: 9999px;
-  border-top-right-radius: 9999px;
-}
-
-/* Subtle fabric grain */
-.fabric-subtle-overlay {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
 }
 
 /* Continuous Marquee Ticker */
@@ -166,3 +587,168 @@ body {
   transform-style: preserve-3d;
 }
 
+/* ==========================================================================
+   GLOBAL GRADIENT UTILITY CLASSES
+   Use these classes across components instead of raw inline styles.
+   ========================================================================== */
+.bg-gradient-luxury-primary {
+  background: var(--gradient-luxury-primary);
+}
+
+.bg-gradient-luxury-lilac {
+  background: var(--gradient-luxury-lilac);
+}
+
+.bg-gradient-luxury-rose {
+  background: var(--gradient-luxury-rose);
+}
+
+.bg-gradient-luxury-champagne {
+  background: var(--gradient-luxury-champagne);
+}
+
+.bg-gradient-luxury-glacier {
+  background: var(--gradient-luxury-glacier);
+}
+
+.bg-gradient-luxury-plum {
+  background: var(--gradient-luxury-plum);
+}
+
+.bg-gradient-radial-vignette {
+  background: var(--gradient-radial-vignette);
+}
+
+.bg-gradient-radial-glow {
+  background: var(--gradient-radial-glow);
+}
+
+/* ==========================================================================
+   GLOBAL CSS KEYFRAME ANIMATIONS & UTILITIES
+   All CSS animations must be declared here for consistency and reusability.
+   ========================================================================== */
+@keyframes float-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes sweep-light {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+.animate-float {
+  animation: float-subtle 4s ease-in-out infinite;
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+.animate-sweep {
+  animation: sweep-light 2.5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+/* ==========================================================================
+   AK LOGO CREST ANIMATIONS & EFFECTS
+   ========================================================================== */
+@keyframes ak-monogram-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 1px rgba(197, 173, 131, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(240, 231, 214, 0.85));
+  }
+}
+
+@keyframes ak-sheen-sweep {
+  0% {
+    stroke-dashoffset: 280;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -280;
+  }
+}
+
+@keyframes ak-star-twinkle {
+  0%, 100% {
+    opacity: 0.65;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes ak-loading-aura {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px rgba(197, 173, 131, 0.35));
+    transform: scale(0.98);
+  }
+  50% {
+    filter: drop-shadow(0 0 14px rgba(240, 231, 214, 0.95));
+    transform: scale(1.02);
+  }
+}
+
+.ak-logo-animated .ak-crest-ring {
+  animation: ak-sheen-sweep 8s linear infinite;
+}
+
+.ak-logo-animated:hover .ak-monogram-paths {
+  animation: ak-monogram-pulse 2.2s ease-in-out infinite;
+}
+
+.ak-logo-animated .ak-crown-star {
+  animation: ak-star-twinkle 3s ease-in-out infinite;
+  transform-origin: 50px 14px;
+}
+
+.ak-logo-loading .ak-crest-ring {
+  animation: ak-sheen-sweep 3.5s linear infinite;
+}
+
+.ak-logo-loading .ak-monogram-paths {
+  animation: ak-monogram-pulse 1.8s ease-in-out infinite;
+}
+
+.ak-logo-loading {
+  animation: ak-loading-aura 2.4s ease-in-out infinite;
+  transform-origin: center center;
+}

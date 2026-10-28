@@ -1,0 +1,24 @@
+{
+  "design-token-guardian": {
+    "enabled": true,
+    "PostToolUse": [
+      {
+        "matcher": "write_file|edit_file",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .agents/scripts/design-token-guardian.mjs",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "type": "command",
+        "command": "node .agents/scripts/design-token-guardian.mjs",
+        "timeout": 20
+      }
+    ]
+  }
+}

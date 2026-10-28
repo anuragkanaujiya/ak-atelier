@@ -85,7 +85,7 @@ export const TrendDeckCard: React.FC<TrendDeckCardProps> = ({
       whileDrag={{ scale: 0.98 }}
       onDragEnd={handleDragEnd}
       onClick={onSwipeNext}
-      className="absolute inset-0 select-none rounded-3xl overflow-hidden shadow-2xl bg-black cursor-grab active:cursor-grabbing hover:shadow-black/35"
+      className="absolute inset-0 select-none rounded-3xl overflow-hidden shadow-2xl bg-neutral-900 border border-neutral-700/60 cursor-grab active:cursor-grabbing hover:shadow-black/35"
     >
       {/* High-Resolution Editorial Image */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -103,10 +103,10 @@ export const TrendDeckCard: React.FC<TrendDeckCardProps> = ({
 
       {/* Top Pill Tag on Card */}
       <div className="absolute top-4 inset-x-4 flex items-center justify-between z-10 pointer-events-none">
-        <span className="text-[10px] font-nav uppercase tracking-[0.22em] text-white/80 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
+        <span className="text-[10px] font-nav uppercase tracking-[0.22em] text-neutral-200 bg-neutral-900/70 backdrop-blur-md px-3 py-1 rounded-full border border-neutral-700/60">
           {product.rangeCategory}
         </span>
-        <span className="text-[11px] font-nav uppercase tracking-[0.2em] text-monarch-gold-light font-semibold bg-black/50 backdrop-blur-md px-2.5 py-1 rounded-full border border-monarch-gold/30">
+        <span className="text-[11px] font-nav uppercase tracking-[0.2em] text-primary-300 font-semibold bg-neutral-900/70 backdrop-blur-md px-2.5 py-1 rounded-full border border-primary-500/30">
           0{index + 1}
         </span>
       </div>
@@ -114,13 +114,13 @@ export const TrendDeckCard: React.FC<TrendDeckCardProps> = ({
       {/* Bottom Info & Link on Active Card */}
       <div className="absolute bottom-5 inset-x-5 flex items-end justify-between z-10">
         <div className="space-y-1 pointer-events-none">
-          <span className="text-[10px] font-nav uppercase tracking-[0.2em] text-monarch-gold-light font-medium block">
+          <span className="text-[10px] font-nav uppercase tracking-[0.2em] text-primary-300 font-medium block">
             {product.badge}
           </span>
           <h4 className="font-serif text-lg sm:text-xl text-white font-medium leading-tight drop-shadow-md line-clamp-1">
             {product.name}
           </h4>
-          <span className="text-xs font-sans text-white/70 block">
+          <span className="text-xs font-sans text-neutral-300 block">
             {product.formattedPrice}
           </span>
         </div>
@@ -129,7 +129,7 @@ export const TrendDeckCard: React.FC<TrendDeckCardProps> = ({
         <Link
           href={product.actionHref}
           onClick={(e) => e.stopPropagation()}
-          className="w-10 h-10 rounded-full bg-white/90 hover:bg-white text-black flex items-center justify-center shadow-lg transition-transform hover:scale-105 active:scale-95 cursor-pointer shrink-0 ml-2"
+          className="w-10 h-10 rounded-full bg-surface-100 hover:bg-primary-600 text-neutral-900 hover:text-white flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer shrink-0 ml-2"
           aria-label={`View ${product.name}`}
         >
           <ArrowUpRight className="w-4 h-4" />

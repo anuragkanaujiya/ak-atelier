@@ -12,8 +12,8 @@ interface RoyalMannequinProps {
 }
 
 export const RoyalMannequin: React.FC<RoyalMannequinProps> = ({
-  primaryColor = '#5A1725', // Royal Maroon
-  accentColor = '#C7A15B',  // Antique Gold
+  primaryColor = '#594F72', // Primary Lilac-Plum
+  accentColor = '#B5A9D1',  // Lilac Accent
   autoRotate = true,
   scale = 1.0,
 }) => {
@@ -40,7 +40,7 @@ export const RoyalMannequin: React.FC<RoyalMannequinProps> = ({
       <mesh position={[0, 0.08, 0]} castShadow receiveShadow>
         <cylinderGeometry args={[1.1, 1.2, 0.16, 32]} />
         <meshStandardMaterial
-          color="#291116"
+          color="#242129"
           roughness={0.4}
           metalness={0.5}
         />
@@ -60,7 +60,7 @@ export const RoyalMannequin: React.FC<RoyalMannequinProps> = ({
       <mesh position={[0, 0.28, 0]} castShadow receiveShadow>
         <cylinderGeometry args={[0.85, 0.95, 0.15, 32]} />
         <meshStandardMaterial
-          color="#3F101A"
+          color="#34313B"
           roughness={0.5}
           metalness={0.3}
         />
@@ -80,7 +80,7 @@ export const RoyalMannequin: React.FC<RoyalMannequinProps> = ({
       <mesh position={[0, 0.85, 0]}>
         <torusGeometry args={[0.11, 0.03, 16, 32]} />
         <meshStandardMaterial
-          color="#DFBE7F"
+          color="#CFC7E3"
           metalness={0.95}
           roughness={0.1}
         />
@@ -111,7 +111,7 @@ export const RoyalMannequin: React.FC<RoyalMannequinProps> = ({
       <mesh position={[0, 1.08, 0]}>
         <torusGeometry args={[0.71, 0.015, 12, 32]} />
         <meshStandardMaterial
-          color="#DFBE7F"
+          color="#CFC7E3"
           metalness={0.95}
           roughness={0.15}
         />
@@ -131,16 +131,16 @@ export const RoyalMannequin: React.FC<RoyalMannequinProps> = ({
       <mesh position={[0, 1.74, 0.41]} rotation={[Math.PI / 2, 0, 0]}>
         <cylinderGeometry args={[0.08, 0.08, 0.03, 16]} />
         <meshStandardMaterial
-          color="#DFBE7F"
+          color="#CFC7E3"
           metalness={0.95}
           roughness={0.1}
         />
       </mesh>
-      {/* Central emerald stone in belt buckle */}
+      {/* Central sapphire stone in belt buckle */}
       <mesh position={[0, 1.74, 0.43]}>
         <sphereGeometry args={[0.04, 16, 16]} />
         <meshStandardMaterial
-          color="#164E33"
+          color="#587A8E"
           metalness={0.2}
           roughness={0.1}
         />
@@ -228,7 +228,7 @@ export const RoyalMannequin: React.FC<RoyalMannequinProps> = ({
       <mesh position={[0, 2.76, 0]}>
         <cylinderGeometry args={[0.16, 0.18, 0.16, 24]} />
         <meshStandardMaterial
-          color="#36302B"
+          color="#34313B"
           roughness={0.7}
           metalness={0.1}
         />
@@ -238,7 +238,7 @@ export const RoyalMannequin: React.FC<RoyalMannequinProps> = ({
       <mesh position={[0, 2.92, 0]}>
         <sphereGeometry args={[0.1, 24, 24]} />
         <meshStandardMaterial
-          color="#DFBE7F"
+          color="#CFC7E3"
           metalness={0.95}
           roughness={0.1}
         />
@@ -257,7 +257,7 @@ export const RoyalMannequin: React.FC<RoyalMannequinProps> = ({
       <mesh position={[0, 2.44, 0.42]} rotation={[0.4, 0, 0]}>
         <torusGeometry args={[0.26, 0.022, 12, 32, Math.PI]} />
         <meshStandardMaterial
-          color="#FAF5E8"
+          color="#FAF8FC"
           roughness={0.2}
           metalness={0.1}
         />
@@ -267,7 +267,7 @@ export const RoyalMannequin: React.FC<RoyalMannequinProps> = ({
       <mesh position={[0, 2.32, 0.44]} rotation={[0.3, 0, 0]}>
         <torusGeometry args={[0.32, 0.025, 12, 32, Math.PI]} />
         <meshStandardMaterial
-          color="#FAF5E8"
+          color="#FAF8FC"
           roughness={0.2}
           metalness={0.1}
         />
@@ -277,7 +277,7 @@ export const RoyalMannequin: React.FC<RoyalMannequinProps> = ({
       <mesh position={[0, 2.18, 0.46]}>
         <octahedronGeometry args={[0.065]} />
         <meshStandardMaterial
-          color="#164E33" // Royal Emerald
+          color="#587A8E"
           roughness={0.15}
           metalness={0.4}
         />
@@ -288,7 +288,7 @@ export const RoyalMannequin: React.FC<RoyalMannequinProps> = ({
         <mesh rotation={[Math.PI / 2, 0, 0]}>
           <cylinderGeometry args={[0.045, 0.045, 0.015, 8]} />
           <meshStandardMaterial
-            color="#DFBE7F"
+            color="#CFC7E3"
             metalness={0.95}
             roughness={0.1}
           />
@@ -300,7 +300,7 @@ export const RoyalMannequin: React.FC<RoyalMannequinProps> = ({
         <mesh key={i} position={[0, yPos, 0.42]}>
           <sphereGeometry args={[0.022, 12, 12]} />
           <meshStandardMaterial
-            color="#DFBE7F"
+            color="#CFC7E3"
             metalness={0.95}
             roughness={0.1}
           />

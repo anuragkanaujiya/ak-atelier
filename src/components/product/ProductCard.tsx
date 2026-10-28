@@ -69,7 +69,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
       {/* =========================================================================
           1. EDITORIAL IMAGE CANVAS (Tall 3:4 Portrait, Full Model Visibility)
       ========================================================================= */}
-      <div className="relative aspect-[3/4.2] w-full rounded-2xl overflow-hidden bg-[#EFE8DD] shadow-[0_4px_20px_rgba(0,0,0,0.06)] group-hover:shadow-[0_16px_36px_rgba(160,120,60,0.22)] transition-all duration-500 border border-monarch-gold/20 group-hover:border-monarch-gold/50">
+      <div className="relative aspect-[3/4.2] w-full rounded-2xl overflow-hidden bg-surface-200 shadow-[0_4px_20px_rgba(36,33,41,0.06)] group-hover:shadow-[0_16px_36px_rgba(129,119,159,0.18)] transition-all duration-500 border border-neutral-200 group-hover:border-primary-400">
         <Link href={`/product/${product.id}`} className="absolute inset-0 block overflow-hidden">
           {/* Primary Base Model Image */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -102,13 +102,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
         {/* Top Badges (Discreet Imperial Tags) */}
         <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10 pointer-events-none">
           {product.badge && (
-            <span className="text-[9px] font-nav uppercase tracking-[0.22em] font-bold bg-[#2A0B16]/95 text-monarch-gold-light px-3 py-1 rounded-full border border-monarch-gold/40 shadow-lg backdrop-blur-md">
+            <span className="text-[9px] font-nav uppercase tracking-[0.22em] font-bold bg-primary-900/90 text-primary-100 px-3 py-1 rounded-full border border-primary-500/30 shadow-lg backdrop-blur-md">
               {product.badge}
             </span>
           )}
           {product.has3D && (
-            <span className="text-[9px] font-nav uppercase tracking-wider bg-black/60 text-monarch-ivory px-2.5 py-0.5 rounded-full border border-white/20 shadow-md flex items-center gap-1 backdrop-blur-md">
-              <Box className="w-3 h-3 text-monarch-gold" />
+            <span className="text-[9px] font-nav uppercase tracking-wider bg-neutral-900/75 text-white px-2.5 py-0.5 rounded-full border border-neutral-700 shadow-md flex items-center gap-1 backdrop-blur-md">
+              <Box className="w-3 h-3 text-primary-300" />
               <span>3D</span>
             </span>
           )}
@@ -123,12 +123,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
           }}
           className={`absolute top-3 right-3 w-9 h-9 rounded-full backdrop-blur-md transition-all duration-300 z-10 flex items-center justify-center ${
             inWishlist
-              ? 'bg-[#3F101A] text-monarch-gold border border-monarch-gold scale-105 shadow-md'
-              : 'bg-black/35 hover:bg-black/70 text-white hover:text-monarch-gold-light border border-white/20 hover:scale-110 shadow-sm'
+              ? 'bg-primary-700 text-white border border-primary-500 scale-105 shadow-md'
+              : 'bg-neutral-900/40 hover:bg-neutral-900/75 text-white hover:text-primary-200 border border-white/20 hover:scale-110 shadow-sm'
           }`}
           aria-label={inWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
         >
-          <Heart className={`w-4 h-4 transition-transform ${inWishlist ? 'fill-monarch-gold scale-110' : ''}`} />
+          <Heart className={`w-4 h-4 transition-transform ${inWishlist ? 'fill-white scale-110' : ''}`} />
         </button>
 
         {/* Interactive Hover Action Dock: Sleek Frosted Glass Quick View Bar */}
@@ -136,22 +136,22 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
           {/* Quick View Button */}
           <button
             onClick={handleOpenQuickView}
-            className="flex-1 py-2.5 px-3 rounded-xl bg-[#1B060F]/90 hover:bg-[#2A0B16] text-monarch-gold-light border border-monarch-gold/50 text-[10px] font-nav uppercase tracking-[0.22em] font-semibold flex items-center justify-center gap-2 transition-all shadow-xl backdrop-blur-md hover:border-monarch-gold"
+            className="btn-luxury flex-1 py-2.5 px-3 rounded-xl bg-neutral-900/90 hover:bg-primary-700 text-white border border-neutral-700 hover:border-primary-500 text-[10px] font-nav uppercase tracking-[0.22em] font-semibold flex items-center justify-center gap-2 transition-all shadow-xl backdrop-blur-md cursor-pointer"
           >
-            <Eye className="w-3.5 h-3.5 text-monarch-gold" />
+            <Eye className="w-3.5 h-3.5 text-primary-200" />
             <span>Quick View</span>
           </button>
 
           {/* Quick Bag Button */}
           <button
             onClick={handleQuickAdd}
-            className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all shadow-xl ${
+            className={`btn-luxury w-9 h-9 rounded-xl flex items-center justify-center transition-all shadow-xl cursor-pointer ${
               isQuickAdded
-                ? 'bg-emerald-600 text-white border border-emerald-400 scale-105'
-                : 'bg-gradient-to-r from-monarch-gold via-[#E5C178] to-monarch-gold hover:brightness-110 text-[#200B12] border border-monarch-gold/80 hover:scale-105'
+                ? 'bg-success-600 text-white border border-success-500 scale-105'
+                : 'bg-primary-600 hover:bg-primary-700 text-white border border-primary-500/40 hover:scale-105'
             }`}
-            title="Quick Add to Royal Bag"
-            aria-label="Quick Add to Royal Bag"
+            title="Quick Add to Cart"
+            aria-label="Quick Add to Cart"
           >
             {isQuickAdded ? <Check className="w-4 h-4" /> : <ShoppingBag className="w-4 h-4" />}
           </button>
@@ -163,20 +163,20 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
       ========================================================================= */}
       <div className="pt-3.5 pb-1 px-1 flex flex-col space-y-1">
         {/* Category Eyebrow */}
-        <p className="text-[10px] font-nav uppercase tracking-[0.25em] text-[#9E7A3D] font-semibold">
+        <p className="text-[10px] font-nav uppercase tracking-[0.25em] text-primary-600 font-semibold">
           {product.categoryName}
         </p>
 
         {/* Product Title */}
         <Link
           href={`/product/${product.id}`}
-          className="font-serif text-lg sm:text-[19px] text-[#1C1618] font-medium group-hover:text-monarch-maroon transition-colors line-clamp-1 tracking-tight leading-snug"
+          className="font-serif text-lg sm:text-[19px] text-neutral-900 font-medium group-hover:text-primary-700 transition-colors line-clamp-1 tracking-tight leading-snug"
         >
           {product.name}
         </Link>
 
         {/* Fabric & Craft Drape Subtitle */}
-        <p className="text-xs text-monarch-charcoal/65 font-sans line-clamp-1">
+        <p className="text-xs text-neutral-600 font-sans line-clamp-1">
           {product.fabric}
           {product.embroidery ? ` · ${product.embroidery}` : ''}
         </p>
@@ -185,11 +185,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
         <div className="pt-2 flex items-center justify-between">
           {/* Price Block */}
           <div className="flex items-baseline gap-2">
-            <span className="font-serif text-base sm:text-lg font-bold text-monarch-maroon tracking-tight">
+            <span className="font-serif text-base sm:text-lg font-bold text-primary-700 tracking-tight">
               {formatINR(product.price)}
             </span>
             {product.originalPrice && (
-              <span className="text-xs text-monarch-charcoal/40 line-through font-sans">
+              <span className="text-xs text-neutral-400 line-through font-sans">
                 {formatINR(product.originalPrice)}
               </span>
             )}
@@ -210,8 +210,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
                   }}
                   className={`w-3.5 h-3.5 rounded-full border transition-all cursor-pointer ${
                     isSelected
-                      ? 'ring-2 ring-monarch-gold ring-offset-2 ring-offset-[#FAF7F2] scale-115 border-white shadow-sm'
-                      : 'border-black/20 hover:scale-110 opacity-80 hover:opacity-100'
+                      ? 'ring-2 ring-primary-600 ring-offset-2 ring-offset-surface-100 scale-115 border-white shadow-sm'
+                      : 'border-neutral-300 hover:scale-110 opacity-80 hover:opacity-100'
                   }`}
                   style={{ backgroundColor: color.hex }}
                   title={color.name}
@@ -220,7 +220,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
               );
             })}
             {product.colors.length > 3 && (
-              <span className="text-[10px] text-monarch-charcoal/50 font-nav font-medium ml-0.5">
+              <span className="text-[10px] text-neutral-500 font-nav font-medium ml-0.5">
                 +{product.colors.length - 3}
               </span>
             )}

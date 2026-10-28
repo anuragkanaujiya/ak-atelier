@@ -66,7 +66,7 @@ export const GoldParticles: React.FC<GoldParticlesProps> = ({ count = 120 }) => 
       </bufferGeometry>
       <pointsMaterial
         size={0.06}
-        color="#DFBE7F"
+        color="#CFC7E3"
         transparent
         opacity={0.8}
         blending={THREE.AdditiveBlending}

@@ -71,23 +71,23 @@ export const SeasonalSpecial: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="py-7 sm:py-9 bg-[#FAF7F2] text-monarch-charcoal relative overflow-hidden pb-12 border-t border-monarch-gold/15"
+      className="py-7 sm:py-9 bg-surface-300 text-neutral-900 relative overflow-hidden pb-12 border-t border-neutral-200"
     >
       <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header: "| Seasonal Special" */}
         <div className="seasonal-header-reveal flex items-center justify-between gap-4 mb-4 pb-2">
           <div className="flex items-center gap-2">
-            <span className="text-[#C59B27] font-serif font-light text-2xl sm:text-3xl select-none leading-none">
+            <span className="text-primary-600 font-serif font-light text-2xl sm:text-3xl select-none leading-none">
               |
             </span>
-            <h2 className="font-serif text-xl sm:text-2xl lg:text-[27px] font-normal tracking-tight text-[#1E1714]">
+            <h2 className="font-serif text-xl sm:text-2xl lg:text-[27px] font-normal tracking-tight text-neutral-900">
               Seasonal Special
             </h2>
           </div>
 
           <Link
             href="/collections/all"
-            className="inline-flex items-center gap-1.5 text-xs font-nav uppercase tracking-wider text-monarch-maroon hover:text-monarch-maroon-dark font-medium transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-nav uppercase tracking-wider text-primary-600 hover:text-primary-700 font-medium transition-colors"
           >
             <span>View All</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -98,8 +98,8 @@ export const SeasonalSpecial: React.FC = () => {
       {/* Marquee Track: Centered, Interactive & Silky Smooth */}
       <div className="relative w-full overflow-hidden select-none py-1">
         {/* Edge Gradient Masks — hidden on mobile to prevent white overlay haze, visible on sm+ */}
-        <div className="hidden sm:block pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-16 bg-gradient-to-r from-[#FAF7F2] to-transparent z-10" />
-        <div className="hidden sm:block pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-16 bg-gradient-to-l from-[#FAF7F2] to-transparent z-10" />
+        <div className="hidden sm:block pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-16 bg-gradient-to-r from-surface-300 to-transparent z-10" />
+        <div className="hidden sm:block pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-16 bg-gradient-to-l from-surface-300 to-transparent z-10" />
 
         <div
           ref={containerRef}

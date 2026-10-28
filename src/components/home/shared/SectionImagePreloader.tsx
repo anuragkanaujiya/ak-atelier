@@ -21,24 +21,24 @@ import { PRODUCTS } from '@/data/products';
 
 // ─── Section image batches (index = section order) ────────────────────────────
 
-/** Section 0: Six Moods of Silk — above-fold, always preloaded immediately */
+/** Section 1: Six Moods of Silk (Haute Couture expressions) */
 const SECTION_0_IMAGES = [
-  '/images/moods/kanjivaram_silk.jpg',
-  '/images/moods/banarasi_brocade.jpg',
-  '/images/moods/chanderi_heritage.jpg',
-  '/images/moods/paithani_heirloom.jpg',
-  '/images/moods/tussar_silk.jpg',
-  '/images/moods/pure_organza.jpg',
+  '/images/products/3d_crema_pant_suit.webp',
+  '/images/products/3d_camel_cashmere_coat.webp',
+  '/images/products/3d_black_silk_gown.webp',
+  '/images/products/3d_milano_trench_coat.webp',
+  '/images/products/3d_espresso_leather_trench.webp',
+  '/images/products/3d_charcoal_wool_tuxedo.webp',
 ];
 
-/** Section 1: Woven to Be Remembered Panoramic Ensembles — above-fold, always preloaded */
+/** Section 2: Woven to Be Remembered Panoramic Signatures */
 const SECTION_1_IMAGES = [
-  '/images/panoramic/ensemble_aarunya.jpg',
-  '/images/panoramic/ensemble_kalyani.jpg',
-  '/images/panoramic/ensemble_saanjh.jpg',
-  '/images/panoramic/ensemble_prerna.jpg',
-  '/images/panoramic/ensemble_utsav.jpg',
-  '/images/panoramic/ensemble_vara.jpg',
+  '/images/products/notte-asymmetric-silk-column-gown_studio.webp',
+  '/images/products/crema-double-breasted-pant-suit_studio.webp',
+  '/images/products/belvedere-camel-cashmere-overcoat_studio.webp',
+  '/images/products/emerald-bias-cut-liquid-satin-dress_studio.webp',
+  '/images/products/milano-gabardine-trench-coat_studio.webp',
+  '/images/products/brera-double-breasted-dinner-tuxedo_studio.webp',
 ];
 
 /**
@@ -226,72 +226,56 @@ function scheduleIdlePreload(urls: string[], timeout = 1500): void {
  * Renders invisible sentinel `<div>` anchors for each section transition point.
  */
 export const SectionImagePreloader: React.FC = () => {
-  const sentinelRefs = useRef<(HTMLDivElement | null)[]>([]);
   const batchLoaded = useRef<boolean[]>([false, false, false, false]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // ── Phase 1: Above-fold images — preload immediately ──────────────────
-    Promise.all([...SECTION_0_IMAGES, ...SECTION_1_IMAGES].map(preloadAndDecodeImage)).then(() => {
-      ScrollTrigger.refresh();
-    });
+    // Phase 1: Preload Six Moods images on idle (Section 1)
+    scheduleIdlePreload(SECTION_0_IMAGES, 800);
 
-    // ── Phase 2: IntersectionObserver look-ahead loading ─────────────────
+    // Phase 2: Staged section-by-section lookahead preloading
+    // Only preloads assets for upcoming sections when the user scrolls near them
     const batches = getLazyBatchesMemo();
+    const sectionTargets = [
+      'six-moods',             // Approaching six-moods -> preload Woven signatures & new arrivals
+      'woven-to-be-remembered',// Approaching woven -> preload bridal
+      'autumn-winter-2026',    // Approaching autumn winter -> preload trends & occasion edits
+      'worth-your-attention',  // Approaching spotlight -> preload deep stories & atelier
+    ];
 
-    // When sentinel[i] enters viewport → preload batch[i]
     const observers: IntersectionObserver[] = [];
 
-    sentinelRefs.current.forEach((el, i) => {
-      if (!el) return;
+    const timer = setTimeout(() => {
+      sectionTargets.forEach((targetId, i) => {
+        const el = document.getElementById(targetId);
+        if (!el) return;
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting && !batchLoaded.current[i]) {
-            batchLoaded.current[i] = true;
-            const urls = batches[i] ?? [];
-            // Sections 0-1 → immediate; sections 2+ → idle
-            if (i <= 1) {
-              Promise.all(urls.map(preloadAndDecodeImage)).then(() => ScrollTrigger.refresh());
-            } else {
-              scheduleIdlePreload(urls, 800);
+        const observer = new IntersectionObserver(
+          (entries) => {
+            if (entries[0].isIntersecting && !batchLoaded.current[i]) {
+              batchLoaded.current[i] = true;
+              const urls = i === 0 ? [...SECTION_1_IMAGES, ...(batches[0] ?? [])] : batches[i] ?? [];
+              scheduleIdlePreload(urls, 250);
+              observer.disconnect();
             }
-            observer.disconnect();
+          },
+          {
+            rootMargin: '400px 0px 400px 0px',
+            threshold: 0.01,
           }
-        },
-        {
-          // Start preloading when sentinel is 600px below the fold — enough lead time
-          rootMargin: '0px 0px 600px 0px',
-          threshold: 0.1,
-        }
-      );
+        );
 
-      observer.observe(el);
-      observers.push(observer);
-    });
-
-    // ── Phase 3: Deep scroll batch (sections 9-13) — schedule on idle ─────
-    scheduleIdlePreload(batches[3] ?? [], 2000);
+        observer.observe(el);
+        observers.push(observer);
+      });
+    }, 150);
 
     return () => {
+      clearTimeout(timer);
       observers.forEach((obs) => obs.disconnect());
     };
   }, []);
 
-  // Render invisible sentinel divs between section transitions
-  // Positions: after SixMoods (s0→s1), after WovenToBeRemembered (s1→s2),
-  //            after NewArrivals+BestSellers (s2-3→s4), after Bridal (s4→s5+)
-  return (
-    <>
-      {[0, 1, 2, 3].map((i) => (
-        <div
-          key={i}
-          ref={(el) => { sentinelRefs.current[i] = el; }}
-          aria-hidden="true"
-          style={{ position: 'absolute', width: 1, height: 1, opacity: 0, pointerEvents: 'none' }}
-        />
-      ))}
-    </>
-  );
+  return null;
 };

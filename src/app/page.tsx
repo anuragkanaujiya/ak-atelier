@@ -18,7 +18,7 @@ import { AtelierSanctum } from '@/components/home/AtelierSanctum';
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#F7F0E5]">
+    <div className="flex flex-col min-h-screen bg-primary-100">
       {/* Background section image preloader for instant load on scroll */}
       <SectionImagePreloader />
 

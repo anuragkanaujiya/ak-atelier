@@ -79,7 +79,7 @@ export const ChangeYourLook: React.FC = () => {
     currentLook?.colors?.[0] || {
       id: 'rose',
       name: 'Rosé',
-      hex: '#E79DA2',
+      hex: '#B58FA8',
       image: currentLook?.modelImage || '/images/panoramic/ensemble_vara.jpg',
     };
   const displayImage = activeColor.image || currentLook.modelImage;
@@ -158,7 +158,7 @@ export const ChangeYourLook: React.FC = () => {
     <section
       id="change-your-look"
       ref={sectionRef}
-      className="py-12 sm:py-20 bg-[#FAF7F2] text-monarch-charcoal relative overflow-hidden border-t border-monarch-gold/20"
+      className="py-12 sm:py-20 bg-surface-300 text-neutral-900 relative overflow-hidden border-t border-neutral-200"
     >
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
@@ -168,12 +168,12 @@ export const ChangeYourLook: React.FC = () => {
           <div className="lg:col-span-2 flex flex-col items-start space-y-3">
             {/* Handwritten "Change look" script + decorative curved arrow (Matches screenshot) */}
             <div className="relative pl-1 select-none">
-              <span className="font-serif italic text-2xl sm:text-3xl text-monarch-charcoal tracking-wide font-normal">
+              <span className="font-serif italic text-2xl sm:text-3xl text-neutral-900 tracking-wide font-normal">
                 Change look
               </span>
               {/* Whimsical curved arrow sketch pointing down to looks */}
               <svg
-                className="w-9 h-6 text-monarch-charcoal/70 ml-6 -mt-1"
+                className="w-9 h-6 text-neutral-500 ml-6 -mt-1"
                 viewBox="0 0 45 28"
                 fill="none"
                 stroke="currentColor"
@@ -222,7 +222,7 @@ export const ChangeYourLook: React.FC = () => {
             {/* Previous Look Chevron Arrow (Left) */}
             <button
               onClick={handlePrevLook}
-              className="absolute left-3.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/85 hover:bg-white text-monarch-charcoal shadow-md flex items-center justify-center backdrop-blur-sm transition-all hover:scale-110 active:scale-95 z-10 cursor-pointer"
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/85 hover:bg-white text-neutral-800 shadow-md flex items-center justify-center backdrop-blur-sm transition-all hover:scale-110 active:scale-95 z-10 cursor-pointer"
               aria-label="Previous look"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -231,7 +231,7 @@ export const ChangeYourLook: React.FC = () => {
             {/* Next Look Chevron Arrow (Right) */}
             <button
               onClick={handleNextLook}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/85 hover:bg-white text-monarch-charcoal shadow-md flex items-center justify-center backdrop-blur-sm transition-all hover:scale-110 active:scale-95 z-10 cursor-pointer"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/85 hover:bg-white text-neutral-800 shadow-md flex items-center justify-center backdrop-blur-sm transition-all hover:scale-110 active:scale-95 z-10 cursor-pointer"
               aria-label="Next look"
             >
               <ChevronRight className="w-4 h-4" />
@@ -260,16 +260,16 @@ export const ChangeYourLook: React.FC = () => {
           <div className="lg:col-span-5 flex flex-col justify-center space-y-5 lg:pl-3">
             {/* Category / Breadcrumb & Rating */}
             <div className="look-text-reveal flex items-center justify-between gap-3 text-xs">
-              <span className="text-[10px] font-nav uppercase tracking-[0.22em] font-semibold text-gray-500">
+              <span className="text-[10px] font-nav uppercase tracking-[0.22em] font-semibold text-neutral-500">
                 Shop All Sarees &gt; Designer Sarees
               </span>
 
-              <div className="flex items-center gap-1.5 text-monarch-gold">
+              <div className="flex items-center gap-1.5 text-primary-600">
                 <span className="tracking-widest text-sm">★★★★★</span>
-                <span className="font-semibold text-monarch-charcoal text-[11px]">
+                <span className="font-semibold text-neutral-900 text-[11px]">
                   {currentLook.rating}
                 </span>
-                <span className="text-gray-400 text-[10px]">
+                <span className="text-neutral-400 text-[10px]">
                   ({currentLook.reviewCount} Reviews)
                 </span>
               </div>
@@ -281,49 +281,49 @@ export const ChangeYourLook: React.FC = () => {
                 href={`/product/${currentLook.slug || currentLook.id}`}
                 className="group/title block"
               >
-                <h2 className="font-serif text-3xl sm:text-4xl lg:text-[42px] font-normal tracking-tight text-[#1E1714] group-hover/title:text-monarch-maroon transition-colors leading-[1.1] uppercase">
+                <h2 className="font-serif text-3xl sm:text-4xl lg:text-[42px] font-normal tracking-tight text-neutral-900 group-hover/title:text-primary-700 transition-colors leading-[1.1] uppercase">
                   {currentLook.name}
                 </h2>
               </Link>
               <div className="flex items-baseline gap-2.5">
-                <span className="font-serif text-2xl sm:text-3xl font-bold text-[#1E1714]">
+                <span className="font-serif text-2xl sm:text-3xl font-bold text-neutral-900">
                   {currentLook.formattedPrice}
                 </span>
-                <span className="text-xs text-gray-400 font-sans">
+                <span className="text-xs text-neutral-400 font-sans">
                   (MRP incl. of all taxes)
                 </span>
               </div>
             </div>
 
             {/* Editorial Features Line */}
-            <div className="look-text-reveal flex items-center gap-4 text-xs text-gray-600 pt-1 border-t border-gray-200/80 flex-wrap">
+            <div className="look-text-reveal flex items-center gap-4 text-xs text-neutral-600 pt-1 border-t border-neutral-200 flex-wrap">
               <div className="flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-monarch-gold-dark" />
+                <ShieldCheck className="w-3.5 h-3.5 text-primary-600" />
                 <span>Pure Silk Mark</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <Award className="w-3.5 h-3.5 text-monarch-gold-dark" />
+                <Award className="w-3.5 h-3.5 text-primary-600" />
                 <span>Handloom Zari</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <Truck className="w-3.5 h-3.5 text-monarch-gold-dark" />
+                <Truck className="w-3.5 h-3.5 text-primary-600" />
                 <span>Ready to Ship</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-monarch-gold-dark" />
+                <Sparkles className="w-3.5 h-3.5 text-primary-600" />
                 <span>Custom Blouse</span>
               </div>
             </div>
 
             {/* Select Blouse Size (Matches Screenshot) */}
-            <div className="look-text-reveal pt-1 border-t border-gray-200/80">
+            <div className="look-text-reveal pt-1 border-t border-neutral-200">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-[11px] font-nav uppercase tracking-wider text-gray-700 font-semibold">
+                <span className="text-[11px] font-nav uppercase tracking-wider text-neutral-700 font-semibold">
                   SELECT BLOUSE SIZE:
                 </span>
                 <button
                   type="button"
-                  className="text-[11px] text-monarch-maroon hover:underline cursor-pointer bg-transparent border-0 p-0"
+                  className="text-[11px] text-primary-700 hover:underline cursor-pointer bg-transparent border-0 p-0"
                 >
                   Size Guide
                 </button>
@@ -336,8 +336,8 @@ export const ChangeYourLook: React.FC = () => {
                     onClick={() => setSelectedSize(size)}
                     className={`w-9 h-9 sm:w-10 sm:h-10 rounded-lg text-xs font-semibold transition-all cursor-pointer flex items-center justify-center ${
                       selectedSize === size
-                        ? 'border-2 border-black bg-white text-black shadow-xs font-bold'
-                        : 'border border-gray-200 bg-white hover:border-gray-400 text-gray-700'
+                        ? 'border-2 border-primary-600 bg-primary-100 text-primary-900 shadow-xs font-bold'
+                        : 'border border-neutral-200 bg-white hover:border-neutral-400 text-neutral-700'
                     }`}
                   >
                     {size}
@@ -349,10 +349,10 @@ export const ChangeYourLook: React.FC = () => {
             {/* Select Colour Swatches (Matches Screenshot) */}
             <div className="look-text-reveal pt-1">
               <div className="flex items-center gap-2 mb-2">
-                <span className="text-[11px] font-nav uppercase tracking-wider text-gray-700 font-semibold">
+                <span className="text-[11px] font-nav uppercase tracking-wider text-neutral-700 font-semibold">
                   SELECT COLOUR:
                 </span>
-                <span className="text-xs font-serif font-semibold text-monarch-charcoal uppercase tracking-wider">
+                <span className="text-xs font-serif font-semibold text-neutral-900 uppercase tracking-wider">
                   {activeColor.name}
                 </span>
               </div>
@@ -365,8 +365,8 @@ export const ChangeYourLook: React.FC = () => {
                     onClick={() => setSelectedColorIdx(idx)}
                     className={`w-9 h-9 rounded-md transition-all cursor-pointer flex items-center justify-center ${
                       selectedColorIdx === idx
-                        ? 'ring-2 ring-black ring-offset-2 scale-105 shadow-sm'
-                        : 'border border-gray-300 hover:scale-102'
+                        ? 'ring-2 ring-primary-600 ring-offset-2 scale-105 shadow-sm'
+                        : 'border border-neutral-300 hover:scale-102'
                     }`}
                     style={{ backgroundColor: color.hex }}
                     title={color.name}
@@ -380,11 +380,11 @@ export const ChangeYourLook: React.FC = () => {
             <div className="look-text-reveal pt-2 flex flex-col gap-3">
               <div className="flex items-center gap-4 sm:gap-6 flex-wrap">
                 {/* Quantity Counter */}
-                <div className="flex items-center rounded-full bg-white border border-gray-200 px-3 py-1.5 shadow-xs">
+                <div className="flex items-center rounded-full bg-white border border-neutral-200 px-3 py-1.5 shadow-xs">
                   <button
                     type="button"
                     onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
-                    className="w-6 h-6 rounded-full hover:bg-gray-100 text-gray-800 flex items-center justify-center font-bold text-sm cursor-pointer"
+                    className="w-6 h-6 rounded-full hover:bg-neutral-100 text-neutral-800 flex items-center justify-center font-bold text-sm cursor-pointer"
                     aria-label="Decrease quantity"
                   >
                     -
@@ -395,7 +395,7 @@ export const ChangeYourLook: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setQuantity((prev) => prev + 1)}
-                    className="w-6 h-6 rounded-full hover:bg-gray-100 text-gray-800 flex items-center justify-center font-bold text-sm cursor-pointer"
+                    className="w-6 h-6 rounded-full hover:bg-neutral-100 text-neutral-800 flex items-center justify-center font-bold text-sm cursor-pointer"
                     aria-label="Increase quantity"
                   >
                     +
@@ -407,14 +407,14 @@ export const ChangeYourLook: React.FC = () => {
               </div>
 
               {/* Action Badges Row (Below Button, Matches Screenshot) */}
-              <div className="flex items-center gap-8 justify-end max-w-[400px] pr-4 text-gray-600">
+              <div className="flex items-center gap-8 justify-end max-w-[400px] pr-4 text-neutral-600">
                 <button
                   type="button"
                   onClick={() => toggleWishlist(currentLook.id)}
                   className="flex flex-col items-center gap-1 text-[9px] font-nav uppercase tracking-wider hover:text-black transition-colors cursor-pointer bg-transparent border-0 p-0"
                   aria-label="Save to Wishlist"
                 >
-                  <Heart className={`w-4 h-4 ${inWishlist ? 'fill-monarch-maroon text-monarch-maroon' : 'text-gray-600'}`} />
+                  <Heart className={`w-4 h-4 ${inWishlist ? 'fill-secondary-600 text-secondary-600' : 'text-neutral-500'}`} />
                   <span>Wishlist</span>
                 </button>
 
@@ -432,12 +432,12 @@ export const ChangeYourLook: React.FC = () => {
                   className="flex flex-col items-center gap-1 text-[9px] font-nav uppercase tracking-wider hover:text-black transition-colors cursor-pointer bg-transparent border-0 p-0"
                   aria-label="Share Ensemble"
                 >
-                  <Share2 className="w-4 h-4 text-gray-600" />
+                  <Share2 className="w-4 h-4 text-neutral-500" />
                   <span>Share</span>
                 </button>
 
-                <div className="flex flex-col items-center gap-1 text-[9px] font-nav uppercase tracking-wider text-gray-500">
-                  <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                <div className="flex flex-col items-center gap-1 text-[9px] font-nav uppercase tracking-wider text-neutral-500">
+                  <ShieldCheck className="w-4 h-4 text-success-600" />
                   <span>Authentic</span>
                 </div>
               </div>
@@ -445,8 +445,8 @@ export const ChangeYourLook: React.FC = () => {
 
             {/* Added to Cart Feedback Toast */}
             {addedNotice && (
-              <div className="flex items-center gap-2 p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs animate-fade-in">
-                <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+              <div className="flex items-center gap-2 p-3 rounded-xl bg-success-100 border border-success-200 text-success-900 text-xs animate-fade-in">
+                <Check className="w-4 h-4 text-success-600 shrink-0" />
                 <span>
                   <strong>{currentLook.name}</strong> ({activeColor.name}, Size {selectedSize}) added to your bag.
                 </span>

@@ -48,20 +48,20 @@ export interface FooterData {
 export const FOOTER_DATA: FooterData = {
   brand: {
     name: 'AK ATELIER',
-    tagline: 'Haute Couture Heritage · Mumbai & Paris',
-    scriptTag: 'Draped for every royal celebration.',
+    tagline: 'Haute Couture & Western Tailoring · Milan & Paris',
+    scriptTag: 'Sculpted for commanding presence.',
     monogram: 'AK',
-    description: 'Preserving sacred handloom corridors and imperial Indian weaves across Varanasi, Kanchipuram, and Chanderi.',
+    description: 'Preserving master bespoke tailoring, Super 150s virgin wool, and double-faced cashmere across Milan and Florence.',
   },
   columns: {
     shop: {
       id: 'shop',
       title: 'Shop',
       links: [
-        { label: 'New arrivals', href: '/collections/new-arrivals' },
-        { label: 'Silk sarees', href: '/collections/sarees' },
-        { label: 'Bridal edit', href: '/collections/bridal' },
-        { label: 'Best sellers', href: '/collections/best-sellers' },
+        { label: 'New arrivals', href: '/collections/all' },
+        { label: 'Tailored suiting', href: '/collections/tailored-suiting' },
+        { label: 'Coats & trench', href: '/collections/coats-outerwear' },
+        { label: 'Eveningwear & gowns', href: '/collections/evening-dresses' },
       ],
     },
     explore: {
@@ -71,7 +71,7 @@ export const FOOTER_DATA: FooterData = {
         { label: 'Our story', href: '/our-story' },
         { label: 'Craftsmanship', href: '/our-craft' },
         { label: 'Lookbook', href: '/collections/all' },
-        { label: 'Stores', href: '/stores' },
+        { label: 'Milan Flagship', href: '/stores' },
       ],
     },
     support: {
@@ -86,16 +86,16 @@ export const FOOTER_DATA: FooterData = {
     },
   },
   newsletter: {
-    eyebrow: 'Royal Registry',
+    eyebrow: 'Private Salon Registry',
     title: 'Stay updated',
-    description: 'Subscribe for private trunk shows, rare handwoven drops, and stories from the loom.',
+    description: 'Subscribe for private runway previews, bespoke salon appointments, and limited couture drops.',
     placeholder: 'Your email address',
     buttonText: 'Subscribe',
-    successMessage: 'Thank you for subscribing to DRIFT. Welcome to our royal registry.',
+    successMessage: 'Thank you for subscribing to AK ATELIER Milano. Welcome to our private couture registry.',
   },
   heroImage: {
-    src: '/images/footer-banner-lake-palace.jpg',
-    alt: 'Regal Indian women draped in handwoven silk sarees at a heritage palace courtyard',
+    src: '/hero-poster.webp',
+    alt: 'AK ATELIER Milan flagship showroom with tailored suits and cashmere overcoats',
   },
   legalLinks: [
     { label: 'Terms & Conditions', href: '/terms' },

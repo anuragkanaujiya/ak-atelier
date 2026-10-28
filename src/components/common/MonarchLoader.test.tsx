@@ -26,8 +26,10 @@ describe('AkLoader', () => {
     const minimalProps: AkLoaderProps = {
       variant: 'minimal',
       message: 'Adding to Bag...',
+      logoSize: 16,
     };
     expect(minimalProps.variant).toBe('minimal');
+    expect(minimalProps.logoSize).toBe(16);
   });
 
   it('supports controlled mode with boolean isLoading flag', () => {

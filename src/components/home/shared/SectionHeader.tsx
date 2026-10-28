@@ -29,29 +29,29 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
 }) => {
   const isDark = theme === 'dark';
 
-  const textColor = isDark ? 'text-monarch-ivory' : 'text-monarch-charcoal';
+  const textColor = isDark ? 'text-white' : 'text-neutral-900';
   const eyebrowBg = isDark
-    ? 'bg-monarch-gold/15 text-monarch-gold-light border-monarch-gold/30'
-    : 'bg-monarch-maroon/10 text-monarch-maroon border-monarch-maroon/20';
-  const descColor = isDark ? 'text-monarch-beige/80' : 'text-monarch-charcoal/75';
+    ? 'bg-neutral-800 text-primary-200 border-primary-500/40'
+    : 'bg-primary-100 text-primary-800 border-primary-200';
+  const descColor = isDark ? 'text-neutral-300' : 'text-neutral-600';
   const ctaColor = isDark
-    ? 'text-monarch-gold-light hover:text-white border-monarch-gold/40 hover:border-monarch-gold'
-    : 'text-monarch-maroon hover:text-monarch-maroon-dark border-monarch-maroon/30 hover:border-monarch-maroon';
+    ? 'text-primary-300 hover:text-white border-primary-400/40 hover:border-primary-300'
+    : 'text-primary-600 hover:text-primary-700 border-primary-300 hover:border-primary-600';
 
   if (align === 'split') {
     return (
-      <div className={`flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b ${isDark ? 'border-monarch-gold/20' : 'border-monarch-gold/30'} ${className}`}>
+      <div className={`flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b ${isDark ? 'border-neutral-750' : 'border-neutral-200'} ${className}`}>
         <div className="max-w-2xl space-y-2">
           {eyebrow && (
             <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-[11px] font-nav uppercase tracking-[0.25em] font-medium ${eyebrowBg}`}>
-              <Sparkles className="w-3 h-3 text-monarch-gold" />
+              <Sparkles className="w-3 h-3 text-primary-400" />
               <span>{eyebrow}</span>
             </div>
           )}
           <h2 className={`font-serif text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight ${textColor}`}>
             {title}{' '}
             {italicWord && (
-              <span className="font-serif italic font-light text-monarch-gold-light">
+              <span className={`font-serif italic font-light ${isDark ? 'text-primary-200' : 'text-primary-600'}`}>
                 {italicWord}
               </span>
             )}
@@ -69,7 +69,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
             className={`inline-flex items-center gap-2 text-xs font-nav uppercase tracking-[0.2em] font-semibold pb-1 border-b transition-all duration-300 group ${ctaColor}`}
           >
             <span>{ctaText}</span>
-            <ArrowRight className="w-4 h-4 text-monarch-gold group-hover:translate-x-1.5 transition-transform" />
+            <ArrowRight className="w-4 h-4 text-primary-400 group-hover:translate-x-1.5 transition-transform" />
           </Link>
         )}
       </div>
@@ -88,7 +88,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         <div
           className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full border text-[11px] font-nav uppercase tracking-[0.25em] font-medium ${eyebrowBg}`}
         >
-          <Sparkles className="w-3 h-3 text-monarch-gold" />
+          <Sparkles className="w-3 h-3 text-primary-400" />
           <span>{eyebrow}</span>
         </div>
       )}
@@ -98,7 +98,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
       >
         {title}{' '}
         {italicWord && (
-          <span className="font-serif italic font-light text-monarch-gold-light">
+          <span className={`font-serif italic font-light ${isDark ? 'text-primary-200' : 'text-primary-600'}`}>
             {italicWord}
           </span>
         )}
@@ -121,7 +121,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
             className={`inline-flex items-center gap-2 text-xs font-nav uppercase tracking-[0.2em] font-semibold pb-1 border-b transition-all duration-300 group ${ctaColor}`}
           >
             <span>{ctaText}</span>
-            <ArrowRight className="w-4 h-4 text-monarch-gold group-hover:translate-x-1.5 transition-transform" />
+            <ArrowRight className="w-4 h-4 text-primary-400 group-hover:translate-x-1.5 transition-transform" />
           </Link>
         </div>
       )}
