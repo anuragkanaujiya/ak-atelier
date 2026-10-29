@@ -50,15 +50,15 @@ export const SeasonalSpecial: React.FC = () => {
     () => {
       gsap.fromTo(
         '.seasonal-header-reveal',
-        { opacity: 0.85, y: 12 },
+        { opacity: 0.35, y: 24 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.5,
+          duration: 0.6,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 95%',
+            start: 'top 85%',
             refreshPriority: 1,
             toggleActions: 'play none none none',
           },

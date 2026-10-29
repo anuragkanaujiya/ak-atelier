@@ -104,12 +104,8 @@ export const SmoothScrollProvider: React.FC<{ children: React.ReactNode }> = ({ 
     // Smooth lag adjustment: allows fluid recovery without harsh jumps during heavy frames
     gsap.ticker.lagSmoothing(500, 33);
 
-    // 1. Initial calibration once Lenis is operational and scroll position is at (0, 0)
+    // 1. Initial calibration once Lenis is operational
     const initTimer = setTimeout(() => {
-      if (!window.location.hash && (window.scrollY !== 0 || window.pageYOffset !== 0)) {
-        window.scrollTo(0, 0);
-        lenis.scrollTo(0, { immediate: true });
-      }
       lenis.resize();
       ScrollTrigger.refresh();
     }, 150);
@@ -117,10 +113,6 @@ export const SmoothScrollProvider: React.FC<{ children: React.ReactNode }> = ({ 
     // 2. Font loading synchronization: when web fonts load, layout metrics settle
     if ('fonts' in document) {
       document.fonts.ready.then(() => {
-        if (!window.location.hash && (window.scrollY !== 0 || window.pageYOffset !== 0)) {
-          window.scrollTo(0, 0);
-          lenis.scrollTo(0, { immediate: true });
-        }
         lenis.resize();
         ScrollTrigger.refresh();
       });
@@ -128,10 +120,6 @@ export const SmoothScrollProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
     // 3. Complete window load event synchronization
     const handleLoad = () => {
-      if (!window.location.hash && (window.scrollY !== 0 || window.pageYOffset !== 0)) {
-        window.scrollTo(0, 0);
-        lenis.scrollTo(0, { immediate: true });
-      }
       lenis.resize();
       ScrollTrigger.refresh();
     };

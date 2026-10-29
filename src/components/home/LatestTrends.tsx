@@ -45,16 +45,16 @@ export const LatestTrends: React.FC = () => {
 
       const ctx = gsap.fromTo(
         elements,
-        { opacity: 0.85, y: 16 },
+        { opacity: 0.35, y: 32 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.5,
-          stagger: 0.05,
+          duration: 0.7,
+          stagger: 0.1,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 95%',
+            start: 'top 85%',
             refreshPriority: 1,
             toggleActions: 'play none none none',
           },

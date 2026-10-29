@@ -54,6 +54,7 @@ export const HeroSection: React.FC = () => {
   const currentPhaseRef = useRef<number>(0);
 
   // Environment and preference states
+  const [isFirstFrameRendered, setIsFirstFrameRendered] = useState<boolean>(false);
   const [isReducedMotion, setIsReducedMotion] = useState<boolean>(false);
   const [isMobileDevice, setIsMobileDevice] = useState<boolean>(false);
 
@@ -117,7 +118,7 @@ export const HeroSection: React.FC = () => {
 
       let ctx = ctxRef.current;
       if (!ctx) {
-        ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
+        ctx = canvas.getContext('2d', { alpha: false }) || canvas.getContext('2d');
         if (ctx) {
           ctx.imageSmoothingEnabled = true;
           ctx.imageSmoothingQuality = 'medium';
@@ -177,7 +178,7 @@ export const HeroSection: React.FC = () => {
     if (canvas.width !== newW || canvas.height !== newH) {
       canvas.width = newW;
       canvas.height = newH;
-      ctxRef.current = canvas.getContext('2d', { alpha: false, desynchronized: true });
+      ctxRef.current = canvas.getContext('2d', { alpha: false }) || canvas.getContext('2d');
       if (ctxRef.current) {
         ctxRef.current.imageSmoothingEnabled = true;
         ctxRef.current.imageSmoothingQuality = 'medium';
@@ -211,7 +212,7 @@ export const HeroSection: React.FC = () => {
       // Try off-thread ImageBitmap decoding if available for zero UI thread jank
       if ('createImageBitmap' in window) {
         try {
-          const res = await fetch(url, { priority });
+          const res = await fetch(url);
           if (!res.ok) throw new Error('Fetch failed');
           const blob = await res.blob();
 
@@ -230,6 +231,7 @@ export const HeroSection: React.FC = () => {
             if (index === 0) {
               resizeCanvas();
               drawFrame(0);
+              setIsFirstFrameRendered(true);
             }
           }
           return;
@@ -247,6 +249,7 @@ export const HeroSection: React.FC = () => {
             if (index === 0) {
               resizeCanvas();
               drawFrame(0);
+              setIsFirstFrameRendered(true);
             }
           }
           resolve();
@@ -462,10 +465,12 @@ export const HeroSection: React.FC = () => {
 
       const st = ScrollTrigger.create({
         trigger: container,
+        pin: stickyStageRef.current || undefined,
+        pinSpacing: false,
         start: 'top top',
         end: 'bottom bottom',
         scrub: true, // Instant 1:1 sync with Lenis smooth momentum (zero lag)
-        anticipatePin: 0,
+        anticipatePin: 1,
         refreshPriority: 10,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
@@ -579,7 +584,9 @@ export const HeroSection: React.FC = () => {
         <img
           src={HERO_CONFIG.initialPosterPath}
           alt="AK Atelier Flagship Atelier Starting Frame"
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
+          className={`absolute inset-0 w-full h-full object-cover pointer-events-none select-none transition-opacity duration-700 ${
+            isFirstFrameRendered ? 'opacity-0' : 'opacity-100'
+          }`}
           loading="eager"
           fetchPriority="high"
           decoding="sync"

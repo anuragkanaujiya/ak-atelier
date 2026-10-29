@@ -154,16 +154,16 @@ export const AtelierSanctum: React.FC = () => {
       if (heroElements && heroElements.length > 0) {
         gsap.fromTo(
           heroElements,
-          { y: 16, opacity: 0.88 },
+          { y: 32, opacity: 0.35 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.5,
-            stagger: 0.05,
+            duration: 0.7,
+            stagger: 0.08,
             ease: 'power2.out',
             scrollTrigger: {
               trigger: containerRef.current,
-              start: 'top 95%',
+              start: 'top 85%',
               toggleActions: 'play none none none',
             },
           }

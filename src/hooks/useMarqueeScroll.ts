@@ -59,9 +59,9 @@ export function useMarqueeScroll<
           const newSetWidth = totalWidth / repeatCount;
           setWidth = newSetWidth;
 
-          if (!hasInitializedScroll && setWidth > 0) {
+          if ((!hasInitializedScroll || container.scrollLeft < newSetWidth * 0.2) && newSetWidth > 0) {
             // Position in the middle set for seamless bi-directional room
-            container.scrollLeft = setWidth;
+            container.scrollLeft = newSetWidth;
             hasInitializedScroll = true;
           }
         }
@@ -87,20 +87,8 @@ export function useMarqueeScroll<
         isPausedRef.current = true;
       }
 
-      // Only tick when container is actually visible in the viewport (eliminates off-screen CPU & reflow thrashing)
-      let isIntersecting = false;
-      let isWindowScrolling = false;
-      let windowScrollTimer: ReturnType<typeof setTimeout> | null = null;
-
-      const onWindowScroll = () => {
-        isWindowScrolling = true;
-        if (windowScrollTimer) clearTimeout(windowScrollTimer);
-        windowScrollTimer = setTimeout(() => {
-          isWindowScrolling = false;
-        }, 120);
-      };
-
-      window.addEventListener('scroll', onWindowScroll, { passive: true });
+      // Check visibility in viewport (default true for instant responsiveness)
+      let isIntersecting = true;
 
       let intersectionObserver: IntersectionObserver | null = null;
       if (typeof IntersectionObserver !== 'undefined') {
@@ -108,11 +96,9 @@ export function useMarqueeScroll<
           ([entry]) => {
             isIntersecting = Boolean(entry?.isIntersecting);
           },
-          { rootMargin: '200px 0px 200px 0px' }
+          { rootMargin: '300px 0px 300px 0px' }
         );
         intersectionObserver.observe(container);
-      } else {
-        isIntersecting = true;
       }
 
       const scheduleResume = (delay = 1200) => {
@@ -125,9 +111,9 @@ export function useMarqueeScroll<
         }, delay);
       };
 
-      // Ticker callback driven by GSAP — executes ONLY when visible and NOT actively window-scrolling
+      // Ticker callback driven by GSAP — executes smoothly when visible
       const onTick = (_time: number, deltaTime: number) => {
-        if (!container || !isIntersecting || setWidth <= 0 || isPausedRef.current || isWindowScrolling) return;
+        if (!container || !isIntersecting || setWidth <= 0 || isPausedRef.current) return;
 
         // Keep scroll normalized within bounds even during manual drag/swipe
         if (container.scrollLeft >= setWidth * 2.5) {
@@ -266,8 +252,6 @@ export function useMarqueeScroll<
         container.removeEventListener('click', onClickCapture, true);
         container.removeEventListener('wheel', onWheel);
         document.removeEventListener('visibilitychange', onVisibilityChange);
-        window.removeEventListener('scroll', onWindowScroll);
-        if (windowScrollTimer) clearTimeout(windowScrollTimer);
       };
     },
     { scope: containerRef, dependencies: [speed, direction, repeatCount, pauseOnHover] }
