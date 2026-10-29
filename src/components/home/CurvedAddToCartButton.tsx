@@ -28,17 +28,34 @@ export const CurvedAddToCartButton: React.FC<CurvedAddToCartButtonProps> = ({
   const tokenGroupRef = useRef<SVGGElement>(null);
   const arrowPathRef = useRef<SVGPathElement>(null);
 
-  // Scoped GSAP idle micro-nudge animation
+  // Scoped GSAP idle micro-nudge animation — paused when off-screen to preserve 120 FPS frame budget
   useGSAP(
     () => {
       if (!arrowPathRef.current || !tokenGroupRef.current) return;
 
-      const idleTimeline = gsap.timeline({ repeat: -1, repeatDelay: 2.4 });
+      const idleTimeline = gsap.timeline({ repeat: -1, repeatDelay: 2.4, paused: true });
       idleTimeline
         .to(tokenGroupRef.current, { x: 2, duration: 0.28, ease: 'power2.out' }, '+=0.2')
         .to(arrowPathRef.current, { x: 2.5, duration: 0.28, ease: 'power2.out' }, '<')
         .to(tokenGroupRef.current, { x: 0, duration: 0.35, ease: 'power2.inOut' })
         .to(arrowPathRef.current, { x: 0, duration: 0.35, ease: 'power2.inOut' }, '<');
+
+      let io: IntersectionObserver | null = null;
+      if (typeof IntersectionObserver !== 'undefined' && buttonRef.current) {
+        io = new IntersectionObserver(([entry]) => {
+          if (entry.isIntersecting) {
+            idleTimeline.play();
+          } else {
+            idleTimeline.pause();
+          }
+        });
+        io.observe(buttonRef.current);
+      }
+
+      return () => {
+        idleTimeline.kill();
+        if (io) io.disconnect();
+      };
     },
     { scope: buttonRef }
   );
@@ -103,7 +120,7 @@ export const CurvedAddToCartButton: React.FC<CurvedAddToCartButtonProps> = ({
         viewBox="0 0 326 185"
         className="w-[235px] sm:w-[255px] md:w-[270px] h-auto overflow-visible transition-transform duration-300 group-hover:scale-[1.02] group-hover:-translate-y-0.5"
         style={{
-          filter: 'drop-shadow(0 14px 24px rgba(160, 18, 45, 0.45))',
+          filter: 'drop-shadow(0 14px 24px rgba(109, 99, 138, 0.35))',
         }}
       >
         <defs>
@@ -113,11 +130,11 @@ export const CurvedAddToCartButton: React.FC<CurvedAddToCartButtonProps> = ({
             d="M 58 142 C 106 94, 168 56, 230 42"
           />
 
-          {/* Deep regal ruby maroon gradient matching reference screenshot */}
-          <linearGradient id="exact-maroon-grad" x1="0%" y1="100%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#58141F" />
-            <stop offset="40%" stopColor="#701124" />
-            <stop offset="100%" stopColor="#8A162D" />
+          {/* Deep regal Lilac gradient matching brand palette */}
+          <linearGradient id="exact-lilac-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#594F72" />
+            <stop offset="45%" stopColor="#6D638A" />
+            <stop offset="100%" stopColor="#81779F" />
           </linearGradient>
         </defs>
 
@@ -130,7 +147,7 @@ export const CurvedAddToCartButton: React.FC<CurvedAddToCartButtonProps> = ({
              C 292 74, 270 78, 246 84
              C 188 98, 128 136, 78 172
              C 56 178, 34 168, 42 146 Z"
-          fill="url(#exact-maroon-grad)"
+          fill="url(#exact-lilac-grad)"
           className="transition-colors duration-300 group-hover:brightness-110"
         />
 
@@ -153,7 +170,7 @@ export const CurvedAddToCartButton: React.FC<CurvedAddToCartButtonProps> = ({
           ref={tokenGroupRef}
           style={{ transformOrigin: '268px 38px' }}
         >
-          {/* White disc badge - 100% nested inside the maroon body */}
+          {/* White disc badge - 100% nested inside the lilac body */}
           <circle
             cx="268"
             cy="38"
@@ -166,7 +183,7 @@ export const CurvedAddToCartButton: React.FC<CurvedAddToCartButtonProps> = ({
           <path
             ref={arrowPathRef}
             d="M 259 38 L 277 38 M 271 32 L 277 38 L 271 44"
-            stroke="#1E1714"
+            stroke="#242129"
             strokeWidth="2.8"
             strokeLinecap="round"
             strokeLinejoin="round"

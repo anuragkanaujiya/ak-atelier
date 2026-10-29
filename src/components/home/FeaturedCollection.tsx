@@ -11,25 +11,25 @@ export const FeaturedCollection: React.FC = () => {
   const featuredProducts = PRODUCTS.slice(0, 8);
 
   return (
-    <section className="py-20 lg:py-28 bg-[#F7F0E5] text-monarch-charcoal relative">
+    <section className="py-20 lg:py-28 bg-surface-300 text-neutral-900 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-monarch-maroon/10 border border-monarch-maroon/20 text-xs font-nav uppercase tracking-widest text-monarch-maroon font-semibold">
-            <Sparkles className="w-3.5 h-3.5 text-monarch-gold-dark" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary-100 border border-primary-200 text-xs font-nav uppercase tracking-widest text-primary-800 font-semibold">
+            <Sparkles className="w-3.5 h-3.5 text-primary-600" />
             <span>Handcrafted Masterpieces</span>
           </div>
 
-          <h2 className="font-serif text-3xl sm:text-5xl font-medium tracking-tight text-monarch-charcoal">
-            THE ROYAL EDIT
+          <h2 className="font-serif text-3xl sm:text-5xl font-medium tracking-tight text-neutral-900">
+            THE ATELIER EDIT
           </h2>
 
-          <p className="font-serif italic text-lg sm:text-xl text-monarch-charcoal/80 font-light">
+          <p className="font-serif italic text-lg sm:text-xl text-neutral-700 font-light">
             &ldquo;Exceptional pieces for moments that become memories.&rdquo;
           </p>
 
-          <p className="text-xs sm:text-sm text-monarch-charcoal/70 font-sans max-w-xl mx-auto">
-            Each garment represents months of devotion by master karigars across Varanasi, Lucknow, and Jaipur, woven with real gold zari and bespoke tailoring.
+          <p className="text-xs sm:text-sm text-neutral-600 font-sans max-w-xl mx-auto">
+            Each garment represents months of devotion by master artisans across Milan, Paris, and Florence, tailored with fine Italian fabrics and bespoke craftsmanship.
           </p>
         </div>
 
@@ -44,10 +44,10 @@ export const FeaturedCollection: React.FC = () => {
         <div className="text-center mt-14">
           <Link
             href="/collections/all"
-            className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full bg-monarch-maroon hover:bg-monarch-maroon-dark text-monarch-ivory border border-monarch-gold/50 font-nav text-xs uppercase tracking-[0.2em] font-medium transition-all shadow-md hover:shadow-xl hover:gap-4 group"
+            className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full bg-primary-600 hover:bg-primary-700 text-white border border-primary-400/40 font-nav text-xs uppercase tracking-[0.2em] font-medium transition-all shadow-md hover:shadow-xl hover:gap-4 group cursor-pointer"
           >
-            <span>DISCOVER COMPLETE ROYAL VAULT</span>
-            <ArrowRight className="w-4 h-4 text-monarch-gold group-hover:translate-x-1 transition-transform" />
+            <span>DISCOVER COMPLETE COUTURE VAULT</span>
+            <ArrowRight className="w-4 h-4 text-primary-200 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </div>

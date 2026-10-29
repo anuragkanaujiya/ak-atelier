@@ -375,7 +375,7 @@ export default function ScrollImageSequence({
   return (
     <div
       ref={containerRef}
-      className="relative w-full bg-[#1A0A0E]"
+      className="relative w-full bg-neutral-900"
       style={{ height: isReducedMotion ? '100vh' : containerHeight }}
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center will-change-transform">
@@ -387,11 +387,11 @@ export default function ScrollImageSequence({
 
         {/* Ambient Loader placeholder */}
         {!isLoaded && (
-          <div className="absolute inset-0 z-40 flex flex-col items-center justify-center bg-[#1A0A0E] text-white">
-            <div className="w-12 h-12 mb-4 rounded-full border border-monarch-gold/40 flex items-center justify-center relative">
-              <div className="w-3.5 h-3.5 bg-monarch-gold rounded-full animate-ping" />
+          <div className="absolute inset-0 z-40 flex flex-col items-center justify-center bg-neutral-900 text-white">
+            <div className="w-12 h-12 mb-4 rounded-full border border-primary-400/40 flex items-center justify-center relative">
+              <div className="w-3.5 h-3.5 bg-primary-400 rounded-full animate-ping" />
             </div>
-            <p className="font-nav text-xs uppercase tracking-[0.3em] text-monarch-gold">
+            <p className="font-nav text-xs uppercase tracking-[0.3em] text-primary-300">
               {loadingTitle}
             </p>
           </div>
@@ -401,7 +401,7 @@ export default function ScrollImageSequence({
         {loadingProgress > 0 && loadingProgress < 100 && (
           <div className="pointer-events-none absolute top-0 left-0 right-0 h-[2px] z-30 bg-black/30">
             <div
-              className="h-full bg-monarch-gold transition-all duration-300"
+              className="h-full bg-primary-500 transition-all duration-300"
               style={{ width: `${loadingProgress}%` }}
             />
           </div>
@@ -412,12 +412,12 @@ export default function ScrollImageSequence({
 
         {/* Contextual HUD */}
         {showCaptions && !isReducedMotion && isLoaded && (
-          <div className="pointer-events-none absolute bottom-8 left-8 right-8 z-20 flex items-center justify-between text-xs text-monarch-beige/70">
-            <span className="font-mono text-[10px] tracking-wider text-monarch-gold/90">
+          <div className="pointer-events-none absolute bottom-8 left-8 right-8 z-20 flex items-center justify-between text-xs text-neutral-400">
+            <span className="font-mono text-[10px] tracking-wider text-primary-300">
               FRAME {activeFrameIndex + 1} / {framePaths.length}
             </span>
-            <span className="font-nav text-[9px] uppercase tracking-[0.25em] text-monarch-gold/80">
-              AK ATELIER ATELIER CINEMATIC SEQUENCE
+            <span className="font-nav text-[9px] uppercase tracking-[0.25em] text-primary-300">
+              AK ATELIER CINEMATIC SEQUENCE
             </span>
           </div>
         )}

@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation';
 import { PRODUCTS } from '@/data/products';
 import { ALL_CATEGORIES } from '@/data/categories';
 import { CollectionBrowser } from '@/components/collection/CollectionBrowser';
-import { Product } from '@/types';
 
 interface PageProps {
   params: Promise<{

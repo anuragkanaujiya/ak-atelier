@@ -45,16 +45,16 @@ export const LatestTrends: React.FC = () => {
 
       const ctx = gsap.fromTo(
         elements,
-        { opacity: 0.85, y: 16 },
+        { opacity: 0.35, y: 32 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.5,
-          stagger: 0.05,
+          duration: 0.7,
+          stagger: 0.1,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 95%',
+            start: 'top 85%',
             refreshPriority: 1,
             toggleActions: 'play none none none',
           },
@@ -70,7 +70,7 @@ export const LatestTrends: React.FC = () => {
     <section
       id="latest-trends"
       ref={sectionRef}
-      className="py-16 sm:py-24 bg-[#EEF2F6] text-[#141416] relative overflow-hidden select-none border-t border-monarch-gold/20"
+      className="py-16 sm:py-24 bg-accent-100/50 text-neutral-900 relative overflow-hidden select-none border-t border-neutral-200"
     >
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
@@ -82,23 +82,23 @@ export const LatestTrends: React.FC = () => {
               {/* Top Pill Button */}
               <Link
                 href="/collections/all"
-                className="inline-flex items-center px-4 py-1.5 rounded-full border border-black/20 text-[11px] font-nav uppercase tracking-[0.22em] text-black/70 hover:border-black hover:text-black transition-colors backdrop-blur-sm"
+                className="inline-flex items-center px-4 py-1.5 rounded-full border border-neutral-300 text-[11px] font-nav uppercase tracking-[0.22em] text-neutral-700 hover:border-neutral-900 hover:text-neutral-900 transition-colors backdrop-blur-sm"
               >
                 {LATEST_TRENDS_DATA.eyebrow}
               </Link>
 
-              {/* Giant Bold Headline Matching Screenshot Exactly */}
-              <h2 className="font-sans font-black tracking-[-0.04em] text-[58px] sm:text-[76px] lg:text-[88px] leading-[0.88] text-[#141416] uppercase">
+              {/* Giant Bold Headline */}
+              <h2 className="font-sans font-black tracking-[-0.04em] text-[58px] sm:text-[76px] lg:text-[88px] leading-[0.88] text-neutral-900 uppercase">
                 {LATEST_TRENDS_DATA.headingPrimary}
                 <br />
                 {LATEST_TRENDS_DATA.headingSecondary}
               </h2>
 
-              {/* Pill CTA Button (Crimson Maroon) */}
+              {/* Pill CTA Button */}
               <div className="pt-2">
                 <Link
                   href={LATEST_TRENDS_DATA.ctaHref}
-                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#7B1123] hover:bg-[#600C1B] text-white text-[11px] sm:text-xs font-nav uppercase tracking-[0.2em] font-medium shadow-md hover:shadow-lg transition-all active:scale-95"
+                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary-600 hover:bg-primary-700 text-white text-[11px] sm:text-xs font-nav uppercase tracking-[0.2em] font-medium shadow-md hover:shadow-lg transition-all active:scale-95"
                 >
                   <span>{LATEST_TRENDS_DATA.ctaText}</span>
                 </Link>
@@ -106,11 +106,11 @@ export const LatestTrends: React.FC = () => {
             </div>
 
             {/* Bottom Story Behind The Drape */}
-            <div className="pt-4 border-t border-black/10 max-w-[340px]">
-              <h3 className="font-serif text-xl sm:text-2xl text-[#141416] font-normal leading-snug">
+            <div className="pt-4 border-t border-neutral-200 max-w-[340px]">
+              <h3 className="font-serif text-xl sm:text-2xl text-neutral-900 font-normal leading-snug">
                 {LATEST_TRENDS_DATA.storyHeading}
               </h3>
-              <p className="text-xs sm:text-[13px] text-black/60 font-sans leading-relaxed mt-2 min-h-[48px] transition-all duration-300">
+              <p className="text-xs sm:text-[13px] text-neutral-600 font-sans leading-relaxed mt-2 min-h-[48px] transition-all duration-300">
                 {currentProduct.storyBehindDrape || LATEST_TRENDS_DATA.storyDescription}
               </p>
             </div>
@@ -178,20 +178,20 @@ export const LatestTrends: React.FC = () => {
               <button
                 type="button"
                 onClick={() => paginate(-1)}
-                className="w-8 h-8 rounded-full border border-black/15 hover:border-black text-black/70 hover:text-black flex items-center justify-center transition-colors cursor-pointer active:scale-95"
+                className="w-8 h-8 rounded-full border border-neutral-300 hover:border-neutral-900 text-neutral-600 hover:text-neutral-900 flex items-center justify-center transition-colors cursor-pointer active:scale-95"
                 aria-label="Previous card"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
 
-              <span className="font-nav text-xs uppercase tracking-[0.25em] text-black/60 font-medium select-none">
+              <span className="font-nav text-xs uppercase tracking-[0.25em] text-neutral-600 font-medium select-none">
                 0{activeIndex + 1} / 0{total}
               </span>
 
               <button
                 type="button"
                 onClick={() => paginate(1)}
-                className="w-8 h-8 rounded-full border border-black/15 hover:border-black text-black/70 hover:text-black flex items-center justify-center transition-colors cursor-pointer active:scale-95"
+                className="w-8 h-8 rounded-full border border-neutral-300 hover:border-neutral-900 text-neutral-600 hover:text-neutral-900 flex items-center justify-center transition-colors cursor-pointer active:scale-95"
                 aria-label="Next card"
               >
                 <ChevronRight className="w-4 h-4" />
@@ -203,11 +203,11 @@ export const LatestTrends: React.FC = () => {
           {/* 3. RIGHT COLUMN: EXPLORE THE RANGE                      */}
           {/* ======================================================== */}
           <div className="trends-col lg:col-span-3 flex flex-col justify-center">
-            <h3 className="font-serif text-xl sm:text-2xl text-[#141416] font-normal mb-6">
+            <h3 className="font-serif text-xl sm:text-2xl text-neutral-900 font-normal mb-6">
               {LATEST_TRENDS_DATA.rangeHeading}
             </h3>
 
-            <div className="divide-y divide-black/10 border-t border-b border-black/10">
+            <div className="divide-y divide-neutral-200 border-t border-b border-neutral-200">
               {LATEST_TRENDS_DATA.rangeCategories.map((cat) => {
                 const isSelected = currentProduct.rangeCategorySlug === cat.slug;
 
@@ -218,8 +218,8 @@ export const LatestTrends: React.FC = () => {
                     onClick={() => handleSelectCategory(cat.slug)}
                     className={`w-full py-4 flex items-center justify-between text-left transition-all duration-300 group cursor-pointer ${
                       isSelected
-                        ? 'text-[#7B1123] font-medium'
-                        : 'text-black/70 hover:text-black'
+                        ? 'text-primary-700 font-semibold'
+                        : 'text-neutral-600 hover:text-neutral-900'
                     }`}
                   >
                     <span className="font-serif text-base sm:text-lg tracking-wide transition-transform group-hover:translate-x-1 duration-300">
@@ -227,13 +227,13 @@ export const LatestTrends: React.FC = () => {
                     </span>
 
                     <div className="flex items-center gap-2">
-                      <span className="text-[11px] font-nav uppercase tracking-widest text-black/40 group-hover:text-black/70 transition-colors">
+                      <span className="text-[11px] font-nav uppercase tracking-widest text-neutral-400 group-hover:text-neutral-700 transition-colors">
                         {cat.count} Looks
                       </span>
                       <ArrowRight
                         className={`w-3.5 h-3.5 transition-all duration-300 ${
                           isSelected
-                            ? 'opacity-100 translate-x-1 text-[#7B1123]'
+                            ? 'opacity-100 translate-x-1 text-primary-700'
                             : 'opacity-30 group-hover:opacity-100 group-hover:translate-x-1'
                         }`}
                       />

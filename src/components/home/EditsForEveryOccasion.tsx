@@ -25,16 +25,16 @@ export const EditsForEveryOccasion: React.FC = () => {
 
       const ctx = gsap.fromTo(
         cards,
-        { opacity: 0.85, y: 16 },
+        { opacity: 0.35, y: 32 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.5,
-          stagger: 0.05,
+          duration: 0.7,
+          stagger: 0.1,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 95%',
+            start: 'top 85%',
             refreshPriority: 1,
             toggleActions: 'play none none none',
           },
@@ -52,28 +52,28 @@ export const EditsForEveryOccasion: React.FC = () => {
     <section
       id="edits-for-every-occasion"
       ref={sectionRef}
-      className="py-14 sm:py-20 lg:py-24 bg-[#FAF7F2] text-monarch-charcoal relative overflow-hidden border-t border-monarch-gold/20"
+      className="py-14 sm:py-20 lg:py-24 bg-surface-300 text-neutral-900 relative overflow-hidden border-t border-neutral-200"
     >
       <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header: Matching Screenshot Typography */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 sm:mb-12">
           <div>
-            <h2 className="tracking-tight text-monarch-charcoal leading-none flex flex-wrap items-baseline gap-2.5 sm:gap-3.5">
-              <span className="font-sans font-black text-3xl sm:text-4xl lg:text-[46px] uppercase tracking-[-0.01em] text-monarch-charcoal">
+            <h2 className="tracking-tight text-neutral-900 leading-none flex flex-wrap items-baseline gap-2.5 sm:gap-3.5">
+              <span className="font-sans font-black text-3xl sm:text-4xl lg:text-[46px] uppercase tracking-[-0.01em] text-neutral-900">
                 {EDITS_FOR_OCCASION_DATA.headingPrimary}
               </span>
-              <span className="font-serif italic font-light text-3xl sm:text-4xl lg:text-[48px] text-[#8E793E] lowercase">
+              <span className="font-serif italic font-light text-3xl sm:text-4xl lg:text-[48px] text-primary-600 lowercase">
                 {EDITS_FOR_OCCASION_DATA.headingScript}
               </span>
             </h2>
-            <p className="text-xs sm:text-sm text-monarch-charcoal/70 font-sans mt-2 max-w-xl">
+            <p className="text-xs sm:text-sm text-neutral-700 font-sans mt-2 max-w-xl">
               {EDITS_FOR_OCCASION_DATA.description}
             </p>
           </div>
 
           <Link
             href={EDITS_FOR_OCCASION_DATA.ctaHref}
-            className="inline-flex items-center gap-2 text-xs font-nav uppercase tracking-[0.2em] text-monarch-maroon hover:text-monarch-maroon-dark font-semibold pb-1 border-b border-monarch-maroon/30 hover:border-monarch-maroon transition-all group shrink-0"
+            className="inline-flex items-center gap-2 text-xs font-nav uppercase tracking-[0.2em] text-primary-700 hover:text-primary-800 font-semibold pb-1 border-b border-primary-700/30 hover:border-primary-700 transition-all group shrink-0"
           >
             <span>{EDITS_FOR_OCCASION_DATA.ctaText}</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform duration-300" />

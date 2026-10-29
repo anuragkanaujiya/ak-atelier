@@ -156,20 +156,20 @@ const QuickViewContent: React.FC<QuickViewContentProps> = ({ product, onClose })
   };
 
   return (
-    <div className="flex flex-col h-full w-full overflow-hidden bg-[#FAF7F2] text-monarch-charcoal">
+    <div className="flex flex-col h-full w-full overflow-hidden bg-surface-300 text-neutral-900">
       {/* =========================================================================
           FIXED TOP HEADER (LIGHT LUXURY THEME)
       ========================================================================= */}
-      <div className="px-6 py-5 sm:px-8 border-b border-monarch-gold/25 flex items-center justify-between bg-[#F4ECE1] shrink-0">
+      <div className="px-6 py-5 sm:px-8 border-b border-neutral-200 flex items-center justify-between bg-surface-200 shrink-0">
         <div className="flex items-center gap-2.5">
-          <span className="p-1.5 rounded-full bg-monarch-gold/20 text-[#8C682A] border border-monarch-gold/35">
-            <Sparkles className="w-3.5 h-3.5 text-[#8C682A]" />
+          <span className="p-1.5 rounded-full bg-primary-100 text-primary-700 border border-primary-200">
+            <Sparkles className="w-3.5 h-3.5 text-primary-700" />
           </span>
           <div>
-            <span className="text-[10px] font-nav uppercase tracking-[0.25em] text-[#8C682A] font-bold block">
+            <span className="text-[10px] font-nav uppercase tracking-[0.25em] text-primary-700 font-bold block">
               Couture Quick View
             </span>
-            <p className="font-serif text-sm text-monarch-charcoal font-medium line-clamp-1">
+            <p className="font-serif text-sm text-neutral-900 font-medium line-clamp-1">
               {product.categoryName} · {product.name}
             </p>
           </div>
@@ -177,7 +177,7 @@ const QuickViewContent: React.FC<QuickViewContentProps> = ({ product, onClose })
 
         <button
           onClick={onClose}
-          className="text-monarch-charcoal hover:text-monarch-maroon p-2 rounded-full border border-monarch-gold/35 hover:border-monarch-gold bg-white transition-all hover:scale-105 shadow-sm"
+          className="text-neutral-700 hover:text-primary-700 p-2 rounded-full border border-neutral-300 hover:border-primary-400 bg-white transition-all hover:scale-105 shadow-sm"
           aria-label="Close preview"
         >
           <X className="w-4 h-4" />
@@ -202,7 +202,7 @@ const QuickViewContent: React.FC<QuickViewContentProps> = ({ product, onClose })
           <div
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className="relative w-full aspect-[3/3.8] rounded-2xl overflow-hidden bg-[#F0E6D8] border-2 border-monarch-gold/35 shadow-lg group select-none cursor-crosshair"
+            className="relative w-full aspect-[3/3.8] rounded-2xl overflow-hidden bg-surface-200 border border-neutral-200 shadow-lg group select-none cursor-crosshair"
           >
             {/* Big Model Photo (Interactive Pan/Zoom on hover) */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -222,14 +222,14 @@ const QuickViewContent: React.FC<QuickViewContentProps> = ({ product, onClose })
             {/* Badges on Image */}
             <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10 pointer-events-none">
               {product.badge && (
-                <span className="text-[9px] font-nav uppercase tracking-[0.2em] font-bold bg-monarch-burgundy/95 text-monarch-gold-light px-2.5 py-1 rounded-full border border-monarch-gold/40 shadow-md backdrop-blur-md flex items-center gap-1">
-                  <Award className="w-3 h-3 text-monarch-gold" />
+                <span className="text-[9px] font-nav uppercase tracking-[0.2em] font-bold bg-primary-900/90 text-primary-200 px-2.5 py-1 rounded-full border border-primary-500/30 shadow-md backdrop-blur-md flex items-center gap-1">
+                  <Award className="w-3 h-3 text-primary-300" />
                   <span>{product.badge}</span>
                 </span>
               )}
               {product.has3D && (
-                <span className="text-[9px] font-nav uppercase tracking-wider bg-white/90 text-monarch-charcoal px-2 py-0.5 rounded-full border border-monarch-gold/30 shadow-md flex items-center gap-1 backdrop-blur-md font-medium">
-                  <Box className="w-3 h-3 text-monarch-gold" />
+                <span className="text-[9px] font-nav uppercase tracking-wider bg-white/90 text-neutral-800 px-2 py-0.5 rounded-full border border-neutral-300 shadow-md flex items-center gap-1 backdrop-blur-md font-medium">
+                  <Box className="w-3 h-3 text-primary-600" />
                   <span>Interactive 3D</span>
                 </span>
               )}
@@ -242,7 +242,7 @@ const QuickViewContent: React.FC<QuickViewContentProps> = ({ product, onClose })
                   type="button"
                   onClick={handlePrevImage}
                   aria-label="Previous photo"
-                  className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/95 hover:bg-white text-monarch-charcoal hover:text-monarch-maroon shadow-lg border border-monarch-gold/40 flex items-center justify-center transition-all hover:scale-110 active:scale-95 z-20"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/95 hover:bg-white text-neutral-800 hover:text-primary-700 shadow-lg border border-neutral-300 flex items-center justify-center transition-all hover:scale-110 active:scale-95 z-20"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
@@ -251,7 +251,7 @@ const QuickViewContent: React.FC<QuickViewContentProps> = ({ product, onClose })
                   type="button"
                   onClick={handleNextImage}
                   aria-label="Next photo"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/95 hover:bg-white text-monarch-charcoal hover:text-monarch-maroon shadow-lg border border-monarch-gold/40 flex items-center justify-center transition-all hover:scale-110 active:scale-95 z-20"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/95 hover:bg-white text-neutral-800 hover:text-primary-700 shadow-lg border border-neutral-300 flex items-center justify-center transition-all hover:scale-110 active:scale-95 z-20"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
@@ -266,8 +266,8 @@ const QuickViewContent: React.FC<QuickViewContentProps> = ({ product, onClose })
             )}
 
             {/* Subtle Zoom Instruction */}
-            <div className="absolute bottom-3 left-3 hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/55 backdrop-blur-md text-monarch-gold-light text-[10px] font-nav uppercase tracking-wider border border-white/10 z-10 pointer-events-none opacity-85 group-hover:opacity-100 transition-opacity">
-              <Sparkles className="w-3 h-3 text-monarch-gold" />
+            <div className="absolute bottom-3 left-3 hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/55 backdrop-blur-md text-primary-200 text-[10px] font-nav uppercase tracking-wider border border-white/10 z-10 pointer-events-none opacity-85 group-hover:opacity-100 transition-opacity">
+              <Sparkles className="w-3 h-3 text-primary-300" />
               <span>Hover to inspect weave</span>
             </div>
           </div>
@@ -282,8 +282,8 @@ const QuickViewContent: React.FC<QuickViewContentProps> = ({ product, onClose })
                   onClick={() => handleThumbnailClick(idx)}
                   className={`relative shrink-0 w-12 h-16 sm:w-14 sm:h-18 rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${
                     activeImageIndex === idx && !customImageSrc
-                      ? 'border-monarch-maroon ring-2 ring-monarch-gold ring-offset-2 ring-offset-[#FAF7F2] scale-105 shadow-md'
-                      : 'border-monarch-gold/35 opacity-75 hover:opacity-100 hover:border-monarch-gold hover:scale-105'
+                      ? 'border-primary-600 ring-2 ring-primary-400 ring-offset-2 ring-offset-surface-100 scale-105 shadow-md'
+                      : 'border-neutral-300 opacity-75 hover:opacity-100 hover:border-primary-400 hover:scale-105'
                   }`}
                   aria-label={`Switch to photo ${idx + 1}`}
                 >
@@ -298,40 +298,40 @@ const QuickViewContent: React.FC<QuickViewContentProps> = ({ product, onClose })
         {/* =========================================================================
             INFO 1: TITLE, CATEGORY, RATING & PRICE BLOCK
         ========================================================================= */}
-        <div className="bg-[#F4ECE1] rounded-2xl p-5 sm:p-6 border border-monarch-gold/30 shadow-sm space-y-3">
+        <div className="bg-surface-100 rounded-2xl p-5 sm:p-6 border border-neutral-200 shadow-sm space-y-3">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <span className="text-[10px] font-nav uppercase tracking-[0.25em] text-[#8C682A] font-bold">
+              <span className="text-[10px] font-nav uppercase tracking-[0.25em] text-primary-700 font-bold">
                 {product.categoryName}
               </span>
-              <h2 className="font-serif text-2xl sm:text-3xl text-monarch-charcoal font-medium mt-1 tracking-tight leading-snug">
+              <h2 className="font-serif text-2xl sm:text-3xl text-neutral-900 font-medium mt-1 tracking-tight leading-snug">
                 {product.name}
               </h2>
-              <p className="text-xs text-monarch-charcoal/70 font-sans mt-1 leading-relaxed">
+              <p className="text-xs text-neutral-600 font-sans mt-1 leading-relaxed">
                 {product.tagline}
               </p>
             </div>
 
             {/* Star Rating Badge */}
-            <div className="shrink-0 flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-full border border-monarch-gold/30 text-xs shadow-sm">
-              <Star className="w-3.5 h-3.5 fill-monarch-gold text-monarch-gold" />
-              <span className="font-bold text-monarch-charcoal">{product.rating || 4.9}</span>
-              <span className="text-monarch-charcoal/50 text-[10px]">({product.reviewsCount || 48})</span>
+            <div className="shrink-0 flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-full border border-neutral-200 text-xs shadow-sm">
+              <Star className="w-3.5 h-3.5 fill-primary-500 text-primary-500" />
+              <span className="font-bold text-neutral-900">{product.rating || 4.9}</span>
+              <span className="text-neutral-400 text-[10px]">({product.reviewsCount || 48})</span>
             </div>
           </div>
 
           {/* Price Display */}
           <div className="flex items-baseline gap-3 pt-1">
-            <span className="font-serif text-2xl sm:text-3xl font-bold text-monarch-maroon tracking-tight">
+            <span className="font-serif text-2xl sm:text-3xl font-bold text-neutral-900 tracking-tight">
               {formatINR(product.price)}
             </span>
             {product.originalPrice && (
-              <span className="text-sm font-sans line-through text-monarch-charcoal/40">
+              <span className="text-sm font-sans line-through text-neutral-400">
                 {formatINR(product.originalPrice)}
               </span>
             )}
             {product.discountPercent && (
-              <span className="text-[11px] font-nav uppercase tracking-wider text-emerald-800 bg-emerald-50 border border-emerald-300/80 px-2.5 py-0.5 rounded-full font-bold">
+              <span className="text-[11px] font-nav uppercase tracking-wider text-success-800 bg-success-100 border border-success-300 px-2.5 py-0.5 rounded-full font-bold">
                 {product.discountPercent}% Privilege Off
               </span>
             )}
@@ -341,12 +341,12 @@ const QuickViewContent: React.FC<QuickViewContentProps> = ({ product, onClose })
         {/* =========================================================================
             INFO 2: HERITAGE COLOR SELECTION (CLICK TO SELECT SHADE)
         ========================================================================= */}
-        <div className="bg-[#F4ECE1] rounded-2xl p-5 sm:p-6 border border-monarch-gold/30 shadow-sm space-y-3">
+        <div className="bg-surface-100 rounded-2xl p-5 sm:p-6 border border-neutral-200 shadow-sm space-y-3">
           <div className="flex items-center justify-between text-xs">
-            <span className="font-nav uppercase tracking-wider text-monarch-charcoal/80 font-medium">
-              Heritage Shade: <strong className="text-monarch-charcoal">{selectedColor}</strong>
+            <span className="font-nav uppercase tracking-wider text-neutral-700 font-medium">
+              Heritage Shade: <strong className="text-neutral-900">{selectedColor}</strong>
             </span>
-            <span className="text-[11px] text-[#8C682A] font-sans font-medium">
+            <span className="text-[11px] text-primary-700 font-sans font-medium">
               {product.colors.length} Curated Silks
             </span>
           </div>
@@ -359,7 +359,7 @@ const QuickViewContent: React.FC<QuickViewContentProps> = ({ product, onClose })
                 onClick={() => handleColorClick(color.name, color.imageIndex, idx, color.image)}
                 className={`relative w-8 h-8 rounded-full border transition-all cursor-pointer ${
                   selectedColor === color.name
-                    ? 'ring-2 ring-monarch-gold ring-offset-2 ring-offset-[#FAF7F2] scale-110 border-white shadow-lg'
+                    ? 'ring-2 ring-primary-600 ring-offset-2 ring-offset-surface-100 scale-110 border-white shadow-lg'
                     : 'border-black/20 hover:scale-110 opacity-85 hover:opacity-100'
                 }`}
                 style={{ backgroundColor: color.hex }}
@@ -378,14 +378,14 @@ const QuickViewContent: React.FC<QuickViewContentProps> = ({ product, onClose })
         {/* =========================================================================
             INFO 3: SILHOUETTE SIZE & MEASUREMENT GUIDE
         ========================================================================= */}
-        <div className="bg-[#F4ECE1] rounded-2xl p-5 sm:p-6 border border-monarch-gold/30 shadow-sm space-y-3">
+        <div className="bg-surface-100 rounded-2xl p-5 sm:p-6 border border-neutral-200 shadow-sm space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-nav uppercase tracking-wider text-monarch-charcoal/80 font-medium">
+            <span className="text-xs font-nav uppercase tracking-wider text-neutral-700 font-medium">
               Select Silhouette Size
             </span>
             <button
               onClick={() => setShowSizeGuide(!showSizeGuide)}
-              className="text-[11px] text-[#8C682A] hover:text-monarch-maroon font-nav flex items-center gap-1.5 underline underline-offset-2 transition-colors font-semibold"
+              className="text-[11px] text-primary-700 hover:text-primary-800 font-nav flex items-center gap-1.5 underline underline-offset-2 transition-colors font-semibold"
             >
               <Ruler className="w-3.5 h-3.5" />
               <span>{showSizeGuide ? 'Hide Measurements' : 'Royal Size Guide'}</span>
@@ -394,44 +394,44 @@ const QuickViewContent: React.FC<QuickViewContentProps> = ({ product, onClose })
 
           {/* Interactive Royal Size Guide */}
           {showSizeGuide && (
-            <div className="p-3.5 rounded-xl bg-white border border-monarch-gold/30 text-xs text-monarch-charcoal space-y-2 animate-fadeIn shadow-sm">
-              <p className="font-semibold text-monarch-maroon font-serif text-sm">
+            <div className="p-3.5 rounded-xl bg-white border border-neutral-200 text-xs text-neutral-800 space-y-2 animate-fadeIn shadow-sm">
+              <p className="font-semibold text-neutral-900 font-serif text-sm">
                 AK Atelier Royal Sizing Index (Inches):
               </p>
-              <div className="grid grid-cols-4 gap-2 text-center text-[10px] font-nav uppercase tracking-wider py-1 border-y border-monarch-gold/25 text-[#8C682A] font-bold">
+              <div className="grid grid-cols-4 gap-2 text-center text-[10px] font-nav uppercase tracking-wider py-1 border-y border-neutral-200 text-primary-700 font-bold">
                 <span>Size</span>
                 <span>Bust</span>
                 <span>Waist</span>
                 <span>Hip</span>
               </div>
               <div className="space-y-1 text-[11px] font-sans">
-                <div className="grid grid-cols-4 gap-2 text-center text-monarch-charcoal">
+                <div className="grid grid-cols-4 gap-2 text-center text-neutral-700">
                   <span className="font-semibold">36 (S)</span>
                   <span>34-35&quot;</span>
                   <span>28&quot;</span>
                   <span>38&quot;</span>
                 </div>
-                <div className="grid grid-cols-4 gap-2 text-center text-monarch-charcoal">
+                <div className="grid grid-cols-4 gap-2 text-center text-neutral-700">
                   <span className="font-semibold">38 (M)</span>
                   <span>36-37&quot;</span>
                   <span>30&quot;</span>
                   <span>40&quot;</span>
                 </div>
-                <div className="grid grid-cols-4 gap-2 text-center text-monarch-charcoal">
+                <div className="grid grid-cols-4 gap-2 text-center text-neutral-700">
                   <span className="font-semibold">40 (L)</span>
                   <span>38-39&quot;</span>
                   <span>32&quot;</span>
                   <span>42&quot;</span>
                 </div>
-                <div className="grid grid-cols-4 gap-2 text-center text-monarch-charcoal">
+                <div className="grid grid-cols-4 gap-2 text-center text-neutral-700">
                   <span className="font-semibold">42 (XL)</span>
                   <span>40-41&quot;</span>
                   <span>34&quot;</span>
                   <span>44&quot;</span>
                 </div>
               </div>
-              <p className="text-[10px] text-monarch-charcoal/70 italic pt-1 border-t border-monarch-gold/20">
-                Bespoke bridal &amp; imperial custom sizing is also available upon salon appointment.
+              <p className="text-[10px] text-neutral-500 italic pt-1 border-t border-neutral-200">
+                Bespoke tailoring &amp; imperial custom sizing is also available upon salon appointment.
               </p>
             </div>
           )}
@@ -445,8 +445,8 @@ const QuickViewContent: React.FC<QuickViewContentProps> = ({ product, onClose })
                 onClick={() => handleSizeClick(size)}
                 className={`py-2 px-3 text-xs font-nav rounded-lg border transition-all cursor-pointer ${
                   selectedSize === size
-                    ? 'bg-monarch-burgundy text-monarch-gold-light font-bold border-monarch-burgundy shadow-sm scale-102 ring-1 ring-monarch-gold/50'
-                    : 'bg-white text-monarch-charcoal border-monarch-gold/30 hover:border-monarch-gold hover:bg-[#FAF7F2]'
+                    ? 'bg-primary-600 text-white font-bold border-primary-600 shadow-sm scale-102 ring-1 ring-primary-300'
+                    : 'bg-white text-neutral-900 border-neutral-200 hover:border-primary-400 hover:bg-surface-200'
                 }`}
               >
                 {size}
@@ -458,35 +458,35 @@ const QuickViewContent: React.FC<QuickViewContentProps> = ({ product, onClose })
         {/* =========================================================================
             INFO 4: FABRIC WEAVE & SPECIFICATIONS
         ========================================================================= */}
-        <div className="bg-[#F4ECE1] rounded-2xl p-5 sm:p-6 border border-monarch-gold/30 shadow-sm space-y-3">
+        <div className="bg-surface-100 rounded-2xl p-5 sm:p-6 border border-neutral-200 shadow-sm space-y-3">
           <div className="space-y-2 text-xs">
             <div className="flex items-center justify-between">
-              <span className="text-[#8C682A] font-semibold">Fabric Weave:</span>
-              <span className="text-monarch-charcoal font-serif font-medium">{product.fabric}</span>
+              <span className="text-primary-700 font-semibold">Fabric Weave:</span>
+              <span className="text-neutral-900 font-serif font-medium">{product.fabric}</span>
             </div>
             {product.embroidery && (
               <div className="flex items-center justify-between">
-                <span className="text-[#8C682A] font-semibold">Craft Technique:</span>
-                <span className="text-monarch-charcoal">{product.embroidery}</span>
+                <span className="text-primary-700 font-semibold">Craft Technique:</span>
+                <span className="text-neutral-800">{product.embroidery}</span>
               </div>
             )}
             <div className="flex items-center justify-between">
-              <span className="text-[#8C682A] font-semibold">Estimated Delivery:</span>
-              <span className="text-monarch-charcoal flex items-center gap-1.5 font-medium">
-                <Truck className="w-3.5 h-3.5 text-monarch-maroon" />
+              <span className="text-primary-700 font-semibold">Estimated Delivery:</span>
+              <span className="text-neutral-900 flex items-center gap-1.5 font-medium">
+                <Truck className="w-3.5 h-3.5 text-primary-600" />
                 <span>{product.deliveryDays || 3}-5 Business Days (Insured)</span>
               </span>
             </div>
           </div>
 
           {/* Authenticity Seals */}
-          <div className="pt-2 border-t border-monarch-gold/20 space-y-1.5 text-[11px] text-monarch-charcoal/80">
+          <div className="pt-2 border-t border-neutral-200 space-y-1.5 text-[11px] text-neutral-700">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-[#8C682A] shrink-0" />
-              <span>100% Certified Silk Mark Guild · 24K Pure Gold Zari</span>
+              <ShieldCheck className="w-4 h-4 text-primary-600 shrink-0" />
+              <span>100% Certified European Luxury Guild · Pure Haute Couture</span>
             </div>
             <div className="flex items-center gap-2">
-              <RotateCcw className="w-4 h-4 text-[#8C682A] shrink-0" />
+              <RotateCcw className="w-4 h-4 text-primary-600 shrink-0" />
               <span>Complimentary 7-Day Royal Concierge Exchange</span>
             </div>
           </div>
@@ -496,23 +496,23 @@ const QuickViewContent: React.FC<QuickViewContentProps> = ({ product, onClose })
       {/* =========================================================================
           STICKY BOTTOM ACTION FOOTER (LIGHT THEME)
       ========================================================================= */}
-      <div className="px-6 py-5 sm:px-8 border-t border-monarch-gold/25 bg-[#F4ECE1] shrink-0 space-y-2.5">
+      <div className="px-6 py-5 sm:px-8 border-t border-neutral-200 bg-surface-200 shrink-0 space-y-2.5">
         <div className="flex items-center gap-3">
           {/* Main Add to Royal Bag Button */}
           <button
             onClick={handleAddToCart}
             disabled={isAdding}
-            className="flex-1 py-3.5 px-6 rounded-full bg-gradient-to-r from-monarch-gold via-[#E5C178] to-monarch-gold hover:brightness-105 text-monarch-burgundy font-nav text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-md disabled:opacity-80 active:scale-98"
+            className="btn-luxury flex-1 py-3.5 px-6 rounded-full bg-primary-600 hover:bg-primary-700 text-white font-nav text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-md disabled:opacity-80 active:scale-98 cursor-pointer"
           >
             {isAdding ? (
               <>
-                <Check className="w-4 h-4 text-monarch-burgundy" />
-                <span>Added to Royal Bag</span>
+                <Check className="w-4 h-4 text-white" />
+                <span>Added to Bag</span>
               </>
             ) : (
               <>
                 <ShoppingBag className="w-4 h-4" />
-                <span>Add to Royal Bag · {formatINR(product.price)}</span>
+                <span>Add to Bag · {formatINR(product.price)}</span>
               </>
             )}
           </button>
@@ -520,14 +520,14 @@ const QuickViewContent: React.FC<QuickViewContentProps> = ({ product, onClose })
           {/* Wishlist Button */}
           <button
             onClick={() => toggleWishlist(product.id)}
-            className={`p-3.5 rounded-full border transition-all shadow-sm ${
+            className={`p-3.5 rounded-full border transition-all shadow-sm cursor-pointer ${
               inWishlist
-                ? 'bg-monarch-maroon text-monarch-gold border-monarch-maroon'
-                : 'bg-white text-monarch-charcoal border-monarch-gold/35 hover:text-monarch-maroon hover:border-monarch-gold'
+                ? 'bg-secondary-600 text-white border-secondary-600'
+                : 'bg-white text-neutral-800 border-neutral-300 hover:text-secondary-600 hover:border-secondary-400'
             }`}
             aria-label="Toggle wishlist"
           >
-            <Heart className={`w-4 h-4 ${inWishlist ? 'fill-monarch-gold' : ''}`} />
+            <Heart className={`w-4 h-4 ${inWishlist ? 'fill-white' : ''}`} />
           </button>
         </div>
 
@@ -535,7 +535,7 @@ const QuickViewContent: React.FC<QuickViewContentProps> = ({ product, onClose })
         <Link
           href={`/product/${product.id}`}
           onClick={onClose}
-          className="flex items-center justify-center gap-1.5 text-xs font-nav uppercase tracking-widest text-[#8C682A] hover:text-monarch-maroon hover:underline pt-0.5 transition-colors font-bold"
+          className="flex items-center justify-center gap-1.5 text-xs font-nav uppercase tracking-widest text-primary-700 hover:text-primary-800 hover:underline pt-0.5 transition-colors font-bold"
         >
           <span>View Complete Couture Portfolio &amp; Story</span>
           <ArrowRight className="w-3.5 h-3.5" />
@@ -593,7 +593,7 @@ export const ProductQuickView: React.FC<ProductQuickViewProps> = ({
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ duration: 0.38, ease: [0.32, 0.72, 0, 1] }}
-            className="relative z-10 w-full max-w-md sm:max-w-lg bg-[#FAF7F2] text-monarch-charcoal border-l border-monarch-gold/30 shadow-[0_0_60px_rgba(0,0,0,0.35)] flex flex-col h-full max-h-screen overflow-hidden overscroll-contain"
+            className="relative z-10 w-full max-w-md sm:max-w-lg bg-surface-300 text-neutral-900 border-l border-neutral-200 shadow-[0_0_60px_rgba(0,0,0,0.35)] flex flex-col h-full max-h-screen overflow-hidden overscroll-contain"
           >
             <QuickViewContent
               key={activeProduct.id}

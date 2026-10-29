@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" width="100%" height="100%">
+  <defs>
+    <!-- Multi-Stop Metallic Haute Foil Gradient -->
+    <linearGradient id="akGoldFoil" x1="15%" y1="10%" x2="85%" y2="90%">
+      <stop offset="0%" stop-color="#F9F1DC" />
+      <stop offset="25%" stop-color="#D9BA77" />
+      <stop offset="50%" stop-color="#F6E7BF" />
+      <stop offset="75%" stop-color="#B38B3F" />
+      <stop offset="100%" stop-color="#E4C88A" />
+    </linearGradient>
+
+    <!-- Specular Shimmer -->
+    <linearGradient id="akSheen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="transparent" />
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="transparent" />
+    </linearGradient>
+
+    <!-- Ambient Bloom Filter -->
+    <filter id="akBloom" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- 1. Architectural Shield Frame -->
+  <path d="M 50 4 L 92 50 L 50 96 L 8 50 Z" stroke="url(#akGoldFoil)" stroke-width="1.25" stroke-linejoin="round" opacity="0.85" />
+  <path d="M 50 8.5 L 87.5 50 L 50 91.5 L 12.5 50 Z" stroke="url(#akGoldFoil)" stroke-width="0.6" stroke-dasharray="4 2.5" opacity="0.55" />
+
+  <!-- Zenith Accent Diamonds -->
+  <circle cx="50" cy="4" r="1.5" fill="url(#akGoldFoil)" />
+  <circle cx="92" cy="50" r="1.5" fill="url(#akGoldFoil)" />
+  <circle cx="50" cy="96" r="1.5" fill="url(#akGoldFoil)" />
+  <circle cx="8" cy="50" r="1.5" fill="url(#akGoldFoil)" />
+
+  <!-- Zenith Crown Star -->
+  <path d="M 50 10 Q 50 14 54 14 Q 50 14 50 18 Q 50 14 46 14 Q 50 14 50 10 Z" fill="url(#akGoldFoil)" />
+
+  <!-- 2. Haute Monogram: 'A' and 'K' -->
+  <g id="akMonogram">
+    <!-- Letter A -->
+    <path d="M 48 24 L 28 76" stroke="url(#akGoldFoil)" stroke-width="3.2" stroke-linecap="round" />
+    <path d="M 23 76 L 33 76" stroke="url(#akGoldFoil)" stroke-width="1.8" stroke-linecap="round" />
+    <path d="M 48 24 L 66 76" stroke="url(#akGoldFoil)" stroke-width="3.2" stroke-linecap="round" />
+    <path d="M 61 76 L 71 76" stroke="url(#akGoldFoil)" stroke-width="1.8" stroke-linecap="round" />
+    <path d="M 43 24 L 53 24" stroke="url(#akGoldFoil)" stroke-width="1.8" stroke-linecap="round" />
+    <path d="M 35 56 L 60 56" stroke="url(#akGoldFoil)" stroke-width="1.6" stroke-linecap="round" />
+
+    <!-- Letter K -->
+    <path d="M 53 30 L 53 74" stroke="url(#akGoldFoil)" stroke-width="2.8" stroke-linecap="round" />
+    <path d="M 49 30 L 57 30" stroke="url(#akGoldFoil)" stroke-width="1.6" stroke-linecap="round" />
+    <path d="M 49 74 L 57 74" stroke="url(#akGoldFoil)" stroke-width="1.6" stroke-linecap="round" />
+    <path d="M 54 52 L 73 34" stroke="url(#akGoldFoil)" stroke-width="2.6" stroke-linecap="round" />
+    <path d="M 70 31 L 76 37" stroke="url(#akGoldFoil)" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 54 51 Q 62 61 74 76" stroke="url(#akGoldFoil)" stroke-width="2.8" stroke-linecap="round" />
+    <path d="M 71 77 L 78 74" stroke="url(#akGoldFoil)" stroke-width="1.6" stroke-linecap="round" />
+
+    <!-- Center Jewel Node -->
+    <circle cx="53.5" cy="52" r="2.2" fill="url(#akGoldFoil)" />
+    <circle cx="53.5" cy="52" r="1.1" fill="#FFFFFF" opacity="0.95" />
+  </g>
+
+  <!-- Inscription -->
+  <text x="50" y="85" text-anchor="middle" font-size="4.2" font-family="'Inter', -apple-system, sans-serif" letter-spacing="0.25em" fill="url(#akGoldFoil)" opacity="0.85">MILANO</text>
+</svg>

@@ -63,16 +63,19 @@ export const SmoothScrollProvider: React.FC<{ children: React.ReactNode }> = ({ 
       window.scrollTo(0, 0);
     }
 
-    // Initialize Lenis smooth scroll
+    // Initialize Lenis smooth scroll with responsive, snappy parameters
     const lenis = new Lenis({
-      duration: 1.15,
+      duration: 0.95, // Snappy, crisp scroll momentum (prevents sluggish dragging)
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      touchMultiplier: 1.2,
+      touchMultiplier: 1.5,
+      wheelMultiplier: 1.15,
     });
 
     lenisRef.current = lenis;
-    setLenisInstance(lenis);
+    requestAnimationFrame(() => {
+      setLenisInstance(lenis);
+    });
 
     // Guarantee initial coordinates are at 0 before ScrollTrigger registers triggers
     if (!window.location.hash) {
@@ -98,15 +101,11 @@ export const SmoothScrollProvider: React.FC<{ children: React.ReactNode }> = ({ 
     };
 
     gsap.ticker.add(tickerCb);
-    // Smooth out micro frame spikes in Safari WebKit without desyncing Lenis
+    // Smooth lag adjustment: allows fluid recovery without harsh jumps during heavy frames
     gsap.ticker.lagSmoothing(500, 33);
 
-    // 1. Initial calibration once Lenis is operational and scroll position is at (0, 0)
+    // 1. Initial calibration once Lenis is operational
     const initTimer = setTimeout(() => {
-      if (!window.location.hash && (window.scrollY !== 0 || window.pageYOffset !== 0)) {
-        window.scrollTo(0, 0);
-        lenis.scrollTo(0, { immediate: true });
-      }
       lenis.resize();
       ScrollTrigger.refresh();
     }, 150);
@@ -114,10 +113,6 @@ export const SmoothScrollProvider: React.FC<{ children: React.ReactNode }> = ({ 
     // 2. Font loading synchronization: when web fonts load, layout metrics settle
     if ('fonts' in document) {
       document.fonts.ready.then(() => {
-        if (!window.location.hash && (window.scrollY !== 0 || window.pageYOffset !== 0)) {
-          window.scrollTo(0, 0);
-          lenis.scrollTo(0, { immediate: true });
-        }
         lenis.resize();
         ScrollTrigger.refresh();
       });
@@ -125,10 +120,6 @@ export const SmoothScrollProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
     // 3. Complete window load event synchronization
     const handleLoad = () => {
-      if (!window.location.hash && (window.scrollY !== 0 || window.pageYOffset !== 0)) {
-        window.scrollTo(0, 0);
-        lenis.scrollTo(0, { immediate: true });
-      }
       lenis.resize();
       ScrollTrigger.refresh();
     };
@@ -156,14 +147,22 @@ export const SmoothScrollProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
     const ro = new ResizeObserver(() => {
       const currentHeight = document.documentElement.scrollHeight;
-      // Only refresh if height significantly shifted (e.g. image loads), ignoring micro sub-pixel shifts
-      if (Math.abs(currentHeight - lastHeight) > 16) {
+      // Only refresh if height significantly shifted (>120px) and user is not actively scrolling
+      if (Math.abs(currentHeight - lastHeight) > 120) {
         lastHeight = currentHeight;
         if (resizeTimer) clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
+          // Never interrupt an active scroll stroke with full recalculation
+          if (lenis.isScrolling) {
+            resizeTimer = setTimeout(() => {
+              lenis.resize();
+              ScrollTrigger.refresh();
+            }, 300);
+            return;
+          }
           lenis.resize();
           ScrollTrigger.refresh();
-        }, 120);
+        }, 300);
       }
     });
 

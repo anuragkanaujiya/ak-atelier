@@ -7,6 +7,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { Check, AlertCircle, Sparkles, ChevronDown } from 'lucide-react';
 import { FOOTER_DATA, FooterSocialLink, FooterColumn } from '@/data/footer';
+import { AKLogo } from '@/components/common/AKLogo';
 
 export const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -134,7 +135,7 @@ export const Footer: React.FC = () => {
       href={social.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#C7A15B]/25 border border-[#C7A15B]/35 hover:border-[#DFBE7F] backdrop-blur-sm flex items-center justify-center text-white/90 hover:text-[#DFBE7F] transition-all duration-300 hover:scale-105 active:scale-95 shadow-sm"
+      className="w-10 h-10 rounded-full bg-white/10 hover:bg-primary-500/20 border border-primary-400/40 hover:border-primary-300 backdrop-blur-sm flex items-center justify-center text-white/90 hover:text-primary-200 transition-all duration-300 hover:scale-105 active:scale-95 shadow-sm"
       aria-label={social.name}
     >
       {renderSocialIcon(social.icon)}
@@ -144,13 +145,13 @@ export const Footer: React.FC = () => {
   return (
     <footer
       ref={footerRef}
-      className="w-full relative z-10 selection:bg-monarch-maroon selection:text-monarch-gold-light overflow-hidden bg-[#FAF7F2]"
+      className="w-full relative z-10 selection:bg-primary-600 selection:text-white overflow-hidden bg-neutral-900 text-surface-100"
     >
       {/* ============================================================ */}
-      {/* BACKGROUND: Full-Bleed Panoramic Visual with Multi-Stop Scrim */}
+      {/* BACKGROUND: Full-Bleed Atmospheric Scrim with 100% High Contrast */}
       {/* ============================================================ */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden">
-        <div className="drift-image-layer absolute inset-0 w-full h-full">
+        <div className="drift-image-layer absolute inset-0 w-full h-full opacity-25">
           <Image
             src={FOOTER_DATA.heroImage.src}
             alt={FOOTER_DATA.heroImage.alt}
@@ -162,18 +163,8 @@ export const Footer: React.FC = () => {
           />
         </div>
 
-        {/* 
-          CRITICAL REQUIREMENT: Refined Multi-Stop Warm Ivory Scrim
-          Seamlessly blends with the site background, guaranteeing 100% contrast
-          for typography on mobile, tablet, and desktop viewports.
-        */}
-        <div className="absolute top-0 inset-x-0 h-[460px] sm:h-[480px] lg:h-[360px] bg-gradient-to-b from-[#FAF7F2] via-[#FAF7F2]/95 via-[#FAF7F2]/80 to-transparent z-10 pointer-events-none" />
-
-        {/* 
-          Deep Royal Burgundy Bottom Vignette
-          Anchors the bottom bar with solid deep burgundy (#1A0A0E) contrast
-        */}
-        <div className="absolute bottom-0 inset-x-0 h-48 sm:h-36 bg-gradient-to-t from-[#1A0A0E] via-[#291116]/95 via-[#291116]/75 to-transparent z-10 pointer-events-none" />
+        {/* Ambient Dark Gradient Scrim ensuring 100% contrast */}
+        <div className="absolute inset-0 bg-gradient-to-b from-neutral-900/90 via-neutral-900/85 to-neutral-900 z-10 pointer-events-none" />
       </div>
 
       {/* ============================================================ */}
@@ -188,20 +179,20 @@ export const Footer: React.FC = () => {
             {/* -------------------------------------------------------- */}
             <div className="col-span-1 md:col-span-6 lg:col-span-3 space-y-2 order-1 md:order-1 lg:order-1">
               <Link href="/" className="group inline-block focus:outline-none">
-                <span className="font-serif italic text-3xl sm:text-4xl text-[#5A1725] tracking-wide block transition-colors group-hover:text-[#7A1E2D] font-normal">
+                <span className="font-serif italic text-3xl sm:text-4xl text-white tracking-wide block transition-colors group-hover:text-primary-200 font-normal">
                   {FOOTER_DATA.brand.name}
                 </span>
-                <span className="block text-[11px] sm:text-xs font-sans tracking-[0.22em] uppercase text-[#6B5E55] mt-1 font-medium">
+                <span className="block text-[11px] sm:text-xs font-sans tracking-[0.22em] uppercase text-primary-300 mt-1 font-medium">
                   {FOOTER_DATA.brand.tagline}
                 </span>
-                <div className="inline-flex items-center gap-2 mt-1 border-b border-[#C7A15B]/40 pb-0.5">
-                  <span className="font-serif italic text-xs sm:text-sm text-[#7A1E2D] font-normal">
+                <div className="inline-flex items-center gap-2 mt-1 border-b border-primary-400/40 pb-0.5">
+                  <span className="font-serif italic text-xs sm:text-sm text-primary-200 font-light">
                     {FOOTER_DATA.brand.scriptTag}
                   </span>
                 </div>
               </Link>
               {FOOTER_DATA.brand.description && (
-                <p className="text-xs text-[#55473F] leading-relaxed font-sans max-w-sm pt-1 font-normal">
+                <p className="text-xs text-neutral-300 leading-relaxed font-sans max-w-sm pt-1 font-normal">
                   {FOOTER_DATA.brand.description}
                 </p>
               )}
@@ -210,11 +201,11 @@ export const Footer: React.FC = () => {
             {/* -------------------------------------------------------- */}
             {/* MOBILE ONLY: Accordion Navigation Columns (< md)          */}
             {/* -------------------------------------------------------- */}
-            <div className="col-span-1 md:hidden space-y-1.5 order-2 border-t border-b border-[#C7A15B]/25 py-2">
+            <div className="col-span-1 md:hidden space-y-1.5 order-2 border-t border-b border-neutral-800 py-2">
               {columnList.map((column) => {
                 const isOpen = !!openAccordions[column.id];
                 return (
-                  <div key={column.id} className="border-b border-[#C7A15B]/15 last:border-b-0">
+                  <div key={column.id} className="border-b border-neutral-800/80 last:border-b-0">
                     <button
                       type="button"
                       onClick={() => toggleAccordion(column.id)}
@@ -222,12 +213,12 @@ export const Footer: React.FC = () => {
                       aria-expanded={isOpen}
                       aria-controls={`footer-accordion-${column.id}`}
                     >
-                      <span className="font-serif italic text-base text-[#231815] group-hover:text-[#5A1725] transition-colors">
+                      <span className="font-serif italic text-base text-white group-hover:text-primary-300 transition-colors">
                         {column.title}
                       </span>
                       <span
-                        className={`w-7 h-7 rounded-full bg-[#C7A15B]/10 flex items-center justify-center text-[#8E703E] transition-transform duration-300 ${
-                          isOpen ? 'rotate-180 bg-[#C7A15B]/25 text-[#5A1725]' : ''
+                        className={`w-7 h-7 rounded-full bg-neutral-800 flex items-center justify-center text-primary-300 transition-transform duration-300 ${
+                          isOpen ? 'rotate-180 bg-neutral-700 text-white' : ''
                         }`}
                       >
                         <ChevronDown className="w-3.5 h-3.5" />
@@ -246,9 +237,9 @@ export const Footer: React.FC = () => {
                             <li key={link.label}>
                               <Link
                                 href={link.href}
-                                className="text-[#55473F] hover:text-[#5A1725] active:text-[#5A1725] transition-colors py-1 inline-flex items-center gap-2"
+                                className="text-neutral-300 hover:text-primary-200 active:text-white transition-colors py-1 inline-flex items-center gap-2"
                               >
-                                <span className="w-1 h-1 rounded-full bg-[#C7A15B]/60" />
+                                <span className="w-1 h-1 rounded-full bg-primary-400" />
                                 <span>{link.label}</span>
                               </Link>
                             </li>
@@ -274,18 +265,18 @@ export const Footer: React.FC = () => {
                   key={column.id}
                   className={`hidden md:block md:col-span-4 lg:col-span-2 space-y-2.5 ${tabletOrder} ${desktopOrder}`}
                 >
-                  <h4 className="font-serif italic text-base sm:text-lg text-[#231815] font-normal tracking-wide flex items-center gap-2">
+                  <h4 className="font-serif italic text-base sm:text-lg text-white font-normal tracking-wide flex items-center gap-2">
                     <span>{column.title}</span>
-                    <span className="h-px w-3 bg-[#C7A15B]/40" />
+                    <span className="h-px w-3 bg-primary-400/60" />
                   </h4>
                   <ul className="space-y-1.5 text-xs sm:text-[13px] font-sans">
                     {column.links.map((link) => (
                       <li key={link.label}>
                         <Link
                           href={link.href}
-                          className="text-[#55473F] hover:text-[#5A1725] transition-colors py-0.5 inline-flex items-center gap-1.5 group font-normal"
+                          className="text-neutral-300 hover:text-primary-200 transition-colors py-0.5 inline-flex items-center gap-1.5 group font-normal"
                         >
-                          <span className="w-1 h-1 rounded-full bg-[#C7A15B]/0 group-hover:bg-[#C7A15B] transition-all duration-200" />
+                          <span className="w-1 h-1 rounded-full bg-primary-400 opacity-0 group-hover:opacity-100 transition-all duration-200" />
                           <span className="group-hover:translate-x-0.5 transition-transform duration-200">
                             {link.label}
                           </span>
@@ -302,38 +293,38 @@ export const Footer: React.FC = () => {
             {/* -------------------------------------------------------- */}
             <div className="col-span-1 md:col-span-6 lg:col-span-3 space-y-2.5 order-3 md:order-2 lg:order-5">
               <div className="flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-[#C7A15B]" />
-                <span className="text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.2em] text-[#8E703E] font-medium">
-                  {FOOTER_DATA.newsletter.eyebrow || 'Royal Registry'}
+                <Sparkles className="w-3.5 h-3.5 text-primary-400" />
+                <span className="text-[10px] sm:text-[11px] font-sans uppercase tracking-[0.2em] text-primary-300 font-medium">
+                  {FOOTER_DATA.newsletter.eyebrow || 'Atelier Registry'}
                 </span>
               </div>
 
-              <h4 className="font-serif italic text-lg sm:text-xl text-[#231815] font-normal tracking-wide">
+              <h4 className="font-serif italic text-lg sm:text-xl text-white font-normal tracking-wide">
                 {FOOTER_DATA.newsletter.title}
               </h4>
-              <p className="text-xs text-[#55473F] leading-relaxed font-sans max-w-sm font-normal">
+              <p className="text-xs text-neutral-300 leading-relaxed font-sans max-w-sm font-normal">
                 {FOOTER_DATA.newsletter.description}
               </p>
 
               {/* Newsletter Interactive Form / Success Box */}
               {status === 'success' ? (
-                <div className="p-3 sm:p-3.5 rounded-2xl bg-white/95 border border-[#5A1725]/25 backdrop-blur-md shadow-sm space-y-1.5 transition-all">
+                <div className="p-3 sm:p-3.5 rounded-2xl bg-neutral-800 border border-primary-500/30 backdrop-blur-md shadow-sm space-y-1.5 transition-all">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-[#5A1725] text-xs font-medium">
-                      <div className="w-5 h-5 rounded-full bg-[#5A1725] text-white flex items-center justify-center shrink-0">
+                    <div className="flex items-center gap-2 text-primary-300 text-xs font-medium">
+                      <div className="w-5 h-5 rounded-full bg-primary-600 text-white flex items-center justify-center shrink-0">
                         <Check className="w-3 h-3" />
                       </div>
-                      <span className="font-serif italic text-sm">Joined Royal Registry</span>
+                      <span className="font-serif italic text-sm text-white">Joined Atelier Registry</span>
                     </div>
                     <button
                       type="button"
                       onClick={() => setStatus('idle')}
-                      className="text-[10px] text-[#5A1725]/70 hover:text-[#5A1725] underline transition-colors"
+                      className="text-[10px] text-primary-300 hover:text-white underline transition-colors"
                     >
                       Add another
                     </button>
                   </div>
-                  <p className="text-[11px] text-[#55473F] leading-relaxed font-sans pl-7">
+                  <p className="text-[11px] text-neutral-300 leading-relaxed font-sans pl-7">
                     {FOOTER_DATA.newsletter.successMessage}
                   </p>
                 </div>
@@ -341,10 +332,10 @@ export const Footer: React.FC = () => {
                 <form onSubmit={handleSubscribe} noValidate className="space-y-1.5 pt-1 w-full max-w-md">
                   {/* Integrated Responsive Luxury Pill Container */}
                   <div
-                    className={`relative flex items-center rounded-full bg-white/95 backdrop-blur-md p-1 pl-3.5 sm:pl-4 shadow-xs transition-all border ${
+                    className={`relative flex items-center rounded-full bg-neutral-800/95 backdrop-blur-md p-1 pl-3.5 sm:pl-4 shadow-sm transition-all border ${
                       status === 'error'
-                        ? 'border-red-500/80 ring-2 ring-red-500/15'
-                        : 'border-[#C7A15B]/35 hover:border-[#C7A15B] focus-within:border-[#5A1725] focus-within:ring-2 focus-within:ring-[#5A1725]/15'
+                        ? 'border-error-500 ring-2 ring-error-500/20'
+                        : 'border-neutral-700 hover:border-primary-400 focus-within:border-primary-400 focus-within:ring-2 focus-within:ring-primary-500/20'
                     }`}
                   >
                     <input
@@ -356,13 +347,13 @@ export const Footer: React.FC = () => {
                       }}
                       disabled={status === 'loading'}
                       placeholder={FOOTER_DATA.newsletter.placeholder}
-                      className="w-full flex-1 min-w-0 bg-transparent text-xs text-neutral-900 placeholder:text-neutral-500 font-normal focus:outline-none pr-2 disabled:opacity-50"
+                      className="w-full flex-1 min-w-0 bg-transparent text-xs text-white placeholder:text-neutral-400 font-normal focus:outline-none pr-2 disabled:opacity-50"
                       aria-label="Email address for royal updates"
                     />
                     <button
                       type="submit"
                       disabled={status === 'loading'}
-                      className="h-9 sm:h-10 px-3.5 sm:px-5 rounded-full bg-[#5A1725] hover:bg-[#43101B] active:scale-95 text-[#FAF7F2] text-xs font-medium tracking-wide shadow-xs hover:shadow transition-all shrink-0 flex items-center justify-center gap-1.5 focus:outline-none min-w-[84px] sm:min-w-[100px]"
+                      className="btn-luxury h-9 sm:h-10 px-3.5 sm:px-5 rounded-full bg-primary-600 hover:bg-primary-700 active:scale-95 text-white text-xs font-medium tracking-wide shadow-md transition-all shrink-0 flex items-center justify-center gap-1.5 focus:outline-none min-w-[84px] sm:min-w-[100px] cursor-pointer"
                     >
                       {status === 'loading' ? (
                         <>
@@ -372,7 +363,7 @@ export const Footer: React.FC = () => {
                       ) : (
                         <>
                           <span>{FOOTER_DATA.newsletter.buttonText}</span>
-                          <Sparkles className="w-3 h-3 text-[#C7A15B] opacity-90" />
+                          <Sparkles className="w-3 h-3 text-primary-200 opacity-90" />
                         </>
                       )}
                     </button>
@@ -403,10 +394,10 @@ export const Footer: React.FC = () => {
         {/* BOTTOM BAR: Refined Social Icons & Crisp Grounding Overlay   */}
         {/* ============================================================ */}
         <div className="relative z-20 pb-5 sm:pb-6 px-4 sm:px-8 lg:px-12 max-w-[1360px] mx-auto w-full">
-          {/* Subtle Royal Gold Divider with Central Emblem */}
+          {/* Subtle Royal Divider with Central Emblem */}
           <div className="relative flex items-center justify-center mb-4 sm:mb-5">
-            <div className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-[#C7A15B]/35 to-transparent" />
-            <span className="relative px-3 bg-[#1A0A0E] text-[#DFBE7F] text-[10px] tracking-widest font-serif select-none">
+            <div className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-primary-400/35 to-transparent" />
+            <span className="relative px-3 bg-neutral-900 text-primary-300 text-[10px] tracking-widest font-serif select-none">
               ❖
             </span>
           </div>
@@ -420,9 +411,12 @@ export const Footer: React.FC = () => {
 
             {/* Monogram Seal & Copyright */}
             <div className="flex items-center justify-center gap-2 pt-0.5">
-              <span className="w-7 h-7 rounded-full bg-gradient-to-br from-[#DFBE7F]/20 to-[#9A7737]/30 border border-[#C7A15B]/50 flex items-center justify-center text-[10px] font-serif font-medium text-[#DFBE7F] shadow-xs">
-                {FOOTER_DATA.brand.monogram}
-              </span>
+              <AKLogo
+                size={22}
+                animated={true}
+                variant="gold"
+                href="/"
+              />
               <span className="text-[11px] text-white/85 tracking-wide font-sans">
                 {FOOTER_DATA.copyright}
               </span>
@@ -432,10 +426,10 @@ export const Footer: React.FC = () => {
             <div className="flex items-center justify-center gap-3 text-[11px] text-white/75 font-sans">
               {FOOTER_DATA.legalLinks.map((legal, index) => (
                 <React.Fragment key={legal.label}>
-                  {index > 0 && <span className="text-[#C7A15B]/50 text-[10px]">·</span>}
+                  {index > 0 && <span className="text-primary-400/50 text-[10px]">·</span>}
                   <Link
                     href={legal.href}
-                    className="hover:text-[#DFBE7F] transition-colors underline-offset-4 hover:underline"
+                    className="hover:text-primary-200 transition-colors underline-offset-4 hover:underline"
                   >
                     {legal.label}
                   </Link>
@@ -448,9 +442,12 @@ export const Footer: React.FC = () => {
           <div className="hidden md:flex items-center justify-between gap-4 text-xs font-sans text-white/90">
             {/* Left: Monogram Badge & Copyright */}
             <div className="flex items-center gap-2.5">
-              <span className="w-8 h-8 rounded-full bg-gradient-to-br from-[#DFBE7F]/20 to-[#9A7737]/30 border border-[#C7A15B]/50 flex items-center justify-center text-xs font-serif font-medium text-[#DFBE7F] shadow-xs">
-                {FOOTER_DATA.brand.monogram}
-              </span>
+              <AKLogo
+                size={24}
+                animated={true}
+                variant="gold"
+                href="/"
+              />
               <span className="tracking-wide text-white/85 text-xs">
                 {FOOTER_DATA.copyright}
               </span>
@@ -467,7 +464,7 @@ export const Footer: React.FC = () => {
                 <Link
                   key={legal.label}
                   href={legal.href}
-                  className="text-white/85 hover:text-[#DFBE7F] transition-colors underline-offset-4 hover:underline"
+                  className="text-white/85 hover:text-primary-200 transition-colors underline-offset-4 hover:underline"
                 >
                   {legal.label}
                 </Link>

@@ -17,8 +17,8 @@ interface Product3DViewerProps {
 }
 
 const ProductSceneContent: React.FC<Product3DViewerProps> = ({
-  primaryColor = '#5A1725',
-  accentColor = '#C7A15B',
+  primaryColor = '#594F72',
+  accentColor = '#B5A9D1',
   productName,
 }) => {
   const controlsRef = useRef<any>(null);
@@ -54,7 +54,7 @@ const ProductSceneContent: React.FC<Product3DViewerProps> = ({
   };
 
   return (
-    <div className="relative w-full h-[520px] md:h-[620px] rounded-2xl overflow-hidden bg-gradient-to-b from-[#1E090E] via-[#291116] to-[#15060A] border border-monarch-gold/30 shadow-2xl cursor-grab active:cursor-grabbing">
+    <div className="relative w-full h-[440px] md:h-[500px] max-h-[64vh] rounded-2xl overflow-hidden bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950 border border-primary-500/30 shadow-2xl cursor-grab active:cursor-grabbing">
       <Canvas
         camera={{ position: [0, 0.4, 4.4], fov: 42 }}
         shadows={{ type: THREE.PCFShadowMap }}
@@ -83,13 +83,13 @@ const ProductSceneContent: React.FC<Product3DViewerProps> = ({
 
       {/* Top Bar with Status and Title */}
       <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none z-10">
-        <div className="bg-monarch-burgundy/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-monarch-gold/30 text-xs text-monarch-gold flex items-center gap-2">
-          <Sparkles className="w-3.5 h-3.5 text-monarch-gold-light" />
-          <span className="font-nav tracking-wide">360° Royal Atelier Viewer</span>
+        <div className="bg-neutral-900/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-primary-500/30 text-xs text-primary-200 flex items-center gap-2">
+          <Sparkles className="w-3.5 h-3.5 text-primary-300" />
+          <span className="font-nav tracking-wide">360° Couture Atelier Viewer</span>
         </div>
         <button
           onClick={handleReset}
-          className="pointer-events-auto bg-monarch-burgundy/85 hover:bg-monarch-maroon/90 text-monarch-gold hover:text-monarch-ivory px-3 py-1.5 rounded-full border border-monarch-gold/30 text-xs flex items-center gap-1.5 transition-colors"
+          className="pointer-events-auto bg-neutral-900/85 hover:bg-neutral-800 text-primary-200 hover:text-white px-3 py-1.5 rounded-full border border-primary-500/30 text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
         >
           <RotateCcw className="w-3.5 h-3.5" />
           <span>Reset Camera</span>
@@ -97,46 +97,46 @@ const ProductSceneContent: React.FC<Product3DViewerProps> = ({
       </div>
 
       {/* Angle Presets Bottom Bar */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-monarch-burgundy/90 backdrop-blur-md p-1.5 rounded-full border border-monarch-gold/35 shadow-xl z-10">
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-neutral-900/90 backdrop-blur-md p-1.5 rounded-full border border-primary-500/35 shadow-xl z-10">
         <button
           onClick={() => setCameraAngle('front')}
-          className={`px-3 py-1 rounded-full text-xs font-nav transition-all ${
+          className={`px-3 py-1 rounded-full text-xs font-nav transition-all cursor-pointer ${
             activeAngle === 'front'
-              ? 'bg-monarch-gold text-monarch-burgundy font-medium shadow'
-              : 'text-monarch-beige hover:text-monarch-gold'
+              ? 'bg-primary-600 text-white font-medium shadow'
+              : 'text-neutral-300 hover:text-white'
           }`}
         >
           Front
         </button>
         <button
           onClick={() => setCameraAngle('side')}
-          className={`px-3 py-1 rounded-full text-xs font-nav transition-all ${
+          className={`px-3 py-1 rounded-full text-xs font-nav transition-all cursor-pointer ${
             activeAngle === 'side'
-              ? 'bg-monarch-gold text-monarch-burgundy font-medium shadow'
-              : 'text-monarch-beige hover:text-monarch-gold'
+              ? 'bg-primary-600 text-white font-medium shadow'
+              : 'text-neutral-300 hover:text-white'
           }`}
         >
           Profile
         </button>
         <button
           onClick={() => setCameraAngle('back')}
-          className={`px-3 py-1 rounded-full text-xs font-nav transition-all ${
+          className={`px-3 py-1 rounded-full text-xs font-nav transition-all cursor-pointer ${
             activeAngle === 'back'
-              ? 'bg-monarch-gold text-monarch-burgundy font-medium shadow'
-              : 'text-monarch-beige hover:text-monarch-gold'
+              ? 'bg-primary-600 text-white font-medium shadow'
+              : 'text-neutral-300 hover:text-white'
           }`}
         >
           Back
         </button>
         <button
           onClick={() => setCameraAngle('detail')}
-          className={`px-3 py-1 rounded-full text-xs font-nav transition-all ${
+          className={`px-3 py-1 rounded-full text-xs font-nav transition-all cursor-pointer ${
             activeAngle === 'detail'
-              ? 'bg-monarch-gold text-monarch-burgundy font-medium shadow'
-              : 'text-monarch-beige hover:text-monarch-gold'
+              ? 'bg-primary-600 text-white font-medium shadow'
+              : 'text-neutral-300 hover:text-white'
           }`}
         >
-          Embroidery Detail
+          Detail
         </button>
       </div>
     </div>
@@ -152,7 +152,7 @@ export const Product3DViewer = dynamic(
         variant="embedded"
         message="Loading Ensemble Silhouette"
         subtitle="Interactive 3D Preview"
-        className="min-h-[520px] md:min-h-[620px]"
+        className="min-h-[440px] md:min-h-[500px]"
       />
     ),
   }

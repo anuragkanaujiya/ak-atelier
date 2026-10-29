@@ -1,12 +1,11 @@
 'use client';
 
-import NextImage from 'next/image';
-
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import clsx from 'clsx';
 import { useSmoothScroll } from '@/components/common/SmoothScrollProvider';
+import { AKLogo, AKLogoSize } from '@/components/common/AKLogo';
 
 export interface AkLoaderProps {
   /**
@@ -63,6 +62,12 @@ export interface AkLoaderProps {
    * Additional CSS classes for the outer container.
    */
   className?: string;
+
+  /**
+   * Explicit size of the AK vector logo crest in pixels or preset ('xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | number).
+   * Defaults to 68 in fullscreen, 44 in embedded, and 16 in minimal variant.
+   */
+  logoSize?: AKLogoSize;
 }
 
 /**
@@ -85,6 +90,7 @@ export const AkLoader: React.FC<AkLoaderProps> = ({
   maxTimeout = 3500,
   showSkip,
   className,
+  logoSize,
 }) => {
   const isControlled = isLoading !== undefined;
   const defaultMinTime = isControlled ? 300 : 500;
@@ -366,21 +372,19 @@ export const AkLoader: React.FC<AkLoaderProps> = ({
       <div
         ref={containerRef}
         className={clsx(
-          'inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-[#120407] border border-monarch-gold/30 text-monarch-gold-light select-none',
+          'inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 border border-primary-400/30 text-primary-200 select-none',
           className
         )}
         role="status"
         aria-live="polite"
       >
-        <svg viewBox="0 0 24 24" className="w-3 h-3 animate-spin" fill="none" aria-hidden="true">
-          <circle cx="12" cy="12" r="9" stroke="rgba(223, 190, 127, 0.2)" strokeWidth="2" />
-          <path
-            d="M 12 3 A 9 9 0 0 1 21 12"
-            stroke="#DFBE7F"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-        </svg>
+        <AKLogo
+          size={logoSize ?? 16}
+          animated={true}
+          loading={true}
+          variant="gold"
+          href={null}
+        />
         <span className="text-[10px] font-nav uppercase tracking-wider font-light">
           {message || 'Loading...'}
         </span>
@@ -396,73 +400,58 @@ export const AkLoader: React.FC<AkLoaderProps> = ({
       <div
         ref={containerRef}
         className={clsx(
-          'relative w-full h-full min-h-[260px] flex flex-col items-center justify-center p-6 bg-[#120407]/90 rounded-2xl border border-monarch-gold/20 overflow-hidden select-none',
+          'relative w-full h-full min-h-[260px] flex flex-col items-center justify-center p-6 bg-neutral-900/90 rounded-2xl border border-primary-400/20 overflow-hidden select-none',
           className
         )}
         role="status"
         aria-live="polite"
         aria-label={message || 'Loading content'}
       >
-        {/* Ambient Gold Glow */}
+        {/* Ambient Center Glow */}
         <div
           className="absolute inset-0 pointer-events-none opacity-25"
           style={{
             background:
-              'radial-gradient(circle at 50% 50%, rgba(223, 190, 127, 0.15) 0%, rgba(90, 23, 37, 0.08) 50%, transparent 75%)',
+              'radial-gradient(circle at 50% 50%, rgba(181, 169, 209, 0.15) 0%, rgba(64, 56, 79, 0.08) 50%, transparent 75%)',
           }}
         />
 
         <div ref={cardRef} className="relative z-10 flex flex-col items-center text-center">
-          {/* Gold Arch & AK ATELIER Monogram */}
-          <div className="w-12 h-12 mb-3 relative flex items-center justify-center">
-            <svg
-              viewBox="0 0 48 48"
-              className="w-full h-full overflow-visible"
-              fill="none"
-              aria-hidden="true"
-            >
-              <circle cx="24" cy="24" r="16" fill="rgba(223, 190, 127, 0.06)" />
-              <path
-                ref={archPathRef}
-                d="M 12 42 L 12 24 C 12 14, 36 14, 36 24 L 36 42"
-                stroke="#DFBE7F"
-                strokeWidth="1.35"
-                strokeLinecap="round"
-              />
-              <path
-                ref={monogramPathRef}
-                d="M 16 36 L 24 18 L 32 36 M 19 30 L 29 30"
-                stroke="#FFF2B8"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <circle cx="24" cy="11.5" r="1.75" fill="#DFBE7F" />
-            </svg>
+          {/* Cathedral Arch & AK ATELIER Monogram */}
+          <div className="mb-3 relative flex items-center justify-center">
+            <div className="absolute -inset-2 rounded-full bg-primary-400/15 blur-md pointer-events-none" />
+            <AKLogo
+              size={logoSize ?? 44}
+              animated={true}
+              loading={true}
+              variant="gold"
+              href={null}
+              className="relative z-10 drop-shadow-[0_2px_12px_rgba(217,186,119,0.35)]"
+            />
           </div>
 
           {/* Brand Heading */}
-          <span className="font-display text-base sm:text-lg text-monarch-gold-light font-light tracking-[0.38em] uppercase leading-none">
+          <span className="font-display text-base sm:text-lg text-primary-200 font-light tracking-[0.38em] uppercase leading-none">
             AK ATELIER
           </span>
 
           {/* Custom Status Message */}
           {message && (
-            <p className="font-serif text-sm text-monarch-ivory tracking-wide mt-2">
+            <p className="font-serif text-sm text-white tracking-wide mt-2">
               {message}
             </p>
           )}
 
           {/* Subtitle */}
-          <span className="text-[9px] font-nav uppercase tracking-[0.35em] text-[#DFBE7F]/70 mt-1 font-light">
-            {subtitle || 'Haute Couture Atelier · Mumbai & Paris'}
+          <span className="text-[9px] font-nav uppercase tracking-[0.35em] text-primary-300/80 mt-1 font-light">
+            {subtitle || 'Haute Couture Atelier · Milan & Paris'}
           </span>
 
           {/* Silk Thread Progress Bar */}
           <div className="w-36 sm:w-44 h-[1.5px] mt-4 relative overflow-hidden bg-white/10 rounded-full">
             <div
               ref={threadFillRef}
-              className="h-full bg-gradient-to-r from-[#9A7737] via-[#DFBE7F] to-[#FFF6D4] rounded-full transition-all duration-150"
+              className="h-full bg-gradient-to-r from-primary-400 via-primary-300 to-white rounded-full transition-all duration-150"
             />
           </div>
         </div>
@@ -477,7 +466,7 @@ export const AkLoader: React.FC<AkLoaderProps> = ({
     <div
       ref={containerRef}
       className={clsx(
-        'fixed inset-0 z-[99999] flex items-center justify-center pointer-events-none overflow-hidden select-none bg-[#120407]',
+        'fixed inset-0 z-[99999] flex items-center justify-center pointer-events-none overflow-hidden select-none bg-neutral-900',
         className
       )}
       style={{
@@ -487,12 +476,12 @@ export const AkLoader: React.FC<AkLoaderProps> = ({
       role="dialog"
       aria-modal="true"
     >
-      {/* Warm Ambient Gold Center Glow */}
+      {/* Warm Ambient Center Glow */}
       <div
         className="absolute inset-0 pointer-events-none opacity-30"
         style={{
           background:
-            'radial-gradient(circle at 50% 50%, rgba(223, 190, 127, 0.15) 0%, rgba(90, 23, 37, 0.08) 50%, transparent 75%)',
+            'radial-gradient(circle at 50% 50%, rgba(181, 169, 209, 0.15) 0%, rgba(64, 56, 79, 0.08) 50%, transparent 75%)',
         }}
       />
 
@@ -501,38 +490,40 @@ export const AkLoader: React.FC<AkLoaderProps> = ({
         ref={cardRef}
         className="relative z-10 flex flex-col items-center text-center px-6 pointer-events-none"
       >
-        {/* Imperial Gold Cathedral Arch Crest */}
-        <div className="w-16 h-16 sm:w-20 sm:h-20 mb-4 relative flex items-center justify-center">
-          <div className="absolute inset-0 rounded-full bg-[#DFBE7F]/10 blur-md pointer-events-none" />
-          <NextImage src="/images/logo/ak-logo-gold.png"
-            alt="AK Atelier"
-            width={72}
-            height={72}
-            className="w-14 h-14 sm:w-16 sm:h-16 object-contain relative z-10 [filter:drop-shadow(0_2px_12px_rgba(223,190,127,0.35))]"
-            priority
+        {/* Cathedral Arch Crest with Scalable Animated AK Vector Logo */}
+        <div className="mb-5 relative flex items-center justify-center">
+          <div className="absolute -inset-4 rounded-full bg-primary-400/20 blur-xl pointer-events-none" />
+          <AKLogo
+            size={logoSize ?? 68}
+            animated={true}
+            loading={true}
+            variant="gold"
+            showWordmark={false}
+            href={null}
+            className="relative z-10 drop-shadow-[0_4px_24px_rgba(217,186,119,0.45)]"
           />
         </div>
 
-        {/* Brand Name: A A S H I */}
-        <h1 className="font-display text-2xl sm:text-3xl text-monarch-gold-light font-light tracking-[0.38em] uppercase leading-none drop-shadow-sm">AK ATELIER</h1>
+        {/* Brand Name */}
+        <h1 className="font-display text-2xl sm:text-3xl text-primary-200 font-light tracking-[0.38em] uppercase leading-none drop-shadow-sm">AK ATELIER</h1>
 
         {/* Dynamic Context Message (if supplied) */}
         {message && (
-          <p className="font-serif text-sm sm:text-base text-monarch-ivory tracking-wide mt-2">
+          <p className="font-serif text-sm sm:text-base text-white tracking-wide mt-2">
             {message}
           </p>
         )}
 
         {/* Eyebrow Tagline */}
-        <p className="text-[9px] sm:text-[10px] font-nav uppercase tracking-[0.45em] text-[#DFBE7F]/75 mt-3 font-light">
-          {subtitle || 'Haute Couture Atelier · Mumbai & Paris'}
+        <p className="text-[9px] sm:text-[10px] font-nav uppercase tracking-[0.45em] text-primary-300/80 mt-3 font-light">
+          {subtitle || 'Haute Couture Atelier · Milan & Paris'}
         </p>
 
         {/* Active Silk Thread Progress Bar */}
         <div className="w-40 sm:w-52 h-[1.5px] mt-6 relative overflow-hidden bg-white/10 rounded-full">
           <div
             ref={threadFillRef}
-            className="h-full bg-gradient-to-r from-[#9A7737] via-[#DFBE7F] to-[#FFF6D4] rounded-full transition-all duration-150"
+            className="h-full bg-gradient-to-r from-primary-400 via-primary-300 to-white rounded-full transition-all duration-150"
           />
         </div>
       </div>
@@ -542,7 +533,7 @@ export const AkLoader: React.FC<AkLoaderProps> = ({
         <button
           onClick={handleFinish}
           type="button"
-          className="absolute bottom-5 right-5 z-20 px-3.5 py-1.5 rounded-full border border-monarch-gold/40 bg-black/60 text-[10px] font-nav uppercase tracking-widest text-monarch-gold-light hover:text-white hover:border-monarch-gold transition-colors duration-150 cursor-pointer pointer-events-auto"
+          className="absolute bottom-5 right-5 z-20 px-3.5 py-1.5 rounded-full border border-primary-400/40 bg-black/60 text-[10px] font-nav uppercase tracking-widest text-primary-200 hover:text-white hover:border-primary-300 transition-colors duration-150 cursor-pointer pointer-events-auto"
           aria-label="Skip loader"
         >
           Skip

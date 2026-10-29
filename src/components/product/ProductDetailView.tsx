@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Product } from '@/types';
 import { PRODUCTS, FORMAT_CURRENCY } from '@/data/products';
 import { useCart } from '@/context/CartContext';
@@ -15,9 +16,6 @@ import {
   ShoppingBag,
   Ruler,
   Truck,
-  ShieldCheck,
-  RotateCcw,
-  Sparkles,
   ChevronDown,
   Check,
   Star,
@@ -47,7 +45,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
 
-  // Pincode Delivery Estimator
+  // Delivery Estimator
   const [pincode, setPincode] = useState('');
   const [deliveryResult, setDeliveryResult] = useState<{
     date: string;
@@ -60,7 +58,6 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
     craft: true,
     fabric: false,
     shipping: false,
-    heritage: false,
   });
 
   const toggleAccordion = (key: string) => {
@@ -89,12 +86,12 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
 
   const handleCheckPincode = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!pincode.trim() || pincode.trim().length < 5) return;
+    if (!pincode.trim() || pincode.trim().length < 4) return;
 
     // Calculate delivery date based on product.deliveryDays
     const deliveryDate = new Date();
-    deliveryDate.setDate(deliveryDate.getDate() + (product.deliveryDays || 10));
-    const formattedDate = deliveryDate.toLocaleDateString('en-IN', {
+    deliveryDate.setDate(deliveryDate.getDate() + (product.deliveryDays || 5));
+    const formattedDate = deliveryDate.toLocaleDateString('en-US', {
       weekday: 'long',
       month: 'short',
       day: 'numeric',
@@ -102,7 +99,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
 
     setDeliveryResult({
       date: formattedDate,
-      courier: 'Royal Insured Express (Blue Dart / DHL Sovereign)',
+      courier: 'Atelier Sovereign Express (DHL Sovereign / FedEx Priority)',
       isEligible: true,
     });
   };
@@ -113,109 +110,135 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
   ).slice(0, 4);
 
   return (
-    <div className="bg-[#F7F0E5] text-monarch-charcoal min-h-screen pt-28 pb-24">
+    <div className="bg-surface-300 text-neutral-900 min-h-screen pt-28 pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb Navigation */}
-        <nav className="flex items-center gap-2 text-xs font-nav uppercase tracking-wider text-monarch-charcoal/60 mb-8">
-          <Link href="/" className="hover:text-monarch-maroon transition-colors">
+        <motion.nav
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, ease: 'easeOut' }}
+          className="flex items-center gap-2 text-xs font-nav uppercase tracking-wider text-neutral-500 mb-8"
+        >
+          <Link href="/" className="hover:text-primary-700 transition-colors">
             Home
           </Link>
           <span>/</span>
           <Link
             href={`/collections/${product.gender}`}
-            className="hover:text-monarch-maroon transition-colors capitalize"
+            className="hover:text-primary-700 transition-colors capitalize"
           >
             {product.gender}
           </Link>
           <span>/</span>
           <Link
             href={`/collections/${product.category}`}
-            className="hover:text-monarch-maroon transition-colors"
+            className="hover:text-primary-700 transition-colors"
           >
             {product.categoryName}
           </Link>
           <span>/</span>
-          <span className="text-monarch-maroon font-semibold">{product.name}</span>
-        </nav>
+          <span className="text-primary-700 font-semibold font-nav">{product.name}</span>
+        </motion.nav>
 
         {/* Main Product Layout: Left Viewport (3D or Image Gallery), Right Details */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 xl:gap-14 items-start">
           {/* Left Column: Media Area (Gallery & 3D Viewer) */}
-          <div className="lg:col-span-7 space-y-4 lg:sticky lg:top-28">
-            {/* View Mode Switcher Pills (3D vs High-Res Editorial Photography) */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, ease: 'easeOut' }}
+            className="lg:col-span-7 space-y-4"
+          >
+            {/* View Mode Switcher Pills - Responsive luxury segmented control */}
             {product.has3D && (
-              <div className="flex items-center justify-between bg-white/80 backdrop-blur-md p-1.5 rounded-full border border-monarch-beige/80 max-w-sm">
+              <div className="inline-flex items-center p-1 rounded-full bg-surface-100/90 backdrop-blur-md border border-neutral-200/90 shadow-sm w-full sm:w-auto max-w-md">
                 <button
+                  type="button"
                   onClick={() => setViewMode('3d')}
-                  className={`flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-full text-xs font-nav uppercase tracking-wider transition-all ${
+                  className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 sm:gap-2 py-1.5 sm:py-2 px-3 sm:px-4 rounded-full text-[11px] sm:text-xs font-nav uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                     viewMode === '3d'
-                      ? 'bg-monarch-maroon text-monarch-ivory shadow font-medium'
-                      : 'text-monarch-charcoal hover:text-monarch-maroon'
+                      ? 'bg-primary-600 hover:bg-primary-700 text-white font-medium shadow-sm'
+                      : 'text-neutral-700 hover:text-primary-700'
                   }`}
+                  aria-pressed={viewMode === '3d'}
                 >
-                  <Box className="w-4 h-4 text-monarch-gold" />
-                  <span>Interactive 3D View</span>
+                  <Box className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                  <span>
+                    <span className="hidden sm:inline">Interactive </span>3D View
+                  </span>
                 </button>
 
                 <button
+                  type="button"
                   onClick={() => setViewMode('gallery')}
-                  className={`flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-full text-xs font-nav uppercase tracking-wider transition-all ${
+                  className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 sm:gap-2 py-1.5 sm:py-2 px-3 sm:px-4 rounded-full text-[11px] sm:text-xs font-nav uppercase tracking-wider transition-all duration-300 cursor-pointer ${
                     viewMode === 'gallery'
-                      ? 'bg-monarch-maroon text-monarch-ivory shadow font-medium'
-                      : 'text-monarch-charcoal hover:text-monarch-maroon'
+                      ? 'bg-primary-600 hover:bg-primary-700 text-white font-medium shadow-sm'
+                      : 'text-neutral-700 hover:text-primary-700'
                   }`}
+                  aria-pressed={viewMode === 'gallery'}
                 >
-                  <ImageIcon className="w-4 h-4 text-monarch-gold" />
-                  <span>Editorial Gallery</span>
+                  <ImageIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                  <span>
+                    <span className="hidden sm:inline">Editorial </span>Gallery
+                  </span>
                 </button>
               </div>
             )}
 
             {/* Media Content Box */}
             {viewMode === '3d' && product.has3D ? (
-              <div>
+              <div className="space-y-2">
                 <Product3DViewer
                   productName={product.name}
                   primaryColor={
                     product.colors.find((c) => c.name === selectedColor)?.hex ||
                     product.model3DConfig?.primaryColor ||
-                    '#5A1725'
+                    '#242129'
                   }
-                  accentColor={product.model3DConfig?.accentColor || '#C7A15B'}
+                  accentColor={product.model3DConfig?.accentColor || '#81779F'}
                 />
-                <p className="text-[11px] text-monarch-charcoal/60 font-nav uppercase tracking-wider text-center mt-2">
-                  Rotate 360° · Scroll to Zoom into Micro-Zari Weave
+                <p className="text-[11px] text-neutral-500 font-nav uppercase tracking-wider text-center mt-2">
+                  Rotate 360° · Scroll to Inspect Fabric &amp; Weave
                 </p>
               </div>
             ) : (
               <div className="space-y-4">
-                {/* Main Selected Image */}
-                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-monarch-charcoal shadow-xl border border-monarch-beige/60">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={product.images[activeImageIdx] || product.images[0]}
-                    alt={product.name}
-                    className="w-full h-full object-cover"
-                  />
+                {/* Main Selected Image - Minimally decreased size for balanced viewport */}
+                <div className="relative aspect-[3/3.65] max-h-[58vh] sm:max-h-[64vh] xl:max-h-[68vh] w-full max-w-xl mx-auto rounded-2xl overflow-hidden bg-surface-200 shadow-xl border border-neutral-200">
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={activeImageIdx}
+                      src={product.images[activeImageIdx] || product.images[0]}
+                      alt={product.name}
+                      initial={{ opacity: 0.35, scale: 0.99 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0.35 }}
+                      transition={{ duration: 0.25, ease: 'easeOut' }}
+                      className="w-full h-full object-cover"
+                    />
+                  </AnimatePresence>
                   {product.badge && (
-                    <span className="absolute top-4 left-4 text-xs font-nav uppercase tracking-wider bg-monarch-burgundy text-monarch-gold-light px-3.5 py-1.5 rounded-full border border-monarch-gold/40 shadow">
+                    <span className="absolute top-4 left-4 text-xs font-nav uppercase tracking-wider bg-primary-100 text-primary-800 border border-primary-200 px-3.5 py-1.5 rounded-full shadow-sm font-medium z-10">
                       {product.badge}
                     </span>
                   )}
                 </div>
 
-                {/* Thumbnails Strip */}
+                {/* Thumbnails Strip - Increased padding so border/ring is never clipped */}
                 {product.images.length > 1 && (
-                  <div className="flex items-center gap-3 overflow-x-auto pb-2">
+                  <div className="flex items-center gap-3 overflow-x-auto p-2 sm:p-2.5 no-scrollbar scroll-smooth">
                     {product.images.map((img, idx) => (
                       <button
                         key={idx}
+                        type="button"
                         onClick={() => setActiveImageIdx(idx)}
-                        className={`w-20 sm:w-24 aspect-[3/4] rounded-xl overflow-hidden border-2 transition-all shrink-0 ${
+                        className={`w-18 sm:w-20 md:w-22 aspect-[3/3.8] rounded-xl overflow-hidden transition-all duration-300 shrink-0 cursor-pointer ${
                           activeImageIdx === idx
-                            ? 'border-monarch-maroon ring-2 ring-monarch-gold scale-105'
-                            : 'border-monarch-beige hover:border-monarch-gold opacity-75'
+                            ? 'border-2 border-primary-600 ring-2 ring-primary-500/80 ring-offset-2 ring-offset-surface-100 shadow-md scale-[1.02]'
+                            : 'border-2 border-neutral-200 hover:border-neutral-400 opacity-75 hover:opacity-100'
                         }`}
+                        aria-label={`View product image ${idx + 1}`}
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={img} alt="" className="w-full h-full object-cover" />
@@ -225,22 +248,27 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
                 )}
               </div>
             )}
-          </div>
+          </motion.div>
 
           {/* Right Column: Garment Information & Ordering Controls */}
-          <div className="lg:col-span-5 space-y-6">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.08, ease: 'easeOut' }}
+            className="lg:col-span-5 space-y-6"
+          >
             {/* Header info */}
             <div>
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-nav uppercase tracking-[0.25em] text-monarch-gold-dark font-semibold">
+                <span className="text-xs font-nav uppercase tracking-[0.25em] text-primary-700 font-semibold">
                   {product.categoryName}
                 </span>
 
                 {/* Review Stars */}
-                <div className="flex items-center gap-1.5 text-xs text-monarch-charcoal/80">
-                  <div className="flex text-amber-500">
+                <div className="flex items-center gap-1.5 text-xs text-neutral-700">
+                  <div className="flex">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                      <Star key={i} className="w-3.5 h-3.5 fill-primary-500 text-primary-500" />
                     ))}
                   </div>
                   <span className="font-semibold text-xs font-sans">
@@ -249,58 +277,59 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
                 </div>
               </div>
 
-              <h1 className="font-serif text-3xl sm:text-4xl xl:text-5xl text-monarch-charcoal font-medium leading-tight">
+              <h1 className="font-serif text-3xl sm:text-4xl xl:text-5xl text-neutral-900 font-medium leading-tight">
                 {product.name}
               </h1>
 
-              <p className="font-serif italic text-base text-monarch-charcoal/80 mt-1">
+              <p className="font-serif italic text-base text-neutral-600 mt-1">
                 {product.tagline}
               </p>
             </div>
 
             {/* Pricing Section */}
-            <div className="p-4 rounded-xl bg-white border border-monarch-beige/70 space-y-1">
+            <div className="p-4 rounded-xl bg-surface-100 border border-neutral-200 text-neutral-900 space-y-1">
               <div className="flex items-baseline gap-3">
-                <span className="font-serif text-3xl font-bold text-monarch-maroon">
+                <span className="font-serif text-3xl font-bold text-neutral-900">
                   {FORMAT_CURRENCY(product.price)}
                 </span>
                 {product.originalPrice && (
-                  <span className="font-sans text-sm line-through text-monarch-charcoal/40">
+                  <span className="font-sans text-sm line-through text-neutral-400">
                     {FORMAT_CURRENCY(product.originalPrice)}
                   </span>
                 )}
                 {product.discountPercent && (
-                  <span className="text-xs font-nav uppercase tracking-wider text-green-700 bg-green-50 px-2 py-0.5 rounded border border-green-200">
+                  <span className="text-xs font-nav uppercase tracking-wider text-success-600 bg-success-100 px-2 py-0.5 rounded border border-success-200 font-medium">
                     Save {product.discountPercent}%
                   </span>
                 )}
               </div>
-              <p className="text-[11px] text-monarch-charcoal/60 font-sans">
-                Inclusive of all custom handcraft taxes. Complimentary bespoke fitting included.
+              <p className="text-[11px] text-neutral-500 font-sans">
+                Inclusive of luxury presentation box and complimentary bespoke alterations.
               </p>
             </div>
 
             {/* Color Swatch Selection */}
             <div>
-              <label className="block text-xs font-nav uppercase tracking-wider text-monarch-maroon font-semibold mb-2.5">
-                Colorway: <span className="text-monarch-charcoal font-normal">{selectedColor}</span>
+              <label className="block text-xs font-nav uppercase tracking-wider text-primary-700 font-semibold mb-2.5">
+                Colorway: <span className="text-neutral-900 font-normal">{selectedColor}</span>
               </label>
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-2.5">
                 {product.colors.map((color) => (
                   <button
                     key={color.name}
+                    type="button"
                     onClick={() => handleColorChange(color)}
                     className={`group relative flex items-center gap-2 px-3 py-1.5 rounded-full border transition-all ${
                       selectedColor === color.name
-                        ? 'border-monarch-maroon bg-white shadow-sm ring-1 ring-monarch-maroon'
-                        : 'border-monarch-beige bg-white/60 hover:border-monarch-gold'
+                        ? 'border-primary-600 bg-surface-100 shadow-sm ring-1 ring-primary-600 text-neutral-900'
+                        : 'border-neutral-300 bg-surface-200 text-neutral-700 hover:border-neutral-500'
                     }`}
                   >
                     <span
                       className="w-4 h-4 rounded-full border border-black/10 shrink-0"
                       style={{ backgroundColor: color.hex }}
                     />
-                    <span className="text-xs font-sans text-monarch-charcoal">
+                    <span className="text-xs font-sans">
                       {color.name}
                     </span>
                   </button>
@@ -311,12 +340,13 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
             {/* Size Selection */}
             <div>
               <div className="flex items-center justify-between mb-2.5">
-                <label className="text-xs font-nav uppercase tracking-wider text-monarch-maroon font-semibold">
+                <label className="text-xs font-nav uppercase tracking-wider text-primary-700 font-semibold">
                   Select Size
                 </label>
                 <button
+                  type="button"
                   onClick={() => setIsSizeGuideOpen(true)}
-                  className="text-xs text-monarch-maroon hover:text-monarch-gold-dark flex items-center gap-1 font-nav underline"
+                  className="text-xs text-primary-700 hover:text-primary-800 flex items-center gap-1 font-nav underline"
                 >
                   <Ruler className="w-3.5 h-3.5" />
                   <span>Size &amp; Fit Guide</span>
@@ -327,11 +357,12 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
                 {product.sizes.map((size) => (
                   <button
                     key={size}
+                    type="button"
                     onClick={() => setSelectedSize(size)}
-                    className={`py-2.5 px-3 rounded-lg text-xs font-nav uppercase tracking-wider border transition-all ${
+                    className={`py-2.5 px-3 rounded-lg text-xs font-nav uppercase tracking-wider transition-all ${
                       selectedSize === size
-                        ? 'bg-monarch-maroon text-monarch-ivory border-monarch-maroon font-semibold shadow'
-                        : 'bg-white text-monarch-charcoal border-monarch-beige hover:border-monarch-gold'
+                        ? 'bg-primary-600 hover:bg-primary-700 text-white font-medium border border-primary-600 shadow-sm'
+                        : 'bg-surface-200 text-neutral-700 border border-neutral-300 hover:border-neutral-500'
                     }`}
                   >
                     {size}
@@ -344,18 +375,20 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
             <div className="space-y-3 pt-2">
               <div className="flex items-center gap-3">
                 {/* Quantity */}
-                <div className="flex items-center border border-monarch-beige rounded-full bg-white px-3 py-2">
+                <div className="flex items-center border border-neutral-300 rounded-full bg-surface-200 px-3 py-2 text-neutral-900">
                   <button
+                    type="button"
                     onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                    className="text-monarch-charcoal hover:text-monarch-maroon px-2 text-sm"
+                    className="text-neutral-700 hover:text-primary-700 px-2 text-sm font-medium"
                     aria-label="Decrease quantity"
                   >
                     -
                   </button>
                   <span className="px-3 font-nav text-xs font-semibold">{quantity}</span>
                   <button
+                    type="button"
                     onClick={() => setQuantity((q) => q + 1)}
-                    className="text-monarch-charcoal hover:text-monarch-maroon px-2 text-sm"
+                    className="text-neutral-700 hover:text-primary-700 px-2 text-sm font-medium"
                     aria-label="Increase quantity"
                   >
                     +
@@ -364,177 +397,228 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
 
                 {/* Add to Bag */}
                 <button
+                  type="button"
                   onClick={handleAddToCart}
                   disabled={isAdded}
-                  className="flex-1 py-3.5 px-6 rounded-full bg-monarch-maroon hover:bg-monarch-maroon-dark text-monarch-ivory border border-monarch-gold/50 font-nav text-xs uppercase tracking-widest font-semibold flex items-center justify-center gap-2 transition-all shadow-lg"
+                  className="btn-luxury flex-1 py-3.5 px-6 rounded-full bg-primary-600 hover:bg-primary-700 text-white font-medium font-nav text-xs uppercase tracking-widest flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer"
                 >
                   {isAdded ? (
                     <>
-                      <Check className="w-4 h-4 text-monarch-gold-light" />
-                      <span>Added to Royal Bag</span>
+                      <Check className="w-4 h-4 text-white" />
+                      <span>Added to Atelier Bag</span>
                     </>
                   ) : (
                     <>
                       <ShoppingBag className="w-4 h-4" />
-                      <span>Add to Royal Bag</span>
+                      <span>Add to Atelier Bag</span>
                     </>
                   )}
                 </button>
 
                 {/* Wishlist Toggle */}
                 <button
+                  type="button"
                   onClick={() => toggleWishlist(product.id)}
-                  className={`p-3.5 rounded-full border transition-all ${
+                  className={`btn-luxury p-3.5 rounded-full border transition-all cursor-pointer ${
                     inWishlist
-                      ? 'bg-monarch-maroon text-monarch-gold border-monarch-maroon shadow'
-                      : 'bg-white text-monarch-charcoal border-monarch-beige hover:border-monarch-maroon'
+                      ? 'bg-surface-100 border-secondary-600 text-secondary-600 shadow-sm'
+                      : 'bg-surface-200 text-neutral-700 border border-neutral-300 hover:border-neutral-500'
                   }`}
                   aria-label="Toggle Wishlist"
                 >
-                  <Heart className={`w-5 h-5 ${inWishlist ? 'fill-monarch-gold' : ''}`} />
+                  <Heart className={`w-5 h-5 ${inWishlist ? 'fill-secondary-600 text-secondary-600' : ''}`} />
                 </button>
               </div>
 
               {/* Instant Buy Now Button */}
               <button
+                type="button"
                 onClick={handleBuyNow}
-                className="w-full py-3.5 px-6 rounded-full bg-monarch-gold hover:bg-monarch-gold-light text-monarch-burgundy font-nav text-xs uppercase tracking-widest font-semibold flex items-center justify-center gap-2 transition-all shadow-md"
+                className="btn-luxury w-full py-3.5 px-6 rounded-full bg-neutral-900 hover:bg-neutral-800 text-white font-nav text-xs uppercase tracking-widest font-semibold flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer"
               >
                 <span>Buy Now · Express Checkout</span>
               </button>
             </div>
 
-            {/* Pincode Delivery Estimator */}
-            <div className="bg-white p-5 rounded-2xl border border-monarch-beige/70 space-y-3">
-              <div className="flex items-center gap-2 text-xs font-nav uppercase tracking-wider text-monarch-maroon font-semibold">
+            {/* Delivery Estimator */}
+            <div className="bg-surface-100 border border-neutral-200 text-neutral-900 p-5 rounded-2xl space-y-3">
+              <div className="flex items-center gap-2 text-xs font-nav uppercase tracking-wider text-primary-700 font-semibold">
                 <Truck className="w-4 h-4" />
-                <span>Estimate Royal Delivery</span>
+                <span>Estimate Sovereign Delivery</span>
               </div>
               <form onSubmit={handleCheckPincode} className="flex gap-2">
                 <input
                   type="text"
                   value={pincode}
                   onChange={(e) => setPincode(e.target.value)}
-                  placeholder="Enter 6-digit Pincode (e.g. 110001)"
-                  maxLength={6}
-                  className="flex-1 px-4 py-2 bg-monarch-ivory text-xs border border-monarch-beige rounded-full font-nav focus:outline-none focus:border-monarch-maroon"
+                  placeholder="Enter Postal Code (e.g. 10001, SW1A 1AA)"
+                  maxLength={10}
+                  className="flex-1 px-4 py-2 bg-surface-200 border border-neutral-300 text-neutral-900 placeholder:text-neutral-400 focus:border-primary-600 text-xs rounded-full font-nav focus:outline-none transition-colors"
                 />
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-monarch-charcoal hover:bg-monarch-maroon text-monarch-ivory text-xs font-nav uppercase tracking-wider rounded-full transition-colors"
+                  className="btn-luxury px-5 py-2 bg-primary-600 hover:bg-primary-700 text-white font-medium text-xs font-nav uppercase tracking-wider rounded-full transition-colors cursor-pointer"
                 >
                   Check
                 </button>
               </form>
 
               {deliveryResult && (
-                <div className="p-3 bg-monarch-ivory rounded-xl border border-monarch-beige/80 text-xs space-y-1">
-                  <p className="font-semibold text-monarch-maroon flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-green-600" />
+                <div className="p-3 bg-surface-200 rounded-xl border border-neutral-200 text-xs space-y-1">
+                  <p className="font-semibold text-neutral-900 flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-success-600" />
                     Estimated Delivery by {deliveryResult.date}
                   </p>
-                  <p className="text-[11px] text-monarch-charcoal/70 font-sans">
-                    Via {deliveryResult.courier} with signature on receipt.
+                  <p className="text-[11px] text-neutral-600 font-sans">
+                    Via {deliveryResult.courier} with signature required upon receipt.
                   </p>
                 </div>
               )}
             </div>
 
-            {/* Accordions: Craftsmanship, Care, Delivery */}
-            <div className="divide-y divide-monarch-beige/60 border-y border-monarch-beige/60">
-              {/* Accordion 1: Craftsmanship Details */}
+            {/* Accordions: Tailoring, Fabric, Delivery */}
+            <div className="divide-y divide-neutral-200 border-y border-neutral-200">
+              {/* Accordion 1: Tailoring & Craftsmanship Details */}
               <div className="py-4">
                 <button
+                  type="button"
                   onClick={() => toggleAccordion('craft')}
-                  className="w-full flex items-center justify-between text-left font-serif text-lg text-monarch-charcoal font-medium"
+                  className="w-full flex items-center justify-between text-left font-serif text-lg text-neutral-900 font-medium cursor-pointer"
+                  aria-expanded={openAccordions.craft}
                 >
-                  <span>Craftsmanship &amp; Heritage Embroidery</span>
+                  <span>Atelier Tailoring &amp; Handcraftsmanship</span>
                   <ChevronDown
-                    className={`w-4 h-4 text-monarch-gold-dark transition-transform ${
+                    className={`w-4 h-4 text-neutral-500 transition-transform duration-300 ${
                       openAccordions.craft ? 'rotate-180' : ''
                     }`}
                   />
                 </button>
-                {openAccordions.craft && (
-                  <div className="pt-3 text-xs text-monarch-charcoal/80 font-sans space-y-2 leading-relaxed">
-                    <p>{product.description}</p>
-                    <p>
-                      <strong className="text-monarch-charcoal font-medium">Embroidery:</strong>{' '}
-                      {product.embroidery}
-                    </p>
-                    <p>
-                      <strong className="text-monarch-charcoal font-medium">Loom Story:</strong>{' '}
-                      {product.craftsmanshipStory}
-                    </p>
-                  </div>
-                )}
+                <AnimatePresence initial={false}>
+                  {openAccordions.craft && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pt-3 text-xs text-neutral-700 font-sans space-y-2 leading-relaxed">
+                        <p>{product.description}</p>
+                        {product.embroidery && (
+                          <p>
+                            <strong className="text-neutral-900 font-medium">Finishing Details:</strong>{' '}
+                            {product.embroidery}
+                          </p>
+                        )}
+                        {product.craftsmanshipStory && (
+                          <p>
+                            <strong className="text-neutral-900 font-medium">Atelier Story:</strong>{' '}
+                            {product.craftsmanshipStory}
+                          </p>
+                        )}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               {/* Accordion 2: Fabric & Care */}
               <div className="py-4">
                 <button
+                  type="button"
                   onClick={() => toggleAccordion('fabric')}
-                  className="w-full flex items-center justify-between text-left font-serif text-lg text-monarch-charcoal font-medium"
+                  className="w-full flex items-center justify-between text-left font-serif text-lg text-neutral-900 font-medium cursor-pointer"
+                  aria-expanded={openAccordions.fabric}
                 >
                   <span>Fabric &amp; Garment Care</span>
                   <ChevronDown
-                    className={`w-4 h-4 text-monarch-gold-dark transition-transform ${
+                    className={`w-4 h-4 text-neutral-500 transition-transform duration-300 ${
                       openAccordions.fabric ? 'rotate-180' : ''
                     }`}
                   />
                 </button>
-                {openAccordions.fabric && (
-                  <div className="pt-3 text-xs text-monarch-charcoal/80 font-sans space-y-2 leading-relaxed">
-                    <p>
-                      <strong className="text-monarch-charcoal font-medium">Fabric Composition:</strong>{' '}
-                      {product.fabric}
-                    </p>
-                    <ul className="list-disc pl-4 space-y-1">
-                      {product.careInstructions.map((instruction, idx) => (
-                        <li key={idx}>{instruction}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                <AnimatePresence initial={false}>
+                  {openAccordions.fabric && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pt-3 text-xs text-neutral-700 font-sans space-y-2 leading-relaxed">
+                        <p>
+                          <strong className="text-neutral-900 font-medium">Material Composition:</strong>{' '}
+                          {product.fabric}
+                        </p>
+                        {product.careInstructions && product.careInstructions.length > 0 && (
+                          <ul className="list-disc pl-4 space-y-1">
+                            {product.careInstructions.map((instruction, idx) => (
+                              <li key={idx}>{instruction}</li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               {/* Accordion 3: Delivery & Returns */}
               <div className="py-4">
                 <button
+                  type="button"
                   onClick={() => toggleAccordion('shipping')}
-                  className="w-full flex items-center justify-between text-left font-serif text-lg text-monarch-charcoal font-medium"
+                  className="w-full flex items-center justify-between text-left font-serif text-lg text-neutral-900 font-medium cursor-pointer"
+                  aria-expanded={openAccordions.shipping}
                 >
-                  <span>Insured Shipping &amp; Royal Guarantee</span>
+                  <span>Sovereign Packaging &amp; Global Delivery</span>
                   <ChevronDown
-                    className={`w-4 h-4 text-monarch-gold-dark transition-transform ${
+                    className={`w-4 h-4 text-neutral-500 transition-transform duration-300 ${
                       openAccordions.shipping ? 'rotate-180' : ''
                     }`}
                   />
                 </button>
-                {openAccordions.shipping && (
-                  <div className="pt-3 text-xs text-monarch-charcoal/80 font-sans space-y-2 leading-relaxed">
-                    <p>
-                      Each order travels in a tamper-sealed, cedarwood-treated luxury presentation box with climate-proof inner casing.
-                    </p>
-                    <p>
-                      Complimentary bespoke alterations are supported at any of our flagship boutiques in Delhi, Mumbai, or through our courier alteration network.
-                    </p>
-                  </div>
-                )}
+                <AnimatePresence initial={false}>
+                  {openAccordions.shipping && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pt-3 text-xs text-neutral-700 font-sans space-y-2 leading-relaxed">
+                        <p>
+                          Each order travels in a tamper-sealed, cedar-treated presentation case with breathable garment covers and archival hangers.
+                        </p>
+                        <p>
+                          Complimentary bespoke alterations are supported at any of our flagship salons in Paris, Milan, and London, or through our private courier alteration network.
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Complete the Royal Look / Related Products */}
+        {/* Complete the Look / Related Products */}
         {relatedProducts.length > 0 && (
-          <div className="mt-24 pt-12 border-t border-monarch-gold/30">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className="mt-24 pt-12 border-t border-neutral-200"
+          >
             <div className="text-center mb-10 space-y-2">
-              <span className="text-xs font-nav uppercase tracking-[0.3em] text-monarch-maroon font-semibold">
-                Curated Ensemble
+              <span className="text-xs font-nav uppercase tracking-[0.3em] text-primary-700 font-semibold">
+                Curated Wardrobe
               </span>
-              <h2 className="font-serif text-3xl sm:text-4xl text-monarch-charcoal font-medium">
-                COMPLETE THE ROYAL LOOK
+              <h2 className="font-serif text-3xl sm:text-4xl text-neutral-900 font-medium">
+                COMPLETE THE ATELIER ENSEMBLE
               </h2>
             </div>
 
@@ -543,7 +627,7 @@ export const ProductDetailView: React.FC<ProductDetailViewProps> = ({ product })
                 <ProductCard key={p.id} product={p} />
               ))}
             </div>
-          </div>
+          </motion.div>
         )}
       </div>
 

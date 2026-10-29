@@ -4,6 +4,7 @@ import path from "path";
 const rootDir = __dirname.includes('.worktrees') ? path.resolve(__dirname, '../..') : __dirname;
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins: ['192.168.2.237', 'localhost:3000'],
   experimental: {
     turbopackPluginRuntimeStrategy: 'workerThreads',
   },

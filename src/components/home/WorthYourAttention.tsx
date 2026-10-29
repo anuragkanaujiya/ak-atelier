@@ -76,16 +76,16 @@ export const WorthYourAttention: React.FC = () => {
 
       const ctx = gsap.fromTo(
         cards,
-        { opacity: 0.85, y: 16 },
+        { opacity: 0.35, y: 32 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.5,
-          stagger: 0.05,
+          duration: 0.7,
+          stagger: 0.08,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top 95%',
+            start: 'top 85%',
             refreshPriority: 1,
             toggleActions: 'play none none none',
           },
@@ -112,7 +112,7 @@ export const WorthYourAttention: React.FC = () => {
     <section
       id="worth-your-attention"
       ref={sectionRef}
-      className="py-14 sm:py-20 bg-[#FAF7F2] text-[#1A1A1A] relative overflow-hidden select-none border-t border-monarch-gold/15"
+      className="py-14 sm:py-20 bg-surface-300 text-neutral-900 relative overflow-hidden select-none border-t border-neutral-200"
     >
       <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Full Section Header with Eyebrow, Title, Description, and Navigation */}
@@ -129,7 +129,7 @@ export const WorthYourAttention: React.FC = () => {
           <div className="flex items-center gap-4 shrink-0">
             <Link
               href={WORTH_YOUR_ATTENTION_DATA.ctaHref}
-              className="text-xs font-nav uppercase tracking-[0.2em] font-semibold text-monarch-maroon hover:text-monarch-maroon-dark pb-0.5 border-b border-monarch-maroon/30 transition-colors"
+              className="text-xs font-nav uppercase tracking-[0.2em] font-semibold text-primary-700 hover:text-primary-800 pb-0.5 border-b border-primary-700/30 transition-colors"
             >
               {WORTH_YOUR_ATTENTION_DATA.ctaText}
             </Link>
@@ -139,7 +139,7 @@ export const WorthYourAttention: React.FC = () => {
               <button
                 type="button"
                 onClick={() => handleScroll('left')}
-                className="w-9 h-9 rounded-full border border-monarch-charcoal/20 hover:border-monarch-charcoal text-monarch-charcoal flex items-center justify-center transition-all hover:bg-black/5 active:scale-95 cursor-pointer"
+                className="w-9 h-9 rounded-full border border-neutral-300 hover:border-neutral-800 text-neutral-800 flex items-center justify-center transition-all hover:bg-neutral-100 active:scale-95 cursor-pointer"
                 aria-label="Scroll left"
               >
                 <ChevronLeft className="w-4 h-4" />
@@ -148,7 +148,7 @@ export const WorthYourAttention: React.FC = () => {
               <button
                 type="button"
                 onClick={() => handleScroll('right')}
-                className="w-9 h-9 rounded-full border border-monarch-charcoal/20 hover:border-monarch-charcoal text-monarch-charcoal flex items-center justify-center transition-all hover:bg-black/5 active:scale-95 cursor-pointer"
+                className="w-9 h-9 rounded-full border border-neutral-300 hover:border-neutral-800 text-neutral-800 flex items-center justify-center transition-all hover:bg-neutral-100 active:scale-95 cursor-pointer"
                 aria-label="Scroll right"
               >
                 <ChevronRight className="w-4 h-4" />
@@ -160,8 +160,8 @@ export const WorthYourAttention: React.FC = () => {
         {/* X-Direction Scrollable Accordion Track */}
         <div className="relative w-full">
           {/* Subtle Fade Edges */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#FAF7F2] to-transparent z-20 opacity-80" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#FAF7F2] to-transparent z-20 opacity-80" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-surface-300 to-transparent z-20 opacity-80" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-surface-300 to-transparent z-20 opacity-80" />
 
           {/* Smooth Scroll Container */}
           <div

@@ -31,8 +31,8 @@ interface HeroSceneProps {
 }
 
 export const HeroScene: React.FC<HeroSceneProps> = ({
-  primaryColor = '#5A1725',
-  accentColor = '#C7A15B',
+  primaryColor = '#594F72',
+  accentColor = '#B5A9D1',
 }) => {
   return (
     <div className="relative w-full h-full min-h-[550px] lg:min-h-[750px] cursor-grab active:cursor-grabbing">
@@ -75,8 +75,8 @@ export const HeroScene: React.FC<HeroSceneProps> = ({
       </Canvas>
 
       {/* Subtle interaction cue indicator */}
-      <div className="absolute bottom-6 right-6 pointer-events-none hidden md:flex items-center gap-2 text-xs text-monarch-gold/80 bg-monarch-burgundy/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-monarch-gold/30">
-        <span className="w-2 h-2 rounded-full bg-monarch-gold animate-ping" />
+      <div className="absolute bottom-6 right-6 pointer-events-none hidden md:flex items-center gap-2 text-xs text-primary-200 bg-neutral-900/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-primary-400/30">
+        <span className="w-2 h-2 rounded-full bg-primary-400 animate-ping" />
         <span>Drag to rotate · 360° Couture View</span>
       </div>
     </div>

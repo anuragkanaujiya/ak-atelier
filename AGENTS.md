@@ -68,6 +68,25 @@ Agents must adhere strictly to these 5 backend developer principles:
 
 ---
 
+### 8. MANDATORY RULE & HOOK: DESIGN TOKENS, GRADIENTS & CSS ANIMATIONS GUARDIAN
+**CRITICAL**: All styling must adhere strictly to centralized design tokens, global gradients, and global CSS animations!
+
+1. **No Hardcoded Hex Colors**:
+   - Every hex color in `.tsx`, `.ts`, `.jsx`, or `.js` MUST strictly belong to the official palette defined in `src/app/globals.css` (`--color-primary-*`, `--color-secondary-*`, `--color-accent-*`, `--color-neutral-*`, `--color-surface-*`, `--color-warning-*`, `--color-success-*`, `--color-error-*`).
+   - Legacy class names (`monarch-*`, `maroon-*`, `text-gold-*`) are forbidden.
+2. **Centralized Gradients in `globals.css`**:
+   - Never write ad-hoc inline gradients with raw hex values inside JSX `style={{ ... }}`.
+   - Use centralized utility classes (e.g. `.bg-gradient-luxury-primary`, `.bg-gradient-luxury-lilac`, `.bg-gradient-luxury-rose`, `.bg-gradient-luxury-champagne`, `.bg-gradient-luxury-plum`, `.bg-gradient-radial-vignette`, `.bg-gradient-radial-glow`) or CSS variables (`var(--gradient-luxury-*)`).
+3. **Centralized CSS Animations in `globals.css`**:
+   - All `@keyframes` and animation utility classes (e.g. `.animate-float`, `.animate-pulse-subtle`, `.animate-spin-slow`, `.animate-sweep`, `.animate-marquee`, `.lilac-shimmer`) MUST be declared in `src/app/globals.css`.
+   - Never define inline `<style jsx>@keyframes ...</style>` or ad-hoc animation strings in component files.
+4. **Automated Lifecycle Guardian Hook (`.agents/hooks.json`)**:
+   - The `.agents/scripts/design-token-guardian.mjs` hook runs automatically on `Stop` (when the agent finishes) and `PostToolUse` (`write_file|edit_file`).
+   - If off-palette colors, inline gradients, or inline `@keyframes` are detected, completion is blocked until resolved.
+   - Manual check: `npm run audit:tokens`.
+
+---
+
 ## Backend Database Architecture & Section-Wise Data Guide
 
 This guide defines how the production database is structured and how data is provisioned section-by-section to the frontend.

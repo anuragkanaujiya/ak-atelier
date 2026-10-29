@@ -59,9 +59,9 @@ export function useMarqueeScroll<
           const newSetWidth = totalWidth / repeatCount;
           setWidth = newSetWidth;
 
-          if (!hasInitializedScroll && setWidth > 0) {
+          if ((!hasInitializedScroll || container.scrollLeft < newSetWidth * 0.2) && newSetWidth > 0) {
             // Position in the middle set for seamless bi-directional room
-            container.scrollLeft = setWidth;
+            container.scrollLeft = newSetWidth;
             hasInitializedScroll = true;
           }
         }
@@ -87,6 +87,20 @@ export function useMarqueeScroll<
         isPausedRef.current = true;
       }
 
+      // Check visibility in viewport (default true for instant responsiveness)
+      let isIntersecting = true;
+
+      let intersectionObserver: IntersectionObserver | null = null;
+      if (typeof IntersectionObserver !== 'undefined') {
+        intersectionObserver = new IntersectionObserver(
+          ([entry]) => {
+            isIntersecting = Boolean(entry?.isIntersecting);
+          },
+          { rootMargin: '300px 0px 300px 0px' }
+        );
+        intersectionObserver.observe(container);
+      }
+
       const scheduleResume = (delay = 1200) => {
         if (prefersReducedMotion) return;
         if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
@@ -97,9 +111,9 @@ export function useMarqueeScroll<
         }, delay);
       };
 
-      // Ticker callback driven by GSAP
+      // Ticker callback driven by GSAP — executes smoothly when visible
       const onTick = (_time: number, deltaTime: number) => {
-        if (!container || setWidth <= 0) return;
+        if (!container || !isIntersecting || setWidth <= 0 || isPausedRef.current) return;
 
         // Keep scroll normalized within bounds even during manual drag/swipe
         if (container.scrollLeft >= setWidth * 2.5) {
@@ -107,8 +121,6 @@ export function useMarqueeScroll<
         } else if (container.scrollLeft <= setWidth * 0.4) {
           container.scrollLeft += setWidth;
         }
-
-        if (isPausedRef.current) return;
 
         const deltaSec = Math.min(deltaTime / 1000, 0.05);
         const px = speed * deltaSec;
@@ -226,6 +238,7 @@ export function useMarqueeScroll<
       return () => {
         gsap.ticker.remove(onTick);
         if (resizeObserver) resizeObserver.disconnect();
+        if (intersectionObserver) intersectionObserver.disconnect();
         if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
 
         container.removeEventListener('mouseenter', onMouseEnter);
