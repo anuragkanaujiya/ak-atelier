@@ -17,6 +17,7 @@
 
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 const SRC_DIR = path.resolve(process.cwd(), 'src');
 
@@ -279,7 +280,13 @@ async function main() {
   }
 }
 
-if (process.env.NODE_ENV !== 'test') {
+const isDirectRun = process.argv[1] && (
+  fileURLToPath(import.meta.url) === path.resolve(process.argv[1]) ||
+  path.resolve(process.argv[1]).endsWith('design-token-guardian.mjs')
+);
+const isTestRun = process.env.NODE_ENV === 'test' || (process.argv[1] && process.argv[1].includes('.test.'));
+
+if (isDirectRun && !isTestRun) {
   main().catch((err) => {
     console.error(err);
     process.exit(1);

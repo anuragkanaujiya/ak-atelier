@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "audit:tokens": "node scripts/design-token-guardian.mjs"
+    "typecheck": "tsc --noEmit",
+    "audit:tokens": "node scripts/design-token-guardian.mjs",
+    "test": "node --test scripts/design-token-guardian.test.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
